@@ -15,7 +15,7 @@ class ListController extends MomentumController<ListModel> {
   }
 
   bool dataExists(String listName, List<ListItem> items) {
-    var exists = model.items.any((e) => (e.listName == listName) || e.listName == listName && e.items == items);
+    var exists = model.items.any((e) => e.listName == listName || e.items == items);
     return exists;
   }
 
