@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:listify/src/widgets/sub-widgets/list-item.home.dart';
 import 'package:momentum/momentum.dart';
 import 'package:relative_scale/relative_scale.dart';
 
@@ -68,55 +69,7 @@ class _HomeState extends State<Home> with RelativeScale {
               var list = snapshot<ListModel>();
               var items = <Widget>[];
               for (var i = 0; i < list.items.length; i++) {
-                items.add(
-                  Card(
-                    key: Key('$i'),
-                    margin: EdgeInsets.only(top: sy(8)),
-                    child: InkWell(
-                      onTap: () {},
-                      child: ListTile(
-                        leading: Checkbox(
-                          value: _listController.getCheckState(i),
-                          tristate: true,
-                          onChanged: (state) {
-                            _inputController.toggleItemState(i);
-                          },
-                        ),
-                        title: AutoSizeText(
-                          list.items[i].listName,
-                          style: TextStyle(fontSize: sy(11)),
-                        ),
-                        trailing: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: <Widget>[
-                            IconButton(
-                              icon: Icon(
-                                Icons.content_copy,
-                                size: sy(18),
-                              ),
-                              onPressed: () {
-                                _listController.createCopy(i);
-                                Router.goto(context, AddNewList);
-                              },
-                              tooltip: 'Create Copy',
-                            ),
-                            IconButton(
-                              icon: Icon(
-                                Icons.close,
-                                size: sy(18),
-                                color: Colors.red,
-                              ),
-                              onPressed: () {
-                                _listController.removeItem(i);
-                              },
-                              tooltip: 'Remove Item',
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                );
+                items.add(ListItemHome(key: Key('$i'), i: i, listData: list.items[i]));
               }
               return Container(
                 constraints: BoxConstraints(maxHeight: screenHeight),
