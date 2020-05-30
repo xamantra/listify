@@ -44,6 +44,7 @@ class ListItemHome extends StatelessWidget {
               leading: Icon(
                 icon,
                 color: color,
+                size: sy(16),
               ),
               title: AutoSizeText(
                 listData.listName,
