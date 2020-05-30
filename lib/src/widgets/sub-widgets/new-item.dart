@@ -1,10 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:momentum/momentum.dart';
 import 'package:relative_scale/relative_scale.dart';
 
-import '../components/input/index.dart';
+import '../../components/input/index.dart';
 import 'text_input.dart';
 
 class AddNewItem extends StatefulWidget {

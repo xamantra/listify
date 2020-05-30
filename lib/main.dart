@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:listify/src/components/settings/index.dart';
 import 'package:momentum/momentum.dart';
 
 import 'src/components/input/index.dart';
 import 'src/components/list/index.dart';
+import 'src/components/settings/index.dart';
 import 'src/services/client_db.dart';
-import 'src/widgets/add-list.dart';
-import 'src/widgets/home.dart';
-import 'src/widgets/settings.dart';
+import 'src/widgets/pages/add-list.dart';
+import 'src/widgets/pages/home.dart';
+import 'src/widgets/pages/settings.dart';
 
 void main() {
   runApp(

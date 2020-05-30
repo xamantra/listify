@@ -1,15 +1,15 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
-import 'package:listify/src/components/settings/index.dart';
 import 'package:momentum/momentum.dart';
 import 'package:relative_scale/relative_scale.dart';
 
-import '../components/input/index.dart';
-import '../components/list/index.dart';
+import '../../components/input/index.dart';
+import '../../components/list/index.dart';
+import '../../components/settings/index.dart';
+import '../sub-widgets/new-item.dart';
+import '../sub-widgets/text_input.dart';
 import 'home.dart';
-import 'new-item.dart';
-import 'text_input.dart';
 
 class AddNewList extends StatefulWidget {
   @override

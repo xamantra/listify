@@ -1,9 +1,10 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:listify/src/components/settings/index.dart';
-import 'package:listify/src/widgets/settings.bool.dart';
 import 'package:momentum/momentum.dart';
 import 'package:relative_scale/relative_scale.dart';
+
+import '../../components/settings/index.dart';
+import '../sub-widgets/settings.bool.dart';
 
 class Settings extends StatelessWidget {
   @override

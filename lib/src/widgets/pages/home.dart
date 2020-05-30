@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:momentum/momentum.dart';
 import 'package:relative_scale/relative_scale.dart';
 
-import '../components/input/index.dart';
-import '../components/list/index.dart';
+import '../../components/input/index.dart';
+import '../../components/list/index.dart';
 import 'add-list.dart';
 import 'settings.dart';
 
