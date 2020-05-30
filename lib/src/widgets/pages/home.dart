@@ -1,11 +1,11 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:listify/src/widgets/sub-widgets/list-item.home.dart';
 import 'package:momentum/momentum.dart';
 import 'package:relative_scale/relative_scale.dart';
 
 import '../../components/input/index.dart';
 import '../../components/list/index.dart';
+import '../sub-widgets/better-text.dart';
+import '../sub-widgets/list-item.home.dart';
 import 'add-list.dart';
 import 'settings.dart';
 
@@ -31,7 +31,7 @@ class _HomeState extends State<Home> with RelativeScale {
     return RouterPage(
       child: Scaffold(
         appBar: AppBar(
-          title: AutoSizeText(
+          title: BetterText(
             'Listify',
             style: TextStyle(fontSize: sy(13)),
           ),

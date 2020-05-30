@@ -1,6 +1,7 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:relative_scale/relative_scale.dart';
+
+import 'better-text.dart';
 
 class BoolSetting extends StatelessWidget {
   final String title;
@@ -34,17 +35,14 @@ class BoolSetting extends StatelessWidget {
                 children: <Widget>[
                   Expanded(
                     child: ListTile(
-                      title: AutoSizeText(
+                      title: BetterText(
                         title,
                         style: TextStyle(fontSize: sy(11)),
-                        maxLines: 1,
-                        minFontSize: 1,
                       ),
-                      subtitle: AutoSizeText(
+                      subtitle: BetterText(
                         description,
                         style: TextStyle(fontSize: sy(10)),
                         maxLines: 2,
-                        minFontSize: 1,
                       ),
                     ),
                   ),

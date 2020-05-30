@@ -1,10 +1,11 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:listify/src/components/list/index.dart';
-import 'package:listify/src/data/list-data.dart';
-import 'package:listify/src/widgets/pages/add-list.dart';
 import 'package:momentum/momentum.dart';
 import 'package:relative_scale/relative_scale.dart';
+
+import '../../components/list/index.dart';
+import '../../data/list-data.dart';
+import '../pages/add-list.dart';
+import 'better-text.dart';
 
 class ListItemHome extends StatelessWidget {
   final int i;
@@ -46,7 +47,7 @@ class ListItemHome extends StatelessWidget {
                 color: color,
                 size: sy(16),
               ),
-              title: AutoSizeText(
+              title: BetterText(
                 listData.listName,
                 style: TextStyle(fontSize: sy(11)),
               ),

@@ -1,9 +1,9 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:momentum/momentum.dart';
 import 'package:relative_scale/relative_scale.dart';
 
 import '../../components/input/index.dart';
+import 'better-text.dart';
 import 'text_input.dart';
 
 class AddNewItem extends StatefulWidget {
@@ -43,7 +43,7 @@ class _AddNewItemState extends MomentumState<AddNewItem> with RelativeScale {
               onPressed: () {
                 _inputController.addItem(controller.text);
               },
-              child: AutoSizeText(
+              child: BetterText(
                 'Add',
                 style: TextStyle(fontSize: sy(11)),
               ),
