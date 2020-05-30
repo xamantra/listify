@@ -11,12 +11,14 @@ class InputModel extends MomentumModel<InputController> with EquatableMixin {
     this.items,
     this.action,
     this.actionMessage,
+    this.addingItem,
   }) : super(controller);
 
   final String listName;
   final List<ListItem> items;
   final InputAction action;
   final String actionMessage;
+  final bool addingItem;
 
   @override
   void update({
@@ -24,13 +26,15 @@ class InputModel extends MomentumModel<InputController> with EquatableMixin {
     List<ListItem> items,
     InputAction action,
     String actionMessage,
+    bool addingItem,
   }) {
     InputModel(
       controller,
       listName: listName ?? this.listName,
       items: items ?? this.items,
       action: action ?? InputAction.None,
-      actionMessage: actionMessage ?? actionMessage,
+      actionMessage: actionMessage ?? this.actionMessage,
+      addingItem: addingItem ?? this.addingItem,
     ).updateMomentum();
   }
 
@@ -39,6 +43,7 @@ class InputModel extends MomentumModel<InputController> with EquatableMixin {
       'listName': listName,
       'items': items?.map((x) => x?.toJson())?.toList(),
       'actionMessage': actionMessage,
+      'addingItem': addingItem,
     };
   }
 
@@ -51,11 +56,18 @@ class InputModel extends MomentumModel<InputController> with EquatableMixin {
       items: List<ListItem>.from(json['items']?.map((x) => ListItem.fromJson(x))),
       action: InputAction.None,
       actionMessage: json['actionMessage'],
+      addingItem: json['addingItem'],
     );
   }
 
   @override
-  List<Object> get props => [listName, items, action, actionMessage];
+  List<Object> get props => [
+        listName,
+        items,
+        action,
+        actionMessage,
+        addingItem,
+      ];
 }
 
 enum InputAction {

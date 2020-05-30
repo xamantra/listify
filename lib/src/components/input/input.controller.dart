@@ -13,6 +13,7 @@ class InputController extends MomentumController<InputModel> {
       listName: '',
       items: [],
       actionMessage: '',
+      addingItem: false,
     );
   }
 
@@ -73,11 +74,30 @@ class InputController extends MomentumController<InputModel> {
     model.update(listName: value);
   }
 
+  void toggleAddingItem() {
+    model.update(addingItem: !model.addingItem);
+  }
+
   /// Add new item in the items input with the name provided.
   void addItem(String name) {
+    if ((name ?? '').isEmpty) {
+      triggerAction(
+        actionMessage: "Item name is required!",
+        action: InputAction.ErrorOccured,
+      );
+      return;
+    }
     var items = List<ListItem>.from(model.items);
+    var itemExists = items.any((x) => x.name == name);
+    if (itemExists) {
+      triggerAction(
+        actionMessage: "Item name already exists!",
+        action: InputAction.ErrorOccured,
+      );
+      return;
+    }
     items.add(ListItem(name: name, listState: 0));
-    model.update(items: items);
+    model.update(items: items, addingItem: false);
   }
 
   /// Set the items input from external source

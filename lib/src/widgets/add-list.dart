@@ -72,6 +72,13 @@ class _AddNewListState extends MomentumState<AddNewList> with RelativeScale {
               },
               tooltip: 'Redo',
             ),
+            IconButton(
+              icon: Icon(Icons.check, size: sy(18)),
+              onPressed: () {
+                _inputController.submit();
+              },
+              tooltip: 'Save',
+            ),
           ],
         ),
         body: Container(
@@ -148,34 +155,34 @@ class _AddNewListState extends MomentumState<AddNewList> with RelativeScale {
                   },
                 ),
               ),
-              AutoSizeText(
-                'NOTE: Long press and drag to reorder items.',
-                style: TextStyle(fontSize: sy(11)),
-              ),
-              Container(
-                height: sy(52),
-                width: screenWidth,
-                padding: EdgeInsets.only(top: sy(8)),
-                child: RaisedButton(
-                  onPressed: () {
-                    showDialog(context: context, builder: (context) => AddNewItem());
-                  },
-                  child: AutoSizeText(
-                    'Add Item',
-                    style: TextStyle(fontSize: sy(11)),
-                  ),
-                ),
+              MomentumBuilder(
+                controllers: [InputController],
+                builder: (context, snapshot) {
+                  var input = snapshot<InputModel>();
+                  return Row(
+                    children: <Widget>[
+                      input.addingItem ? Expanded(flex: 70, child: AddNewItem()) : SizedBox(),
+                      Expanded(
+                        flex: input.addingItem ? 30 : 100,
+                        child: Container(
+                          width: screenWidth,
+                          child: RaisedButton(
+                            onPressed: () {
+                              _inputController.toggleAddingItem();
+                            },
+                            child: AutoSizeText(
+                              input.addingItem ? 'Close' : 'Add Item',
+                              style: TextStyle(fontSize: sy(11)),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  );
+                },
               ),
             ],
           ),
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            _inputController.submit();
-          },
-          backgroundColor: Colors.green,
-          child: Icon(Icons.check, size: sy(18)),
-          tooltip: 'Save',
         ),
       ),
     );
