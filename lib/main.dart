@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:listify/src/components/settings/index.dart';
 import 'package:momentum/momentum.dart';
 
 import 'src/components/input/index.dart';
@@ -15,6 +16,7 @@ void main() {
       controllers: [
         ListController()..config(maxTimeTravelSteps: 200),
         InputController()..config(maxTimeTravelSteps: 200),
+        SettingsController(),
       ],
       services: [
         ClientDB(),

@@ -126,7 +126,6 @@ class _HomeState extends State<Home> with RelativeScale {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            _inputController.reset();
             Router.goto(context, AddNewList);
           },
           child: Icon(Icons.add, size: sy(18)),
