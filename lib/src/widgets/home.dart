@@ -61,7 +61,7 @@ class _HomeState extends State<Home> with RelativeScale {
         body: Container(
           height: screenHeight,
           width: screenWidth,
-          padding: EdgeInsets.all(sy(24)),
+          padding: EdgeInsets.all(sy(12)),
           child: MomentumBuilder(
             controllers: [ListController],
             builder: (context, snapshot) {
