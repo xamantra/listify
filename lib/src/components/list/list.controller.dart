@@ -47,4 +47,12 @@ class ListController extends MomentumController<ListModel> {
     inputController.setListName(toCopy.listName);
     inputController.setItems(toCopy.items);
   }
+
+  bool getCheckState(int index) {
+    var hasChecked = model.items[index].items.any((x) => x.listState == true);
+    var hasUnchecked = model.items[index].items.any((x) => x.listState == false);
+    var hasPartial = model.items[index].items.any((x) => x.listState == null);
+    if (hasChecked && hasUnchecked) return null;
+    return hasChecked && !hasUnchecked && !hasPartial;
+  }
 }

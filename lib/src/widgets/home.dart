@@ -75,6 +75,13 @@ class _HomeState extends State<Home> with RelativeScale {
                     child: InkWell(
                       onTap: () {},
                       child: ListTile(
+                        leading: Checkbox(
+                          value: _listController.getCheckState(i),
+                          tristate: true,
+                          onChanged: (state) {
+                            _inputController.toggleItemState(i);
+                          },
+                        ),
                         title: AutoSizeText(
                           list.items[i].listName,
                           style: TextStyle(fontSize: sy(11)),

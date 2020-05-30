@@ -96,8 +96,22 @@ class InputController extends MomentumController<InputModel> {
       );
       return;
     }
-    items.add(ListItem(name: name, listState: 0));
+    items.add(ListItem(name: name, listState: false));
     model.update(items: items, addingItem: false);
+  }
+
+  void toggleItemState(int index) {
+    var items = List<ListItem>.from(model.items);
+    var item = items[index];
+    var state = item.listState;
+    var updatedItem = ListItem(
+      name: item.name,
+      listState: state == false ? true : state == true ? null : false,
+    );
+    items
+      ..removeAt(index)
+      ..insert(index, updatedItem);
+    model.update(items: items);
   }
 
   /// Set the items input from external source

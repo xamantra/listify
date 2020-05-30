@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 
 class ListItem extends Equatable {
   final String name;
-  final int listState;
+  final bool listState;
 
   ListItem({
     @required this.name,

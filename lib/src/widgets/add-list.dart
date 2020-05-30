@@ -119,8 +119,17 @@ class _AddNewListState extends MomentumState<AddNewList> with RelativeScale {
                           key: Key('$i'),
                           margin: EdgeInsets.only(top: sy(8)),
                           child: InkWell(
-                            onTap: () {},
+                            onTap: () {
+                              _inputController.toggleItemState(i);
+                            },
                             child: ListTile(
+                              leading: Checkbox(
+                                value: input.items[i].listState,
+                                tristate: true,
+                                onChanged: (state) {
+                                  _inputController.toggleItemState(i);
+                                },
+                              ),
                               title: AutoSizeText(
                                 input.items[i].name,
                                 style: TextStyle(fontSize: sy(11)),
