@@ -1,7 +1,7 @@
-import 'package:listify/src/data/list-item.dart';
 import 'package:momentum/momentum.dart';
 
 import '../../data/list-data.dart';
+import '../../data/list-item.dart';
 import '../input/index.dart';
 import 'index.dart';
 

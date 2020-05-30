@@ -1,6 +1,6 @@
-import 'package:listify/src/components/input/index.dart';
 import 'package:momentum/momentum.dart';
 
+import '../input/index.dart';
 import 'index.dart';
 
 class SettingsController extends MomentumController<SettingsModel> {
