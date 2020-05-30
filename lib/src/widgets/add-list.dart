@@ -1,6 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:momentum/momentum.dart';
 import 'package:relative_scale/relative_scale.dart';
 
@@ -174,13 +174,22 @@ class _AddNewListState extends MomentumState<AddNewList> with RelativeScale {
   }
 
   void showError(String message) {
-    Fluttertoast.showToast(
-      msg: message ?? 'No message.',
-      toastLength: Toast.LENGTH_LONG,
-      gravity: ToastGravity.BOTTOM,
+    Flushbar(
+      messageText: AutoSizeText(
+        message,
+        style: TextStyle(
+          fontSize: sy(11),
+          color: Colors.white,
+        ),
+        maxLines: 2,
+        minFontSize: 1,
+      ),
+      isDismissible: true,
       backgroundColor: Colors.red,
-      textColor: Colors.white,
-      fontSize: sy(11),
-    );
+      duration: Duration(seconds: 5),
+      onTap: (flushbar) {
+        flushbar.dismiss();
+      },
+    )..show(context);
   }
 }

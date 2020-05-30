@@ -6,6 +6,7 @@ import 'src/components/list/index.dart';
 import 'src/services/client_db.dart';
 import 'src/widgets/add-list.dart';
 import 'src/widgets/home.dart';
+import 'src/widgets/settings.dart';
 
 void main() {
   runApp(
@@ -20,6 +21,7 @@ void main() {
         Router([
           Home(),
           AddNewList(),
+          Settings(),
         ]),
       ],
 

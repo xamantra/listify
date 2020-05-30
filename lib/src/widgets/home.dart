@@ -6,6 +6,7 @@ import 'package:relative_scale/relative_scale.dart';
 import '../components/input/index.dart';
 import '../components/list/index.dart';
 import 'add-list.dart';
+import 'settings.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -47,6 +48,13 @@ class _HomeState extends State<Home> with RelativeScale {
                 _listController.forward();
               },
               tooltip: 'Redo',
+            ),
+            IconButton(
+              icon: Icon(Icons.settings, size: sy(18)),
+              onPressed: () {
+                Router.goto(context, Settings);
+              },
+              tooltip: 'Settings',
             ),
           ],
         ),
