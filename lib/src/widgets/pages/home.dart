@@ -37,20 +37,6 @@ class _HomeState extends State<Home> with RelativeScale {
           ),
           actions: [
             IconButton(
-              icon: Icon(Icons.undo, size: sy(18)),
-              onPressed: () {
-                _listController.backward();
-              },
-              tooltip: 'Undo',
-            ),
-            IconButton(
-              icon: Icon(Icons.redo, size: sy(18)),
-              onPressed: () {
-                _listController.forward();
-              },
-              tooltip: 'Redo',
-            ),
-            IconButton(
               icon: Icon(Icons.settings, size: sy(18)),
               onPressed: () {
                 Router.goto(context, Settings);

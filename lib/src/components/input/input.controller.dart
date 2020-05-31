@@ -13,6 +13,7 @@ class InputController extends MomentumController<InputModel> {
       this,
       listName: '',
       items: [],
+      action: InputAction.None,
       actionMessage: '',
       itemName: '',
     );
@@ -49,8 +50,8 @@ class InputController extends MomentumController<InputModel> {
     }
     var _listController = dependOn<ListController>();
     _listController.addList(ListData(listName: model.listName, items: model.items));
-    reset();
     triggerAction(action: InputAction.ListDataAdded);
+    reset(clearHistory: true);
   }
 
   void triggerAction({InputAction action, String actionMessage}) {

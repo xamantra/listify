@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:listify/src/components/current-list/current-list.controller.dart';
+import 'package:listify/src/widgets/pages/view-list.dart';
 import 'package:momentum/momentum.dart';
 import 'package:relative_scale/relative_scale.dart';
 
@@ -20,6 +22,7 @@ class ListItemHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var _listController = Momentum.of<ListController>(context);
+    var _currentListController = Momentum.of<CurrentListController>(context);
     return RelativeBuilder(
       builder: (context, screenHeight, screenWidth, sy, sx) {
         IconData icon;
@@ -40,7 +43,11 @@ class ListItemHome extends StatelessWidget {
         return Card(
           margin: EdgeInsets.only(top: sy(8)),
           child: InkWell(
-            onTap: () {},
+            onTap: () {
+              _currentListController.reset(clearHistory: true);
+              _listController.view(i);
+              Router.goto(context, ViewList);
+            },
             child: ListTile(
               leading: Icon(
                 icon,
@@ -64,17 +71,6 @@ class ListItemHome extends StatelessWidget {
                       Router.goto(context, AddNewList);
                     },
                     tooltip: 'Create Copy',
-                  ),
-                  IconButton(
-                    icon: Icon(
-                      Icons.close,
-                      size: sy(18),
-                      color: Colors.red,
-                    ),
-                    onPressed: () {
-                      _listController.removeItem(i);
-                    },
-                    tooltip: 'Remove Item',
                   ),
                 ],
               ),

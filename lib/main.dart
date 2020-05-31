@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:listify/src/components/current-list/index.dart';
 import 'package:momentum/momentum.dart';
 
 import 'src/components/input/index.dart';
@@ -8,6 +9,7 @@ import 'src/services/client_db.dart';
 import 'src/widgets/pages/add-list.dart';
 import 'src/widgets/pages/home.dart';
 import 'src/widgets/pages/settings.dart';
+import 'src/widgets/pages/view-list.dart';
 
 void main() {
   runApp(
@@ -17,6 +19,7 @@ void main() {
         ListController()..config(maxTimeTravelSteps: 200),
         InputController()..config(maxTimeTravelSteps: 200),
         SettingsController(),
+        CurrentListController(),
       ],
       services: [
         ClientDB(),
@@ -24,6 +27,7 @@ void main() {
           Home(),
           AddNewList(),
           Settings(),
+          ViewList(),
         ]),
       ],
 

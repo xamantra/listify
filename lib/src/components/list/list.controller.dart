@@ -1,3 +1,4 @@
+import 'package:listify/src/components/current-list/current-list.controller.dart';
 import 'package:momentum/momentum.dart';
 
 import '../../data/list-data.dart';
@@ -36,9 +37,41 @@ class ListController extends MomentumController<ListModel> {
     model.update(items: lists);
   }
 
+  void reorderListItems(int oldIndex, int newIndex) {
+    var dataItems = List<ListData>.from(model.items);
+    var items = List<ListItem>.from(dataItems[model.viewingIndex].items);
+    if (oldIndex < newIndex) {
+      newIndex -= 1;
+    }
+    var item = items.removeAt(oldIndex);
+    items.insert(newIndex, item);
+    var data = ListData(
+      listName: dataItems[model.viewingIndex].listName,
+      items: items,
+    );
+    dataItems
+      ..removeAt(model.viewingIndex)
+      ..insert(model.viewingIndex, data);
+    model.update(items: dataItems);
+  }
+
   void removeItem(int index) {
     var items = List<ListData>.from(model.items); // create new instance of list.
     model.update(items: items..removeAt(index));
+  }
+
+  void removeListItem(int index) {
+    var dataItems = List<ListData>.from(model.items);
+    var items = List<ListItem>.from(dataItems[model.viewingIndex].items);
+    items.removeAt(index);
+    var data = ListData(
+      listName: dataItems[model.viewingIndex].listName,
+      items: items,
+    );
+    dataItems
+      ..removeAt(model.viewingIndex)
+      ..insert(model.viewingIndex, data);
+    model.update(items: dataItems);
   }
 
   void createCopy(int index) {
@@ -53,6 +86,39 @@ class ListController extends MomentumController<ListModel> {
     var hasUnchecked = model.items[index].items.any((x) => x.listState == false);
     var hasPartial = model.items[index].items.any((x) => x.listState == null);
     if (hasChecked && hasUnchecked) return null;
+    if (hasPartial) return null;
     return hasChecked && !hasUnchecked && !hasPartial;
+  }
+
+  void view(int index) {
+    model.update(viewingIndex: index);
+    viewData();
+  }
+
+  void viewData() {
+    var data = model.items[model.viewingIndex];
+    dependOn<CurrentListController>().viewData(data);
+  }
+
+  void toggleItemState(int index) {
+    var dataItems = List<ListData>.from(model.items);
+    var items = List<ListItem>.from(dataItems[model.viewingIndex].items);
+    var item = items[index];
+    var state = item.listState;
+    var updatedItem = ListItem(
+      name: item.name,
+      listState: state == false ? true : state == true ? null : false,
+    );
+    items
+      ..removeAt(index)
+      ..insert(index, updatedItem);
+    var data = ListData(
+      listName: dataItems[model.viewingIndex].listName,
+      items: items,
+    );
+    dataItems
+      ..removeAt(model.viewingIndex)
+      ..insert(model.viewingIndex, data);
+    model.update(items: dataItems);
   }
 }

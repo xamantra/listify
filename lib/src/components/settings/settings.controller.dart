@@ -25,7 +25,7 @@ class SettingsController extends MomentumController<SettingsModel> {
 
   void executeDraftSetting() {
     if (!model.draftInputs) {
-      dependOn<InputController>().reset();
+      dependOn<InputController>().reset(clearHistory: true);
     }
   }
 
