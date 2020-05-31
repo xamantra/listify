@@ -29,7 +29,7 @@ class CurrentListModel extends MomentumModel<CurrentListController> with Equatab
     };
   }
 
-  CurrentListModel fromMap(Map<String, dynamic> json) {
+  CurrentListModel fromJson(Map<String, dynamic> json) {
     if (json == null) return null;
 
     return CurrentListModel(

@@ -17,12 +17,12 @@ class ListData extends Equatable {
     };
   }
 
-  static ListData fromJson(Map<String, dynamic> map) {
-    if (map == null) return null;
+  static ListData fromJson(Map<String, dynamic> json) {
+    if (json == null) return null;
 
     return ListData(
-      listName: map['listName'],
-      items: List<ListItem>.from(map['items']?.map((x) => ListItem.fromJson(x))),
+      listName: json['listName'],
+      items: List<ListItem>.from(json['items']?.map((x) => ListItem.fromJson(x))),
     );
   }
 
