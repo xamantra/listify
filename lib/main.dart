@@ -16,7 +16,7 @@ void main() {
     Momentum(
       child: MyApp(),
       controllers: [
-        ListController()..config(maxTimeTravelSteps: 200),
+        ListController(),
         InputController()..config(maxTimeTravelSteps: 200),
         SettingsController(),
         CurrentListController(),
