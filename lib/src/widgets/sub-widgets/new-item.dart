@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:listify/src/components/settings/index.dart';
 import 'package:momentum/momentum.dart';
 import 'package:relative_scale/relative_scale.dart';
 
@@ -13,11 +14,37 @@ class AddNewItem extends StatefulWidget {
 
 class _AddNewItemState extends MomentumState<AddNewItem> with RelativeScale {
   InputController _inputController;
+  SettingsController _settingsController;
+  TextEditingController _textEditingController = TextEditingController();
 
   @override
   void didChangeDependencies() {
     initRelativeScaler(context);
     _inputController ??= Momentum.of<InputController>(context);
+    _settingsController ??= Momentum.of<SettingsController>(context);
+    _textEditingController.text = _inputController.model.itemName;
+    _inputController.addListener(
+      state: this,
+      invoke: (model, isTimeTravel) {
+        if (isTimeTravel) {
+          _textEditingController.text = model.itemName;
+          // for this selection code, refer to this link: https://stackoverflow.com/a/58307018
+          _textEditingController.selection = TextSelection.fromPosition(
+            TextPosition(offset: _textEditingController.text.length),
+          );
+        }
+        var clear = _settingsController.model.clearOnAdd;
+        switch (model.action) {
+          case InputAction.ListDataAdded:
+            if (clear) _textEditingController.clear();
+            break;
+          case InputAction.ListItemAdded:
+            if (clear) _textEditingController.clear();
+            break;
+          default:
+        }
+      },
+    );
     super.didChangeDependencies();
   }
 
@@ -25,43 +52,32 @@ class _AddNewItemState extends MomentumState<AddNewItem> with RelativeScale {
   Widget build(BuildContext context) {
     return Container(
       width: screenWidth,
-      child: MomentumBuilder(
-        controllers: [InputController],
-        dontRebuildIf: (_, isTimeTravel) {
-          var listItemAdded = _<InputController>().model.action == InputAction.ListItemAdded;
-          if (listItemAdded) return false;
-          return !isTimeTravel;
-        },
-        builder: (context, snapshot) {
-          var input = snapshot<InputModel>();
-          return Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Expanded(
-                child: TextInput(
-                  value: input.itemName,
-                  hintText: 'Item Name',
-                  onChanged: (value) {
-                    _inputController.setItemName(value);
-                  },
-                ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          Expanded(
+            child: TextInput(
+              controller: _textEditingController,
+              hintText: 'Item Name',
+              onChanged: (value) {
+                _inputController.setItemName(value);
+              },
+            ),
+          ),
+          Container(
+            width: sy(64),
+            child: RaisedButton(
+              onPressed: () {
+                _inputController.addItem();
+              },
+              child: BetterText(
+                'Add',
+                style: TextStyle(fontSize: sy(11)),
               ),
-              Container(
-                width: sy(64),
-                child: RaisedButton(
-                  onPressed: () {
-                    _inputController.addItem();
-                  },
-                  child: BetterText(
-                    'Add',
-                    style: TextStyle(fontSize: sy(11)),
-                  ),
-                ),
-              ),
-            ],
-          );
-        },
+            ),
+          ),
+        ],
       ),
     );
   }

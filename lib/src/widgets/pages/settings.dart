@@ -37,6 +37,14 @@ class Settings extends StatelessWidget {
                           setting.controller.setDraftInputs(state);
                         },
                       ),
+                      BoolSetting(
+                        title: 'Clear on Add',
+                        description: 'After adding new item on the list, the item name textbox will be cleared.',
+                        isChecked: setting.clearOnAdd,
+                        onChanged: (state) {
+                          setting.controller.setClearOnAdd(state);
+                        },
+                      ),
                     ],
                   );
                 },

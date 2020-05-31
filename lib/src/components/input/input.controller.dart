@@ -1,3 +1,4 @@
+import 'package:listify/src/components/settings/index.dart';
 import 'package:momentum/momentum.dart';
 
 import '../../data/list-data.dart';
@@ -97,7 +98,8 @@ class InputController extends MomentumController<InputModel> {
       return;
     }
     items.add(ListItem(name: model.itemName, listState: false));
-    model.update(items: items, itemName: '');
+    dependOn<SettingsController>().executeClearOnAddSetting();
+    model.update(items: items);
     triggerAction(action: InputAction.ListItemAdded);
   }
 

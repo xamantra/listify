@@ -9,6 +9,7 @@ class SettingsController extends MomentumController<SettingsModel> {
     return SettingsModel(
       this,
       draftInputs: false,
+      clearOnAdd: false,
     );
   }
 
@@ -17,9 +18,20 @@ class SettingsController extends MomentumController<SettingsModel> {
     executeDraftSetting();
   }
 
+  void setClearOnAdd(bool value) {
+    model.update(clearOnAdd: value ?? false);
+    executeClearOnAddSetting();
+  }
+
   void executeDraftSetting() {
     if (!model.draftInputs) {
       dependOn<InputController>().reset();
+    }
+  }
+
+  void executeClearOnAddSetting() {
+    if (model.clearOnAdd) {
+      dependOn<InputController>().setItemName('');
     }
   }
 }
