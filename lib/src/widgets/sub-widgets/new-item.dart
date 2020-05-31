@@ -13,7 +13,6 @@ class AddNewItem extends StatefulWidget {
 
 class _AddNewItemState extends MomentumState<AddNewItem> with RelativeScale {
   InputController _inputController;
-  final TextEditingController controller = TextEditingController(text: '');
 
   @override
   void didChangeDependencies() {
@@ -26,30 +25,43 @@ class _AddNewItemState extends MomentumState<AddNewItem> with RelativeScale {
   Widget build(BuildContext context) {
     return Container(
       width: screenWidth,
-      padding: EdgeInsets.only(right: sy(8)),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          Expanded(
-            child: TextInput(
-              controller: controller,
-              hintText: 'Item Name',
-            ),
-          ),
-          Container(
-            width: sy(64),
-            child: RaisedButton(
-              onPressed: () {
-                _inputController.addItem(controller.text);
-              },
-              child: BetterText(
-                'Add',
-                style: TextStyle(fontSize: sy(11)),
+      child: MomentumBuilder(
+        controllers: [InputController],
+        dontRebuildIf: (_, isTimeTravel) {
+          var listItemAdded = _<InputController>().model.action == InputAction.ListItemAdded;
+          if (listItemAdded) return false;
+          return !isTimeTravel;
+        },
+        builder: (context, snapshot) {
+          var input = snapshot<InputModel>();
+          return Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Expanded(
+                child: TextInput(
+                  value: input.itemName,
+                  hintText: 'Item Name',
+                  onChanged: (value) {
+                    _inputController.setItemName(value);
+                  },
+                ),
               ),
-            ),
-          ),
-        ],
+              Container(
+                width: sy(64),
+                child: RaisedButton(
+                  onPressed: () {
+                    _inputController.addItem();
+                  },
+                  child: BetterText(
+                    'Add',
+                    style: TextStyle(fontSize: sy(11)),
+                  ),
+                ),
+              ),
+            ],
+          );
+        },
       ),
     );
   }

@@ -13,7 +13,7 @@ class InputController extends MomentumController<InputModel> {
       listName: '',
       items: [],
       actionMessage: '',
-      addingItem: false,
+      itemName: '',
     );
   }
 
@@ -74,13 +74,13 @@ class InputController extends MomentumController<InputModel> {
     model.update(listName: value);
   }
 
-  void toggleAddingItem() {
-    model.update(addingItem: !model.addingItem);
+  void setItemName(String value) {
+    model.update(itemName: value);
   }
 
   /// Add new item in the items input with the name provided.
-  void addItem(String name) {
-    if ((name ?? '').isEmpty) {
+  void addItem() {
+    if (model.itemName.isEmpty) {
       triggerAction(
         actionMessage: "Item name is required!",
         action: InputAction.ErrorOccured,
@@ -88,7 +88,7 @@ class InputController extends MomentumController<InputModel> {
       return;
     }
     var items = List<ListItem>.from(model.items);
-    var itemExists = items.any((x) => x.name == name);
+    var itemExists = items.any((x) => x.name == model.itemName);
     if (itemExists) {
       triggerAction(
         actionMessage: "Item name already exists!",
@@ -96,8 +96,9 @@ class InputController extends MomentumController<InputModel> {
       );
       return;
     }
-    items.add(ListItem(name: name, listState: false));
-    model.update(items: items, addingItem: false);
+    items.add(ListItem(name: model.itemName, listState: false));
+    model.update(items: items, itemName: '');
+    triggerAction(action: InputAction.ListItemAdded);
   }
 
   void toggleItemState(int index) {

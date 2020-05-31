@@ -28,7 +28,8 @@ class _AddNewListState extends MomentumState<AddNewList> with RelativeScale {
     _settingsController ??= Momentum.of<SettingsController>(context);
     _inputController.addListener(
       state: this,
-      invoke: (model, _) {
+      invoke: (model, isTimeTravel) {
+        if (isTimeTravel) return;
         switch (model.action) {
           case InputAction.ErrorOccured:
             showError(model.actionMessage);
@@ -71,13 +72,6 @@ class _AddNewListState extends MomentumState<AddNewList> with RelativeScale {
               },
               tooltip: 'Redo',
             ),
-            IconButton(
-              icon: Icon(Icons.check, size: sy(18)),
-              onPressed: () {
-                _inputController.submit();
-              },
-              tooltip: 'Save',
-            ),
           ],
         ),
         body: Container(
@@ -107,87 +101,80 @@ class _AddNewListState extends MomentumState<AddNewList> with RelativeScale {
                 },
               ),
               Flexible(
-                child: MomentumBuilder(
-                  controllers: [InputController],
-                  builder: (context, snapshot) {
-                    var input = snapshot<InputModel>();
-                    var items = <Widget>[];
-                    for (var i = 0; i < input.items.length; i++) {
-                      items.add(
-                        Card(
-                          key: Key('$i'),
-                          margin: EdgeInsets.only(top: sy(8)),
-                          child: InkWell(
-                            onTap: () {
-                              _inputController.toggleItemState(i);
-                            },
-                            child: ListTile(
-                              leading: Checkbox(
-                                value: input.items[i].listState,
-                                tristate: true,
-                                onChanged: (state) {
-                                  _inputController.toggleItemState(i);
-                                },
-                              ),
-                              title: BetterText(
-                                input.items[i].name,
-                                style: TextStyle(fontSize: sy(11)),
-                              ),
-                              trailing: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: <Widget>[
-                                  IconButton(
-                                    icon: Icon(Icons.close, size: sy(18), color: Colors.red),
-                                    onPressed: () {
-                                      _inputController.removeItem(i);
-                                    },
-                                    tooltip: 'Remove Item',
+                child: Column(
+                  children: <Widget>[
+                    Expanded(
+                      child: MomentumBuilder(
+                        controllers: [InputController],
+                        builder: (context, snapshot) {
+                          var input = snapshot<InputModel>();
+                          var items = <Widget>[];
+                          for (var i = 0; i < input.items.length; i++) {
+                            items.add(
+                              Card(
+                                key: Key('$i'),
+                                margin: EdgeInsets.only(top: sy(8)),
+                                child: InkWell(
+                                  onTap: () {
+                                    _inputController.toggleItemState(i);
+                                  },
+                                  child: ListTile(
+                                    leading: Checkbox(
+                                      value: input.items[i].listState,
+                                      tristate: true,
+                                      onChanged: (state) {
+                                        _inputController.toggleItemState(i);
+                                      },
+                                    ),
+                                    title: BetterText(
+                                      input.items[i].name,
+                                      style: TextStyle(fontSize: sy(11)),
+                                    ),
+                                    trailing: Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: <Widget>[
+                                        IconButton(
+                                          icon: Icon(Icons.close, size: sy(18), color: Colors.red),
+                                          onPressed: () {
+                                            _inputController.removeItem(i);
+                                          },
+                                          tooltip: 'Remove Item',
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                ],
+                                ),
                               ),
+                            );
+                          }
+                          return Container(
+                            constraints: BoxConstraints(maxHeight: screenHeight),
+                            child: ReorderableListView(
+                              children: items,
+                              onReorder: (oldIndex, newIndex) {
+                                print([oldIndex, newIndex]);
+                                _inputController.reorder(oldIndex, newIndex);
+                              },
                             ),
-                          ),
-                        ),
-                      );
-                    }
-                    return Container(
-                      constraints: BoxConstraints(maxHeight: screenHeight),
-                      child: ReorderableListView(
-                        children: items,
-                        onReorder: (oldIndex, newIndex) {
-                          print([oldIndex, newIndex]);
-                          _inputController.reorder(oldIndex, newIndex);
+                          );
                         },
                       ),
-                    );
-                  },
+                    ),
+                    AddNewItem(),
+                  ],
                 ),
               ),
-              MomentumBuilder(
-                controllers: [InputController],
-                builder: (context, snapshot) {
-                  var input = snapshot<InputModel>();
-                  return Row(
-                    children: <Widget>[
-                      input.addingItem ? Expanded(flex: 70, child: AddNewItem()) : SizedBox(),
-                      Expanded(
-                        flex: input.addingItem ? 30 : 100,
-                        child: Container(
-                          width: screenWidth,
-                          child: RaisedButton(
-                            onPressed: () {
-                              _inputController.toggleAddingItem();
-                            },
-                            child: BetterText(
-                              input.addingItem ? 'Close' : 'Add Item',
-                              style: TextStyle(fontSize: sy(11)),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  );
-                },
+              Container(
+                width: screenWidth,
+                child: RaisedButton(
+                  onPressed: () {
+                    _inputController.submit();
+                  },
+                  child: BetterText(
+                    'Save List',
+                    style: TextStyle(fontSize: sy(11)),
+                  ),
+                ),
               ),
             ],
           ),
