@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:listify/src/components/current-list/current-list.controller.dart';
+import 'package:listify/src/components/settings/index.dart';
 import 'package:momentum/momentum.dart';
 
 import '../../data/list-data.dart';
@@ -77,9 +78,23 @@ class ListController extends MomentumController<ListModel> {
 
   void createCopy(int index) {
     var inputController = dependOn<InputController>();
+    var settings = dependOn<SettingsController>().model;
+    var copyListStates = settings.copyListStates;
+    var copyListName = settings.copyListName;
     var toCopy = model.items[index];
-    inputController.setListName(toCopy.listName);
-    inputController.setItems(toCopy.items);
+    var items = List<ListItem>.from(toCopy.items);
+    if (!copyListStates) {
+      for (var i = 0; i < items.length; i++) {
+        items[i] = ListItem(
+          name: items[i].name,
+          listState: false,
+        );
+      }
+    }
+    inputController.copyFrom(
+      copyListName ? toCopy.listName : '',
+      items,
+    );
   }
 
   bool getCheckState(int index) {

@@ -45,6 +45,22 @@ class Settings extends StatelessWidget {
                           setting.controller.setClearOnAdd(state);
                         },
                       ),
+                      BoolSetting(
+                        title: 'Copy List Name',
+                        description: 'When copying a list data, the list\'s name also be copied.',
+                        isChecked: setting.copyListName,
+                        onChanged: (state) {
+                          setting.controller.setCopyListName(state);
+                        },
+                      ),
+                      BoolSetting(
+                        title: 'Copy List States',
+                        description: 'When copying a list data, the checkbox states will also be copied.',
+                        isChecked: setting.copyListStates,
+                        onChanged: (state) {
+                          setting.controller.setCopyListStates(state);
+                        },
+                      ),
                     ],
                   );
                 },

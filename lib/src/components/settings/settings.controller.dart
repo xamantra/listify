@@ -8,8 +8,10 @@ class SettingsController extends MomentumController<SettingsModel> {
   SettingsModel init() {
     return SettingsModel(
       this,
-      draftInputs: false,
-      clearOnAdd: false,
+      draftInputs: true,
+      clearOnAdd: true,
+      copyListName: false,
+      copyListStates: false,
     );
   }
 
@@ -21,6 +23,14 @@ class SettingsController extends MomentumController<SettingsModel> {
   void setClearOnAdd(bool value) {
     model.update(clearOnAdd: value ?? false);
     executeClearOnAddSetting();
+  }
+
+  void setCopyListName(bool value) {
+    model.update(copyListName: value ?? false);
+  }
+
+  void setCopyListStates(bool value) {
+    model.update(copyListStates: value ?? false);
   }
 
   void executeDraftSetting() {

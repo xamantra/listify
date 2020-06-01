@@ -27,7 +27,7 @@ class _AddNewListState extends MomentumState<AddNewList> with RelativeScale {
     _inputController ??= Momentum.of<InputController>(context);
     _listController ??= Momentum.of<ListController>(context);
     _settingsController ??= Momentum.of<SettingsController>(context);
-    _textEditingController.text = _inputController.model.itemName;
+    _textEditingController.text = _inputController.model.listName;
     _inputController.addListener(
       state: this,
       invoke: (model, isTimeTravel) {

@@ -8,20 +8,28 @@ class SettingsModel extends MomentumModel<SettingsController> with EquatableMixi
     SettingsController controller, {
     this.draftInputs,
     this.clearOnAdd,
+    this.copyListName,
+    this.copyListStates,
   }) : super(controller);
 
   final bool draftInputs;
   final bool clearOnAdd;
+  final bool copyListName;
+  final bool copyListStates;
 
   @override
   void update({
     bool draftInputs,
     bool clearOnAdd,
+    bool copyListName,
+    bool copyListStates,
   }) {
     SettingsModel(
       controller,
       draftInputs: draftInputs ?? this.draftInputs,
       clearOnAdd: clearOnAdd ?? this.clearOnAdd,
+      copyListName: copyListName ?? this.copyListName,
+      copyListStates: copyListStates ?? this.copyListStates,
     ).updateMomentum();
   }
 
@@ -29,6 +37,8 @@ class SettingsModel extends MomentumModel<SettingsController> with EquatableMixi
     return {
       'draftInputs': draftInputs,
       'clearOnAdd': clearOnAdd,
+      'copyListName': copyListName,
+      'copyListStates': copyListStates,
     };
   }
 
@@ -39,9 +49,16 @@ class SettingsModel extends MomentumModel<SettingsController> with EquatableMixi
       controller,
       draftInputs: map['draftInputs'],
       clearOnAdd: map['clearOnAdd'],
+      copyListName: map['copyListName'],
+      copyListStates: map['copyListStates'],
     );
   }
 
   @override
-  List<Object> get props => [draftInputs, clearOnAdd];
+  List<Object> get props => [
+        draftInputs,
+        clearOnAdd,
+        copyListName,
+        copyListStates,
+      ];
 }

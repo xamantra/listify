@@ -116,6 +116,13 @@ class InputController extends MomentumController<InputModel> {
     model.update(items: value);
   }
 
+  void copyFrom(String listName, List<ListItem> items) {
+    model.update(
+      listName: listName,
+      items: items,
+    );
+  }
+
   /// Reorder the items input in the model and rebuild the widgets.
   void reorder(int oldIndex, int newIndex) {
     var items = List<ListItem>.from(model.items);
