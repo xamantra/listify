@@ -1,5 +1,7 @@
+import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:listify/src/widgets/sub-widgets/back-icon-button.dart';
+import 'package:listify/src/widgets/sub-widgets/settings.action.dart';
 import 'package:momentum/momentum.dart';
 import 'package:relative_scale/relative_scale.dart';
 
@@ -7,7 +9,28 @@ import '../../components/settings/index.dart';
 import '../sub-widgets/better-text.dart';
 import '../sub-widgets/settings.bool.dart';
 
-class Settings extends StatelessWidget {
+class Settings extends StatefulWidget {
+  @override
+  _SettingsState createState() => _SettingsState();
+}
+
+class _SettingsState extends MomentumState<Settings> {
+  @override
+  void initMomentumState() {
+    super.initMomentumState();
+    Momentum.of<SettingsController>(context).addListener(
+      state: this,
+      invoke: (model, _) {
+        switch (model.action) {
+          case SettingsAction.DraftCleared:
+            showMessage(model.actionMessage);
+            break;
+          default:
+        }
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return RouterPage(
@@ -63,6 +86,13 @@ class Settings extends StatelessWidget {
                           setting.controller.setCopyListStates(state);
                         },
                       ),
+                      ActionSetting(
+                        title: 'Clear Draft',
+                        description: 'Clear draft inputs inside "Add New List" page.',
+                        action: () {
+                          setting.controller.clearDraft();
+                        },
+                      ),
                     ],
                   );
                 },
@@ -72,5 +102,28 @@ class Settings extends StatelessWidget {
         },
       ),
     );
+  }
+
+  void showMessage(String message) {
+    Flushbar(
+      messageText: RelativeBuilder(
+        builder: (context, screenHeight, screenWidth, sy, sx) {
+          return BetterText(
+            message,
+            style: TextStyle(
+              fontSize: sy(11),
+              color: Colors.white,
+            ),
+            maxLines: 2,
+          );
+        },
+      ),
+      isDismissible: true,
+      backgroundColor: Colors.green,
+      duration: Duration(seconds: 5),
+      onTap: (flushbar) {
+        flushbar.dismiss();
+      },
+    )..show(context);
   }
 }
