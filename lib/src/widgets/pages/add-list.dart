@@ -84,6 +84,13 @@ class _AddNewListState extends MomentumState<AddNewList> with RelativeScale {
               },
               tooltip: 'Redo',
             ),
+            IconButton(
+              icon: Icon(Icons.cancel, size: sy(18)),
+              onPressed: () {
+                _inputController.reset(clearHistory: true);
+              },
+              tooltip: 'Clear',
+            ),
           ],
         ),
         body: Container(
