@@ -33,7 +33,7 @@ class _AddNewListState extends MomentumState<AddNewList> with RelativeScale {
       state: this,
       invoke: (model, isTimeTravel) {
         if (isTimeTravel) {
-          _textEditingController.text = model.itemName;
+          _textEditingController.text = model.listName;
           // for this selection code, refer to this link: https://stackoverflow.com/a/58307018
           _textEditingController.selection = TextSelection.fromPosition(
             TextPosition(offset: _textEditingController.text.length),
