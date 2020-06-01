@@ -43,7 +43,7 @@ class InputController extends MomentumController<InputModel> {
     }
     if (exists()) {
       triggerAction(
-        actionMessage: "List data with same values or same list name already exist.",
+        actionMessage: "List data with same list items or same list name already exist.",
         action: InputAction.ErrorOccured,
       );
       return;
