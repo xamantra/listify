@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:listify/src/widgets/sub-widgets/back-icon-button.dart';
 import 'package:momentum/momentum.dart';
 import 'package:relative_scale/relative_scale.dart';
 
@@ -14,6 +15,7 @@ class Settings extends StatelessWidget {
         builder: (context, screenHeight, screenWidth, sy, sx) {
           return Scaffold(
             appBar: AppBar(
+              leading: BackIconButton(),
               title: BetterText(
                 'Settings',
                 style: TextStyle(fontSize: sy(13)),

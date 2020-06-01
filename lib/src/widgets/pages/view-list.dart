@@ -2,6 +2,7 @@ import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:listify/src/components/current-list/index.dart';
 import 'package:listify/src/components/list/index.dart';
+import 'package:listify/src/widgets/sub-widgets/back-icon-button.dart';
 import 'package:momentum/momentum.dart';
 import 'package:relative_scale/relative_scale.dart';
 
@@ -32,6 +33,7 @@ class _ViewListState extends MomentumState<ViewList> with RelativeScale {
       },
       child: Scaffold(
         appBar: AppBar(
+          leading: BackIconButton(),
           title: BetterText(
             currentListController.model.data.listName,
             style: TextStyle(fontSize: sy(13)),

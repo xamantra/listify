@@ -1,5 +1,6 @@
 import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
+import 'package:listify/src/widgets/sub-widgets/back-icon-button.dart';
 import 'package:momentum/momentum.dart';
 import 'package:relative_scale/relative_scale.dart';
 
@@ -63,6 +64,7 @@ class _AddNewListState extends MomentumState<AddNewList> with RelativeScale {
       },
       child: Scaffold(
         appBar: AppBar(
+          leading: BackIconButton(),
           title: BetterText(
             'Add New List',
             style: TextStyle(fontSize: sy(13)),
