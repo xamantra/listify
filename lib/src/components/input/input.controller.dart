@@ -56,18 +56,10 @@ class InputController extends MomentumController<InputModel> {
 
   void triggerAction({InputAction action, String actionMessage}) {
     model.update(
+      skipRebuild: true,
       action: action,
       actionMessage: actionMessage ?? '',
     );
-    // allow the next triggerAction call with the same values from
-    // previous call to update the state (basically bypassing equatable)
-    // so the widget listeners can still receive the updates and
-    // show dialogs/snackbars/toast/navigate to page.
-    model.update(action: InputAction.None);
-    // imagine a repeating error the user keeps committing,
-    // if we don't do this, equatable will not let us
-    // update the state because the previous model
-    // values are still the same from the new one.
   }
 
   /// Update list name with the new user input.

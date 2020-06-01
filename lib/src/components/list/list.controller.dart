@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:listify/src/components/current-list/current-list.controller.dart';
 import 'package:momentum/momentum.dart';
 
@@ -16,7 +17,7 @@ class ListController extends MomentumController<ListModel> {
   }
 
   bool dataExists(String listName, List<ListItem> items) {
-    var exists = model.items.any((e) => e.listName == listName || e.items == items);
+    var exists = model.items.any((e) => e.listName == listName || listEquals(e.items, items));
     return exists;
   }
 

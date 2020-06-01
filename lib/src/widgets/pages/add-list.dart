@@ -19,6 +19,7 @@ class _AddNewListState extends MomentumState<AddNewList> with RelativeScale {
   InputController _inputController;
   ListController _listController;
   SettingsController _settingsController;
+  TextEditingController _textEditingController = TextEditingController();
 
   @override
   void initMomentumState() {
@@ -26,15 +27,24 @@ class _AddNewListState extends MomentumState<AddNewList> with RelativeScale {
     _inputController ??= Momentum.of<InputController>(context);
     _listController ??= Momentum.of<ListController>(context);
     _settingsController ??= Momentum.of<SettingsController>(context);
+    _textEditingController.text = _inputController.model.itemName;
     _inputController.addListener(
       state: this,
       invoke: (model, isTimeTravel) {
-        if (isTimeTravel) return;
+        if (isTimeTravel) {
+          _textEditingController.text = model.itemName;
+          // for this selection code, refer to this link: https://stackoverflow.com/a/58307018
+          _textEditingController.selection = TextSelection.fromPosition(
+            TextPosition(offset: _textEditingController.text.length),
+          );
+        }
+        var clear = _settingsController.model.clearOnAdd;
         switch (model.action) {
           case InputAction.ErrorOccured:
             showError(model.actionMessage);
             break;
           case InputAction.ListDataAdded:
+            if (clear) _textEditingController.clear();
             Router.pop(context);
             break;
           default:
@@ -82,22 +92,11 @@ class _AddNewListState extends MomentumState<AddNewList> with RelativeScale {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              MomentumBuilder(
-                controllers: [InputController],
-                dontRebuildIf: (controller, isTimeTravel) {
-                  // only rebuild if time travel method is
-                  // responsible for the model update (undo/redo)
-                  return !isTimeTravel;
-                },
-                builder: (context, snapshot) {
-                  var input = snapshot<InputModel>();
-                  return TextInput(
-                    value: input.listName,
-                    hintText: 'List Name',
-                    onChanged: (value) {
-                      _inputController.setListName(value);
-                    },
-                  );
+              TextInput(
+                controller: _textEditingController,
+                hintText: 'List Name',
+                onChanged: (value) {
+                  _inputController.setListName(value);
                 },
               ),
               Flexible(

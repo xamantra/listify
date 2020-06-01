@@ -22,6 +22,7 @@ class InputModel extends MomentumModel<InputController> with EquatableMixin {
 
   @override
   void update({
+    bool skipRebuild,
     String listName,
     List<ListItem> items,
     InputAction action,
@@ -35,7 +36,7 @@ class InputModel extends MomentumModel<InputController> with EquatableMixin {
       action: action ?? InputAction.None,
       actionMessage: actionMessage ?? this.actionMessage,
       itemName: itemName ?? this.itemName,
-    ).updateMomentum();
+    ).updateMomentum(skipRebuild: skipRebuild);
   }
 
   Map<String, dynamic> toJson() {
