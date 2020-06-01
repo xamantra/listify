@@ -21,8 +21,8 @@ class ListItemHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var _listController = Momentum.of<ListController>(context);
-    var _currentListController = Momentum.of<CurrentListController>(context);
+    var _listController = Momentum.controller<ListController>(context);
+    var _currentListController = Momentum.controller<CurrentListController>(context);
     return RelativeBuilder(
       builder: (context, screenHeight, screenWidth, sy, sx) {
         IconData icon;

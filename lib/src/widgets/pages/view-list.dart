@@ -20,8 +20,8 @@ class _ViewListState extends MomentumState<ViewList> with RelativeScale {
   @override
   void initMomentumState() {
     initRelativeScaler(context);
-    currentListController ??= Momentum.of<CurrentListController>(context);
-    listController ??= Momentum.of<ListController>(context);
+    currentListController ??= Momentum.controller<CurrentListController>(context);
+    listController ??= Momentum.controller<ListController>(context);
   }
 
   @override

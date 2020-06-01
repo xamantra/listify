@@ -11,7 +11,7 @@ class ClientDB extends MomentumService {
   }
 
   static Future<SharedPreferences> getByContext(BuildContext context) async {
-    var service = Momentum.getService<ClientDB>(context);
+    var service = Momentum.service<ClientDB>(context);
     service._sharedPreferences ??= await SharedPreferences.getInstance();
     return service._sharedPreferences;
   }

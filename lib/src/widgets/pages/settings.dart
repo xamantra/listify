@@ -18,7 +18,7 @@ class _SettingsState extends MomentumState<Settings> {
   @override
   void initMomentumState() {
     super.initMomentumState();
-    Momentum.of<SettingsController>(context).addListener(
+    Momentum.controller<SettingsController>(context).addListener(
       state: this,
       invoke: (model, _) {
         switch (model.action) {

@@ -21,8 +21,8 @@ class _HomeState extends State<Home> with RelativeScale {
   @override
   void didChangeDependencies() {
     initRelativeScaler(context);
-    _inputController ??= Momentum.of<InputController>(context);
-    _listController ??= Momentum.of<ListController>(context);
+    _inputController ??= Momentum.controller<InputController>(context);
+    _listController ??= Momentum.controller<ListController>(context);
     super.didChangeDependencies();
   }
 

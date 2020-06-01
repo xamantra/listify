@@ -20,8 +20,8 @@ class _AddNewItemState extends MomentumState<AddNewItem> with RelativeScale {
   @override
   void didChangeDependencies() {
     initRelativeScaler(context);
-    _inputController ??= Momentum.of<InputController>(context);
-    _settingsController ??= Momentum.of<SettingsController>(context);
+    _inputController ??= Momentum.controller<InputController>(context);
+    _settingsController ??= Momentum.controller<SettingsController>(context);
     _textEditingController.text = _inputController.model.itemName;
     _inputController.addListener(
       state: this,

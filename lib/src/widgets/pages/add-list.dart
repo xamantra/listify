@@ -25,9 +25,9 @@ class _AddNewListState extends MomentumState<AddNewList> with RelativeScale {
   @override
   void initMomentumState() {
     initRelativeScaler(context);
-    _inputController ??= Momentum.of<InputController>(context);
-    _listController ??= Momentum.of<ListController>(context);
-    _settingsController ??= Momentum.of<SettingsController>(context);
+    _inputController ??= Momentum.controller<InputController>(context);
+    _listController ??= Momentum.controller<ListController>(context);
+    _settingsController ??= Momentum.controller<SettingsController>(context);
     _textEditingController.text = _inputController.model.listName;
     _inputController.addListener(
       state: this,
