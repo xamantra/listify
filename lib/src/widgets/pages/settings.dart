@@ -56,7 +56,7 @@ class _SettingsState extends MomentumState<Settings> {
                     children: [
                       BoolSetting(
                         title: 'Draft inputs',
-                        description: 'When pressing back button inside add list page, save the inputs as draft.',
+                        description: 'When pressing "+" button inside home page, the previous inputs will be shown on Add List Page including edit session.',
                         isChecked: setting.draftInputs,
                         onChanged: (state) {
                           setting.controller.setDraftInputs(state);

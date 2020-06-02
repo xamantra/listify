@@ -1,5 +1,6 @@
 import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
+import 'package:listify/src/widgets/pages/home.dart';
 import 'package:listify/src/widgets/sub-widgets/back-icon-button.dart';
 import 'package:momentum/momentum.dart';
 import 'package:relative_scale/relative_scale.dart';
@@ -10,6 +11,7 @@ import '../../components/settings/index.dart';
 import '../sub-widgets/better-text.dart';
 import '../sub-widgets/new-item.dart';
 import '../sub-widgets/text_input.dart';
+import 'view-list.dart';
 
 class AddNewList extends StatefulWidget {
   @override
@@ -39,14 +41,17 @@ class _AddNewListState extends MomentumState<AddNewList> with RelativeScale {
             TextPosition(offset: _textEditingController.text.length),
           );
         }
-        var clear = _settingsController.model.clearOnAdd;
+        if (model.listName.isEmpty) _textEditingController.clear();
         switch (model.action) {
           case InputAction.ErrorOccured:
             showError(model.actionMessage);
             break;
           case InputAction.ListDataAdded:
-            if (clear) _textEditingController.clear();
             Router.pop(context);
+            break;
+          case InputAction.ListDataEdited:
+            Router.resetWithContext<Home>(context);
+            Router.goto(context, ViewList);
             break;
           default:
         }
@@ -58,16 +63,26 @@ class _AddNewListState extends MomentumState<AddNewList> with RelativeScale {
   Widget build(BuildContext context) {
     return RouterPage(
       onWillPop: () async {
-        _settingsController.executeDraftSetting();
         Router.pop(context);
         return false;
       },
       child: Scaffold(
         appBar: AppBar(
           leading: BackIconButton(),
-          title: BetterText(
-            'Add New List',
-            style: TextStyle(fontSize: sy(13)),
+          title: MomentumBuilder(
+            controllers: [InputController],
+            dontRebuildIf: (controller, __) {
+              var editingListPrev = controller<InputController>().prevModel.editingList;
+              var editingList = controller<InputController>().model.editingList;
+              return editingListPrev != editingList;
+            },
+            builder: (context, snapshot) {
+              var input = snapshot<InputModel>();
+              return BetterText(
+                input.editingList ? 'Edit Existing List' : 'Add New List',
+                style: TextStyle(fontSize: sy(13)),
+              );
+            },
           ),
           actions: [
             IconButton(
@@ -179,7 +194,7 @@ class _AddNewListState extends MomentumState<AddNewList> with RelativeScale {
                     _inputController.submit();
                   },
                   child: BetterText(
-                    'Save List',
+                    'Save',
                     style: TextStyle(fontSize: sy(11)),
                   ),
                 ),

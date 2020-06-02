@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:listify/src/components/settings/index.dart';
 import 'package:momentum/momentum.dart';
 import 'package:relative_scale/relative_scale.dart';
 
@@ -17,12 +18,14 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> with RelativeScale {
   InputController _inputController;
   ListController _listController;
+  SettingsController _settingsController;
 
   @override
   void didChangeDependencies() {
     initRelativeScaler(context);
     _inputController ??= Momentum.controller<InputController>(context);
     _listController ??= Momentum.controller<ListController>(context);
+    _settingsController ??= Momentum.controller<SettingsController>(context);
     super.didChangeDependencies();
   }
 
@@ -72,6 +75,7 @@ class _HomeState extends State<Home> with RelativeScale {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
+            _settingsController.executeDraftSetting();
             Router.goto(context, AddNewList);
           },
           child: Icon(Icons.add, size: sy(18)),

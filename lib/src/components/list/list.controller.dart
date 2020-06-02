@@ -107,6 +107,29 @@ class ListController extends MomentumController<ListModel> {
     );
   }
 
+  void editList(String listName) {
+    var toEdit = model.items.firstWhere((x) => x.listName == listName, orElse: () => null);
+    if (toEdit != null) {
+      var inputController = dependOn<InputController>();
+      inputController.editList(toEdit.listName, toEdit.items);
+    }
+  }
+
+  void updateList(
+    String listName,
+    String newListName,
+    List<ListItem> newItems,
+  ) {
+    var items = List<ListData>.from(model.items);
+    var index = items.indexWhere((x) => x.listName == listName);
+    if (index != -1) {
+      items.removeAt(index);
+      items.insert(index, ListData(listName: newListName, items: newItems));
+      model.update(items: items);
+      dependOn<CurrentListController>().viewData(model.items[index]);
+    }
+  }
+
   bool getCheckState(int index) {
     var hasChecked = model.items[index].items.any((x) => x.listState == true);
     var hasUnchecked = model.items[index].items.any((x) => x.listState == false);

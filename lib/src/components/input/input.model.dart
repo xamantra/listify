@@ -4,6 +4,14 @@ import 'package:momentum/momentum.dart';
 import '../../data/list-item.dart';
 import 'index.dart';
 
+enum InputAction {
+  None,
+  ErrorOccured,
+  ListDataAdded,
+  ListDataEdited,
+  ListItemAdded,
+}
+
 class InputModel extends MomentumModel<InputController> with EquatableMixin {
   InputModel(
     InputController controller, {
@@ -12,6 +20,8 @@ class InputModel extends MomentumModel<InputController> with EquatableMixin {
     this.action,
     this.actionMessage,
     this.itemName,
+    this.editingList,
+    this.editListName,
   }) : super(controller);
 
   final String listName;
@@ -19,6 +29,8 @@ class InputModel extends MomentumModel<InputController> with EquatableMixin {
   final InputAction action;
   final String actionMessage;
   final String itemName;
+  final bool editingList;
+  final String editListName;
 
   @override
   void update({
@@ -28,6 +40,8 @@ class InputModel extends MomentumModel<InputController> with EquatableMixin {
     InputAction action,
     String actionMessage,
     String itemName,
+    bool editingList,
+    String editListName,
   }) {
     InputModel(
       controller,
@@ -36,6 +50,8 @@ class InputModel extends MomentumModel<InputController> with EquatableMixin {
       action: action ?? InputAction.None,
       actionMessage: actionMessage ?? this.actionMessage,
       itemName: itemName ?? this.itemName,
+      editingList: editingList ?? this.editingList,
+      editListName: editListName ?? this.editListName,
     ).updateMomentum(skipRebuild: skipRebuild);
   }
 
@@ -45,6 +61,8 @@ class InputModel extends MomentumModel<InputController> with EquatableMixin {
       'items': items?.map((x) => x?.toJson())?.toList(),
       'actionMessage': actionMessage,
       'itemName': itemName,
+      'editingList': editingList,
+      'editListName': editListName,
     };
   }
 
@@ -58,6 +76,8 @@ class InputModel extends MomentumModel<InputController> with EquatableMixin {
       action: InputAction.None,
       actionMessage: json['actionMessage'],
       itemName: json['itemName'],
+      editingList: json['editingList'],
+      editListName: json['editListName'],
     );
   }
 
@@ -68,12 +88,7 @@ class InputModel extends MomentumModel<InputController> with EquatableMixin {
         action,
         actionMessage,
         itemName,
+        editingList,
+        editListName,
       ];
-}
-
-enum InputAction {
-  None,
-  ErrorOccured,
-  ListDataAdded,
-  ListItemAdded,
 }

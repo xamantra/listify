@@ -7,6 +7,7 @@ import 'package:momentum/momentum.dart';
 import 'package:relative_scale/relative_scale.dart';
 
 import '../sub-widgets/better-text.dart';
+import 'add-list.dart';
 
 class ViewList extends StatefulWidget {
   @override
@@ -38,6 +39,16 @@ class _ViewListState extends MomentumState<ViewList> with RelativeScale {
             currentListController.model.data.listName,
             style: TextStyle(fontSize: sy(13)),
           ),
+          actions: [
+            IconButton(
+              icon: Icon(Icons.edit, size: sy(18)),
+              onPressed: () {
+                listController.editList(currentListController.model.data.listName);
+                Router.goto(context, AddNewList);
+              },
+              tooltip: 'Edit List',
+            ),
+          ],
         ),
         body: Container(
           height: screenHeight,

@@ -1,4 +1,3 @@
-import 'package:listify/src/components/settings/index.dart';
 import 'package:momentum/momentum.dart';
 
 import '../../data/list-data.dart';
@@ -16,6 +15,7 @@ class InputController extends MomentumController<InputModel> {
       action: InputAction.None,
       actionMessage: '',
       itemName: '',
+      editingList: false,
     );
   }
 
@@ -41,7 +41,7 @@ class InputController extends MomentumController<InputModel> {
       );
       return;
     }
-    if (exists()) {
+    if (exists() && !model.editingList) {
       triggerAction(
         actionMessage: "List data with same list items or same list name already exist.",
         action: InputAction.ErrorOccured,
@@ -49,8 +49,13 @@ class InputController extends MomentumController<InputModel> {
       return;
     }
     var _listController = dependOn<ListController>();
-    _listController.addList(ListData(listName: model.listName, items: model.items));
-    triggerAction(action: InputAction.ListDataAdded);
+    if (model.editingList) {
+      _listController.updateList(model.editListName, model.listName, model.items);
+      triggerAction(action: InputAction.ListDataEdited);
+    } else {
+      _listController.addList(ListData(listName: model.listName, items: model.items));
+      triggerAction(action: InputAction.ListDataAdded);
+    }
     reset(clearHistory: true);
   }
 
@@ -91,7 +96,6 @@ class InputController extends MomentumController<InputModel> {
       return;
     }
     items.add(ListItem(name: model.itemName, listState: false));
-    dependOn<SettingsController>().executeClearOnAddSetting();
     model.update(items: items);
     triggerAction(action: InputAction.ListItemAdded);
   }
@@ -120,6 +124,17 @@ class InputController extends MomentumController<InputModel> {
     model.update(
       listName: listName,
       items: items,
+      editingList: false,
+      editListName: '',
+    );
+  }
+
+  void editList(String listName, List<ListItem> items) {
+    model.update(
+      listName: listName,
+      items: items,
+      editingList: true,
+      editListName: listName,
     );
   }
 
