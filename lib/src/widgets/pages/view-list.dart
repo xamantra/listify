@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:listify/src/components/current-list/index.dart';
 import 'package:listify/src/components/list/index.dart';
 import 'package:listify/src/widgets/sub-widgets/back-icon-button.dart';
+import 'package:listify/src/widgets/sub-widgets/confirm-list-delete.dart';
+import 'package:listify/src/widgets/sub-widgets/dialog.dart';
 import 'package:momentum/momentum.dart';
 import 'package:relative_scale/relative_scale.dart';
 
@@ -23,10 +25,25 @@ class _ViewListState extends MomentumState<ViewList> with RelativeScale {
     initRelativeScaler(context);
     currentListController ??= Momentum.controller<CurrentListController>(context);
     listController ??= Momentum.controller<ListController>(context);
+    listController.addListener(
+      state: this,
+      invoke: (model, _) {
+        switch (model.action) {
+          case ListAction.ListConfirmDelete:
+            showDialog(context: context, builder: (context) => ConfirmListDelete());
+            break;
+          case ListAction.ListDataDeleted:
+            Router.pop(context);
+            break;
+          default:
+        }
+      },
+    );
   }
 
   @override
   Widget build(BuildContext context) {
+    var listName = currentListController.model.data.listName;
     return RouterPage(
       onWillPop: () async {
         Router.pop(context);
@@ -36,17 +53,24 @@ class _ViewListState extends MomentumState<ViewList> with RelativeScale {
         appBar: AppBar(
           leading: BackIconButton(),
           title: BetterText(
-            currentListController.model.data.listName,
+            listName,
             style: TextStyle(fontSize: sy(13)),
           ),
           actions: [
             IconButton(
               icon: Icon(Icons.edit, size: sy(18)),
               onPressed: () {
-                listController.editList(currentListController.model.data.listName);
+                listController.editList(listName);
                 Router.goto(context, AddNewList);
               },
               tooltip: 'Edit List',
+            ),
+            IconButton(
+              icon: Icon(Icons.delete, size: sy(18)),
+              onPressed: () {
+                listController.confirmDelete(listName);
+              },
+              tooltip: 'Delete List',
             ),
           ],
         ),

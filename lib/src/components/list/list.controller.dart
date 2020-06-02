@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:listify/src/components/current-list/current-list.controller.dart';
 import 'package:listify/src/components/settings/index.dart';
 import 'package:momentum/momentum.dart';
@@ -127,6 +128,34 @@ class ListController extends MomentumController<ListModel> {
       items.insert(index, ListData(listName: newListName, items: newItems));
       model.update(items: items);
       dependOn<CurrentListController>().viewData(model.items[index]);
+    }
+  }
+
+  void trigger({
+    @required ListAction action,
+    String actionMessage,
+  }) {
+    model.update(actionMessage: actionMessage ?? '');
+    model.update(skipRebuild: true, action: action);
+  }
+
+  void confirmDelete(String listName) {
+    var items = List<ListData>.from(model.items);
+    var toDelete = items.firstWhere((x) => x.listName == listName);
+    if (toDelete != null) {
+      trigger(
+        action: ListAction.ListConfirmDelete,
+        actionMessage: 'Are you sure you want to delete the list "${toDelete.listName}" and its ${toDelete.items.length} items? There\'s no going back.',
+      );
+    }
+  }
+
+  void deleteList(String listName) {
+    var items = List<ListData>.from(model.items);
+    var index = items.indexWhere((x) => x.listName == listName);
+    if (index != -1) {
+      items.removeAt(index);
+      model.update(items: items);
     }
   }
 
