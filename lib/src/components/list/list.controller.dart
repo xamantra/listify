@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:listify/src/components/current-list/current-list.controller.dart';
 import 'package:listify/src/components/settings/index.dart';
 import 'package:momentum/momentum.dart';
