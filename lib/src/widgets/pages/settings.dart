@@ -72,7 +72,7 @@ class _SettingsState extends MomentumState<Settings> {
                       ),
                       BoolSetting(
                         title: 'Copy List Name',
-                        description: 'When copying a list data, the list\'s name also be copied.',
+                        description: 'When copying a list data, the list\'s name will also be copied.',
                         isChecked: setting.copyListName,
                         onChanged: (state) {
                           setting.controller.setCopyListName(state);
