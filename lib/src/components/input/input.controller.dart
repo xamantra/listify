@@ -26,7 +26,11 @@ class InputController extends MomentumController<InputModel> {
   /// Check if list name already exists or list name and exact same list items already exist.
   bool exists() {
     // access another controller.
-    var exists = dependOn<ListController>().dataExists(model.listName, model.items);
+    var exists = dependOn<ListController>().dataExists(
+      listName: model.listName,
+      items: model.items,
+      editMode: model.editingList,
+    );
     return exists;
   }
 
@@ -39,7 +43,7 @@ class InputController extends MomentumController<InputModel> {
       );
       return;
     }
-    if (exists() && !model.editingList) {
+    if (exists()) {
       triggerAction(
         actionMessage: "List data with same list items or same list name already exist.",
         action: InputAction.ErrorOccured,
@@ -58,7 +62,7 @@ class InputController extends MomentumController<InputModel> {
   }
 
   void triggerAction({InputAction action, String actionMessage}) {
-    sendEvent(InputEvent(action: action, message: actionMessage)); 
+    sendEvent(InputEvent(action: action, message: actionMessage));
   }
 
   /// Update list name with the new user input.

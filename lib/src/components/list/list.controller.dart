@@ -17,7 +17,18 @@ class ListController extends MomentumController<ListModel> {
     );
   }
 
-  bool dataExists(String listName, List<ListItem> items) {
+  bool dataExists({
+    String listName,
+    List<ListItem> items,
+    bool editMode,
+  }) {
+    var shouldCheckListName = false;
+    var current = dependOn<CurrentListController>().model;
+    if (editMode) {
+      if (current.data.listName != listName) {
+        shouldCheckListName = true;
+      }
+    }
     var exists = model.items.any((e) {
       var itemsEqual = e.items.length == items.length;
       if (itemsEqual) {
@@ -28,7 +39,8 @@ class ListController extends MomentumController<ListModel> {
           }
         }
       }
-      return e.listName == listName || itemsEqual;
+      var listNameExists = shouldCheckListName ? e.listName == listName : false;
+      return listNameExists || itemsEqual;
     });
     return exists;
   }
