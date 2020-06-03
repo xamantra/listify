@@ -14,7 +14,28 @@ class ListController extends MomentumController<ListModel> {
     return ListModel(
       this,
       items: [],
+      isSearching: false,
+      searchQuery: '',
     );
+  }
+
+  void toggleSearchMode() {
+    model.update(isSearching: !model.isSearching);
+  }
+
+  void search(String query) {
+    model.update(searchQuery: query);
+  }
+
+  List<int> searchResults() {
+    var results = <int>[];
+    var q = model.searchQuery.trim().toLowerCase();
+    for (var i = 0; i < model.items.length; i++) {
+      if (model.items[i].listName.toLowerCase().contains(q)) {
+        results.add(i);
+      }
+    }
+    return results;
   }
 
   bool dataExists({

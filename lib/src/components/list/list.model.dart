@@ -26,20 +26,28 @@ class ListModel extends MomentumModel<ListController> with EquatableMixin {
     ListController controller, {
     this.items,
     this.viewingIndex,
+    this.isSearching,
+    this.searchQuery,
   }) : super(controller);
 
   final List<ListData> items;
   final int viewingIndex;
+  final bool isSearching;
+  final String searchQuery;
 
   @override
   void update({
     List<ListData> items,
     int viewingIndex,
+    bool isSearching,
+    String searchQuery,
   }) {
     ListModel(
       controller,
       items: items ?? this.items,
       viewingIndex: viewingIndex ?? this.viewingIndex,
+      isSearching: isSearching ?? this.isSearching,
+      searchQuery: searchQuery ?? this.searchQuery,
     ).updateMomentum();
   }
 
@@ -47,6 +55,8 @@ class ListModel extends MomentumModel<ListController> with EquatableMixin {
     return {
       'items': items?.map((x) => x?.toJson())?.toList(),
       'viewingIndex': viewingIndex,
+      'isSearching': isSearching,
+      'searchQuery': searchQuery,
     };
   }
 
@@ -57,6 +67,8 @@ class ListModel extends MomentumModel<ListController> with EquatableMixin {
       controller,
       items: List<ListData>.from(json['items']?.map((x) => ListData.fromJson(x))),
       viewingIndex: json['viewingIndex'],
+      isSearching: json['isSearching'],
+      searchQuery: json['searchQuery'],
     );
   }
 
@@ -64,5 +76,7 @@ class ListModel extends MomentumModel<ListController> with EquatableMixin {
   List<Object> get props => [
         items,
         viewingIndex,
+        isSearching,
+        searchQuery,
       ];
 }

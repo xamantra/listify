@@ -34,11 +34,67 @@ class _HomeState extends State<Home> with RelativeScale {
     return RouterPage(
       child: Scaffold(
         appBar: AppBar(
-          title: BetterText(
-            'Listify',
-            style: TextStyle(fontSize: sy(13)),
+          title: MomentumBuilder(
+            controllers: [ListController],
+            builder: (context, snapshot) {
+              var list = snapshot<ListModel>();
+              if (list.isSearching) {
+                return TextFormField(
+                  initialValue: list.searchQuery,
+                  onChanged: (value) {
+                    _listController.search(value);
+                  },
+                  style: TextStyle(
+                    fontSize: sy(12),
+                    color: Colors.white,
+                  ),
+                  decoration: InputDecoration(
+                    hintText: 'Search ...',
+                    hintStyle: TextStyle(
+                      fontSize: sy(12),
+                      color: Colors.white.withOpacity(0.6),
+                    ),
+                    border: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.white,
+                        width: 2,
+                      ),
+                    ),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.white,
+                        width: 2,
+                      ),
+                    ),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.white,
+                        width: 2,
+                      ),
+                    ),
+                  ),
+                );
+              }
+              return BetterText(
+                'Listify',
+                style: TextStyle(fontSize: sy(13)),
+              );
+            },
           ),
           actions: [
+            IconButton(
+              icon: MomentumBuilder(
+                controllers: [ListController],
+                builder: (context, snapshot) {
+                  var isSearching = snapshot<ListModel>().isSearching;
+                  return Icon(isSearching ? Icons.close : Icons.search, size: sy(18));
+                },
+              ),
+              onPressed: () {
+                _listController.toggleSearchMode();
+              },
+              tooltip: 'Search',
+            ),
             IconButton(
               icon: Icon(Icons.settings, size: sy(18)),
               onPressed: () {
@@ -57,8 +113,14 @@ class _HomeState extends State<Home> with RelativeScale {
             builder: (context, snapshot) {
               var list = snapshot<ListModel>();
               var items = <Widget>[];
-              for (var i = 0; i < list.items.length; i++) {
-                items.add(ListItemHome(key: Key('$i'), i: i, listData: list.items[i]));
+              if (list.isSearching && list.searchQuery.trim().isNotEmpty) {
+                for (var i in list.controller.searchResults()) {
+                  items.add(ListItemHome(key: Key('$i'), i: i, listData: list.items[i]));
+                }
+              } else {
+                for (var i = 0; i < list.items.length; i++) {
+                  items.add(ListItemHome(key: Key('$i'), i: i, listData: list.items[i]));
+                }
               }
               return Container(
                 constraints: BoxConstraints(maxHeight: screenHeight),
