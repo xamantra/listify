@@ -4,7 +4,6 @@ import 'package:listify/src/components/current-list/index.dart';
 import 'package:listify/src/components/list/index.dart';
 import 'package:listify/src/widgets/sub-widgets/back-icon-button.dart';
 import 'package:listify/src/widgets/sub-widgets/confirm-list-delete.dart';
-import 'package:listify/src/widgets/sub-widgets/dialog.dart';
 import 'package:momentum/momentum.dart';
 import 'package:relative_scale/relative_scale.dart';
 

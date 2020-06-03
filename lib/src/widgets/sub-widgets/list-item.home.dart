@@ -69,6 +69,7 @@ class ListItemHome extends StatelessWidget {
                       size: sy(18),
                     ),
                     onPressed: () {
+                      _inputController.reset(clearHistory: true);
                       _listController.createCopy(i);
                       Router.goto(context, AddNewList);
                     },
