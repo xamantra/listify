@@ -25,12 +25,12 @@ class _ViewListState extends MomentumState<ViewList> with RelativeScale {
     initRelativeScaler(context);
     currentListController ??= Momentum.controller<CurrentListController>(context);
     listController ??= Momentum.controller<ListController>(context);
-    listController.addListener(
+    listController.listen<ListEvent>(
       state: this,
-      invoke: (model, _) {
-        switch (model.action) {
+      invoke: (data) {
+        switch (data.action) {
           case ListAction.ListConfirmDelete:
-            showDialog(context: context, builder: (context) => ConfirmListDelete());
+            showDialog(context: context, builder: (context) => ConfirmListDelete(message: data.message));
             break;
           case ListAction.ListDataDeleted:
             Router.pop(context);

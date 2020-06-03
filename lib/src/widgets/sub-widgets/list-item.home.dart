@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:listify/src/components/current-list/current-list.controller.dart';
+import 'package:listify/src/components/input/index.dart';
 import 'package:listify/src/widgets/pages/view-list.dart';
 import 'package:momentum/momentum.dart';
 import 'package:relative_scale/relative_scale.dart';
@@ -23,6 +24,7 @@ class ListItemHome extends StatelessWidget {
   Widget build(BuildContext context) {
     var _listController = Momentum.controller<ListController>(context);
     var _currentListController = Momentum.controller<CurrentListController>(context);
+    var _inputController = Momentum.controller<InputController>(context);
     return RelativeBuilder(
       builder: (context, screenHeight, screenWidth, sy, sx) {
         IconData icon;

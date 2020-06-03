@@ -12,8 +12,6 @@ class InputController extends MomentumController<InputModel> {
       this,
       listName: '',
       items: [],
-      action: InputAction.None,
-      actionMessage: '',
       itemName: '',
       editingList: false,
     );
@@ -60,11 +58,7 @@ class InputController extends MomentumController<InputModel> {
   }
 
   void triggerAction({InputAction action, String actionMessage}) {
-    model.update(
-      skipRebuild: true,
-      action: action,
-      actionMessage: actionMessage ?? '',
-    );
+    sendEvent(InputEvent(action: action, message: actionMessage)); 
   }
 
   /// Update list name with the new user input.

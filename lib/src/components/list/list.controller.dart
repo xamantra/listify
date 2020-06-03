@@ -135,8 +135,7 @@ class ListController extends MomentumController<ListModel> {
     @required ListAction action,
     String actionMessage,
   }) {
-    model.update(actionMessage: actionMessage ?? '');
-    model.update(skipRebuild: true, action: action);
+    sendEvent(ListEvent(action: action, message: actionMessage ?? ''));
   }
 
   void confirmDelete(String listName) {

@@ -33,8 +33,13 @@ class _AddNewItemState extends MomentumState<AddNewItem> with RelativeScale {
             TextPosition(offset: _textEditingController.text.length),
           );
         }
+      },
+    );
+    _inputController.listen<InputEvent>(
+      state: this,
+      invoke: (data) {
         var clear = _settingsController.model.clearOnAdd;
-        switch (model.action) {
+        switch (data.action) {
           case InputAction.ListDataAdded:
             if (clear) _textEditingController.clear();
             break;

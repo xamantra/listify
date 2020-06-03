@@ -6,16 +6,12 @@ import 'index.dart';
 class SettingsModel extends MomentumModel<SettingsController> with EquatableMixin {
   SettingsModel(
     SettingsController controller, {
-    this.action,
-    this.actionMessage,
     this.draftInputs,
     this.clearOnAdd,
     this.copyListName,
     this.copyListStates,
   }) : super(controller);
 
-  final SettingsAction action;
-  final String actionMessage;
   final bool draftInputs;
   final bool clearOnAdd;
   final bool copyListName;
@@ -23,8 +19,6 @@ class SettingsModel extends MomentumModel<SettingsController> with EquatableMixi
 
   @override
   void update({
-    bool skipRebuild,
-    SettingsAction action,
     String actionMessage,
     bool draftInputs,
     bool clearOnAdd,
@@ -33,18 +27,15 @@ class SettingsModel extends MomentumModel<SettingsController> with EquatableMixi
   }) {
     SettingsModel(
       controller,
-      action: action ?? SettingsAction.None,
-      actionMessage: actionMessage ?? this.actionMessage,
       draftInputs: draftInputs ?? this.draftInputs,
       clearOnAdd: clearOnAdd ?? this.clearOnAdd,
       copyListName: copyListName ?? this.copyListName,
       copyListStates: copyListStates ?? this.copyListStates,
-    ).updateMomentum(skipRebuild: skipRebuild);
+    ).updateMomentum();
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'actionMessage': actionMessage,
       'draftInputs': draftInputs,
       'clearOnAdd': clearOnAdd,
       'copyListName': copyListName,
@@ -57,8 +48,6 @@ class SettingsModel extends MomentumModel<SettingsController> with EquatableMixi
 
     return SettingsModel(
       controller,
-      action: SettingsAction.None,
-      actionMessage: map['actionMessage'],
       draftInputs: map['draftInputs'],
       clearOnAdd: map['clearOnAdd'],
       copyListName: map['copyListName'],
@@ -68,16 +57,9 @@ class SettingsModel extends MomentumModel<SettingsController> with EquatableMixi
 
   @override
   List<Object> get props => [
-        action,
-        actionMessage,
         draftInputs,
         clearOnAdd,
         copyListName,
         copyListStates,
       ];
-}
-
-enum SettingsAction {
-  None,
-  DraftCleared,
 }

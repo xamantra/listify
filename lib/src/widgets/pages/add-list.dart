@@ -42,9 +42,14 @@ class _AddNewListState extends MomentumState<AddNewList> with RelativeScale {
           );
         }
         if (model.listName.isEmpty) _textEditingController.clear();
-        switch (model.action) {
+      },
+    );
+    _inputController.listen<InputEvent>(
+      state: this,
+      invoke: (data) {
+        switch (data.action) {
           case InputAction.ErrorOccured:
-            showError(model.actionMessage);
+            showError(data.message);
             break;
           case InputAction.ListDataAdded:
             Router.pop(context);

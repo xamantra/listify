@@ -18,15 +18,10 @@ class _SettingsState extends MomentumState<Settings> {
   @override
   void initMomentumState() {
     super.initMomentumState();
-    Momentum.controller<SettingsController>(context).addListener(
+    Momentum.controller<SettingsController>(context).listen<String>(
       state: this,
-      invoke: (model, _) {
-        switch (model.action) {
-          case SettingsAction.DraftCleared:
-            showMessage(model.actionMessage);
-            break;
-          default:
-        }
+      invoke: (data) {
+        showMessage(data);
       },
     );
   }

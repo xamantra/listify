@@ -47,10 +47,6 @@ class SettingsController extends MomentumController<SettingsModel> {
 
   void clearDraft() {
     dependOn<InputController>().reset(clearHistory: true);
-    model.update(
-      skipRebuild: true,
-      action: SettingsAction.DraftCleared,
-      actionMessage: 'Draft inputs cleared.',
-    );
+    sendEvent('Draft inputs cleared.');
   }
 }
