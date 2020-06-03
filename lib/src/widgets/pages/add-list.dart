@@ -77,7 +77,7 @@ class _AddNewListState extends MomentumState<AddNewList> with RelativeScale {
           title: MomentumBuilder(
             controllers: [InputController],
             dontRebuildIf: (controller, __) {
-              var editingListPrev = controller<InputController>().prevModel.editingList;
+              var editingListPrev = controller<InputController>().prevModel?.editingList;
               var editingList = controller<InputController>().model.editingList;
               return editingListPrev != editingList;
             },
