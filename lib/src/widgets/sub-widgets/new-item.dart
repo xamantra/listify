@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:listify/src/components/settings/index.dart';
+import 'package:listify/src/components/theme/index.dart';
 import 'package:momentum/momentum.dart';
 import 'package:relative_scale/relative_scale.dart';
 
@@ -55,39 +56,46 @@ class _AddNewItemState extends MomentumState<AddNewItem> with RelativeScale {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: screenWidth,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          Expanded(
-            child: TextInput(
-              controller: _textEditingController,
-              hintText: 'Item Name',
-              onChanged: (value) {
-                _inputController.setItemName(value);
-              },
-            ),
-          ),
-          Container(
-            width: sy(64),
-            child: RaisedButton(
-              onPressed: () {
-                _inputController.addItem();
-              },
-              color: Theme.of(context).accentColor,
-              child: BetterText(
-                'Add',
-                style: TextStyle(
-                  fontSize: sy(11),
-                  color: Colors.white,
+    return MomentumBuilder(
+      controllers: [ThemeController],
+      builder: (context, snapshot) {
+        var theme = snapshot<ThemeModel>().controller.selectedTheme();
+        return Container(
+          width: screenWidth,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Expanded(
+                child: TextInput(
+                  controller: _textEditingController,
+                  hintText: 'Item Name',
+                  color: theme.textPrimary,
+                  onChanged: (value) {
+                    _inputController.setItemName(value);
+                  },
                 ),
               ),
-            ),
+              Container(
+                width: sy(64),
+                child: RaisedButton(
+                  onPressed: () {
+                    _inputController.addItem();
+                  },
+                  color: theme.buttonSecondary.background,
+                  child: BetterText(
+                    'Add',
+                    style: TextStyle(
+                      fontSize: sy(11),
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 }

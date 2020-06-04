@@ -6,6 +6,7 @@ class TextInput extends StatefulWidget {
   final TextEditingController controller;
   final String hintText;
   final void Function(String) onChanged;
+  final Color color;
 
   const TextInput({
     Key key,
@@ -13,6 +14,7 @@ class TextInput extends StatefulWidget {
     this.controller,
     this.hintText,
     this.onChanged,
+    this.color,
   }) : super(key: key);
 
   @override
@@ -28,6 +30,7 @@ class _TextInputWidgetState extends State<TextInput> with RelativeScale {
 
   @override
   Widget build(BuildContext context) {
+    var underline = UnderlineInputBorder(borderSide: BorderSide(color: widget.color));
     return TextFormField(
       key: Key(widget.value),
       initialValue: widget.controller != null ? null : widget.value,
@@ -35,9 +38,17 @@ class _TextInputWidgetState extends State<TextInput> with RelativeScale {
       onChanged: widget.onChanged ?? (value) {},
       decoration: InputDecoration(
         hintText: widget.hintText ?? '',
-        hintStyle: TextStyle(fontSize: sy(11)),
+        hintStyle: TextStyle(
+          fontSize: sy(11),
+          color: widget.color.withOpacity(0.6),
+        ),
+        border: underline,
+        enabledBorder: underline,
       ),
-      style: TextStyle(fontSize: sy(11)),
+      style: TextStyle(
+        fontSize: sy(11),
+        color: widget.color,
+      ),
     );
   }
 }

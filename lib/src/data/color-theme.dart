@@ -5,6 +5,7 @@ class ListifyColor extends Equatable {
   final MaterialColor primary;
   final Color accent;
   final Color appbarFont;
+  final Color textPrimary;
   final Color bodyBackground;
   final Color listTileCardBackground;
   final ListTileFontColor listTileFontColor;
@@ -16,6 +17,7 @@ class ListifyColor extends Equatable {
     @required this.primary,
     @required this.accent,
     @required this.appbarFont,
+    @required this.textPrimary,
     @required this.bodyBackground,
     @required this.listTileCardBackground,
     @required this.listTileFontColor,
@@ -29,6 +31,7 @@ class ListifyColor extends Equatable {
         primary,
         accent,
         appbarFont,
+        textPrimary,
         bodyBackground,
         listTileCardBackground,
         listTileFontColor,
