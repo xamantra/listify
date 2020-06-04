@@ -1,12 +1,13 @@
 # listify
 
-A flutter todo/task listing app with advance state management using `Momentum` library. Simple on the outside but powerful in the inside. This app has very simple look and feel really just todo app but the state management with momentum makes it very powerful.
+A flutter todo/task listing example app with advance state management using `Momentum` library. Simple on the outside but powerful in the inside. This app has very simple look and feel really just todo app but the state management with momentum makes it very powerful. This actually turned out as a convenient app because of persistent state + persistent navigation (continue where your left off).
 
 - `Persistent State` - all state is persisted on the device. If you terminate the app and open it again, the states are retained.
 - `Persistent Navigation` - navigation between pages is persisted using momentum's powerful built-in router service. If you terminate the app and open it again, the page where you left off will be shown and pressing system back button actually navigates you to the correct previous page means navigation history is also persisted.
 - `Equatable` - skip updates if nothing actually changes.
 - `Undo/Redo` - undo/redo all inputs.
 - `Create Copy` - create a copy of a list.
+- `Edit/Delete` - in view mode, you can edit or delete a list.
 - `Reorderable lists` - both lists and input items can be reordered. 
 - `App settings` - app options which are easily saved using momentum's persistent feature.
 - `Draft inputs` - when back button is pressed the inputs will be saved as draft.
@@ -28,8 +29,16 @@ I decided to not write comments inside the code because I always find it very di
     - `persistSave` - The function parameter for saving state with any storage library you want. This app currently uses shared preference. Good thing is that key and value is already provided by momentum as parameter which you can directly access and easily call `sharedPref.setString(key, value)`. The same thing with:
     - `persistGet` - The function parameter for getting cached state with any storage library you want.
     - `Router.getActivePage(context)` - You'll also see this code inside `MyApp` class as the `home:` parameter value. `getActivePage` returns a widget which is the page where you left off (terminate the app). This is part of persistent navigation feature with momentum.
-    - **NOTE:** `persistSave` and `persistGet` is used for saving and getting data so if both is not specified momentum will not persist any navigation or any state.
+    - **NOTE:** `persistSave` and `persistGet` is used for saving and getting data so if both is not specified momentum will not persist any navigation or any state. And both of these functions require valid `toJson` and `fromJson` implementation on the model classes.
 
 There are still plenty of things that wasn't mentioned here especially one liner codes. But inside this app's code, you can just hover over the method or class names for momentum documentation.
 
 ## Gallery
+In this image the process were like this: Open app (home page) -> go to *add list* page -> close and terminate on multitask view -> reopen the app again ... And magic happens! All the inputs were retained and not just that but also including the page where you left off.
+
+![persistent preview](./gallery/001.png)
+
+#### Dark Mode
+Imagine an app without a dark mode. I can't so I added it into the app. Though, because I'm not familiar with the structure of `ThemeData` and its properties and not really a designer type. I kinda did things manually with the help of momentum.
+
+![dark mode](./gallery/002.png)
