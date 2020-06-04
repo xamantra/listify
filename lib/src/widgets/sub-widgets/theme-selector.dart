@@ -57,13 +57,16 @@ class ThemeSelector extends StatelessWidget {
                     ),
                   );
                 }
-                return Card(
-                  child: Container(
-                    width: width,
-                    height: sy(300),
-                    child: Column(
-                      children: themeItems,
-                    ),
+                return Container(
+                  width: width,
+                  height: sy(300),
+                  padding: EdgeInsets.all(sy(8)),
+                  child: Column(
+                    children: themeItems,
+                  ),
+                  decoration: BoxDecoration(
+                    color: Colors.black.withOpacity(0.9),
+                    borderRadius: BorderRadius.circular(5),
                   ),
                 );
               },
