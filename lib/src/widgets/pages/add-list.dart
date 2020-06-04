@@ -147,6 +147,7 @@ class _AddNewListState extends MomentumState<AddNewList> with RelativeScale {
                                     _inputController.toggleItemState(i);
                                   },
                                   child: ListTile(
+                                    contentPadding: EdgeInsets.all(sy(4)),
                                     leading: Checkbox(
                                       value: input.items[i].listState,
                                       tristate: true,
@@ -157,6 +158,7 @@ class _AddNewListState extends MomentumState<AddNewList> with RelativeScale {
                                     title: BetterText(
                                       input.items[i].name,
                                       style: TextStyle(fontSize: sy(11)),
+                                      maxLines: 2,
                                     ),
                                     trailing: Row(
                                       mainAxisSize: MainAxisSize.min,

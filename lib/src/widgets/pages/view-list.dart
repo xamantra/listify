@@ -100,6 +100,7 @@ class _ViewListState extends MomentumState<ViewList> with RelativeScale {
                                     currentListController.toggleItemState(i);
                                   },
                                   child: ListTile(
+                                    contentPadding: EdgeInsets.all(sy(4)),
                                     leading: Checkbox(
                                       value: list.data.items[i].listState,
                                       tristate: true,
@@ -110,6 +111,7 @@ class _ViewListState extends MomentumState<ViewList> with RelativeScale {
                                     title: BetterText(
                                       list.data.items[i].name,
                                       style: TextStyle(fontSize: sy(11)),
+                                      maxLines: 2,
                                     ),
                                   ),
                                 ),

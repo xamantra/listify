@@ -51,6 +51,7 @@ class ListItemHome extends StatelessWidget {
               Router.goto(context, ViewList);
             },
             child: ListTile(
+              contentPadding: EdgeInsets.all(sy(4)).copyWith(left: sy(8)),
               leading: Icon(
                 icon,
                 color: color,
@@ -59,6 +60,7 @@ class ListItemHome extends StatelessWidget {
               title: BetterText(
                 listData.listName,
                 style: TextStyle(fontSize: sy(11)),
+                maxLines: 2,
               ),
               trailing: Row(
                 mainAxisSize: MainAxisSize.min,
