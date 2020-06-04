@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:listify/src/data/color-theme.dart';
 import 'package:relative_scale/relative_scale.dart';
 
 import 'better-text.dart';
@@ -6,6 +7,7 @@ import 'better-text.dart';
 class ConfirmDialog extends StatelessWidget {
   final String title;
   final String message;
+  final ListifyTheme theme;
   final void Function() no;
   final void Function() yes;
 
@@ -15,11 +17,13 @@ class ConfirmDialog extends StatelessWidget {
     @required this.message,
     this.no,
     this.yes,
+    this.theme,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Dialog(
+      backgroundColor: Colors.transparent,
       child: RelativeBuilder(
         builder: (context, height, width, sy, sx) {
           return Material(
@@ -28,7 +32,7 @@ class ConfirmDialog extends StatelessWidget {
               width: width,
               padding: EdgeInsets.all(sy(12)),
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: theme.bodyBackground,
                 borderRadius: BorderRadius.circular(4),
               ),
               child: Column(
@@ -41,7 +45,7 @@ class ConfirmDialog extends StatelessWidget {
                     style: TextStyle(
                       fontSize: sy(14),
                       fontWeight: FontWeight.bold,
-                      color: Colors.black.withOpacity(0.80),
+                      color: theme.textPrimary.withOpacity(0.80),
                     ),
                   ),
                   SizedBox(height: sy(8)),
@@ -49,7 +53,7 @@ class ConfirmDialog extends StatelessWidget {
                     message ?? '',
                     style: TextStyle(
                       fontSize: sy(12),
-                      color: Colors.black.withOpacity(0.85),
+                      color: theme.textPrimary.withOpacity(0.85),
                     ),
                     textAlign: TextAlign.center,
                     maxLines: 4,
@@ -67,7 +71,7 @@ class ConfirmDialog extends StatelessWidget {
                           'NO',
                           style: TextStyle(
                             fontSize: sy(12),
-                            color: Colors.black.withOpacity(0.65),
+                            color: theme.textPrimary.withOpacity(0.65),
                           ),
                         ),
                       ),
@@ -78,7 +82,7 @@ class ConfirmDialog extends StatelessWidget {
                           'YES',
                           style: TextStyle(
                             fontSize: sy(12),
-                            color: Colors.red,
+                            color: theme.accent,
                           ),
                         ),
                       ),
