@@ -1,4 +1,5 @@
 # listify
+`flutter-1.17.0`
 
 A flutter todo/task listing example app with advance state management using `Momentum` library. Simple on the outside but powerful in the inside. This app has very simple look and feel really just todo app but the state management with momentum makes it very powerful. This actually turned out as a convenient app because of persistent state + persistent navigation (continue where your left off).
 
@@ -9,6 +10,7 @@ A flutter todo/task listing example app with advance state management using `Mom
 - `Create Copy` - create a copy of a list.
 - `Edit/Delete` - in view mode, you can edit or delete a list.
 - `Reorderable lists` - both lists and input items can be reordered. 
+- `Search` - simple search feature in home page.
 - `App settings` - app options which are easily saved using momentum's persistent feature.
 - `Draft inputs` - when back button is pressed the inputs will be saved as draft.
 
