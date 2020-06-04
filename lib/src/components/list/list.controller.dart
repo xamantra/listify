@@ -72,9 +72,8 @@ class ListController extends MomentumController<ListModel> {
     model.update(items: lists);
   }
 
-  /// Reorder the items in the model and rebuild the widgets.
   void reorder(int oldIndex, int newIndex) {
-    var lists = List<ListData>.from(model.items); // create new instance of list.
+    var lists = List<ListData>.from(model.items);
     if (oldIndex < newIndex) {
       newIndex -= 1;
     }
@@ -102,7 +101,7 @@ class ListController extends MomentumController<ListModel> {
   }
 
   void removeItem(int index) {
-    var items = List<ListData>.from(model.items); // create new instance of list.
+    var items = List<ListData>.from(model.items);
     model.update(items: items..removeAt(index));
   }
 

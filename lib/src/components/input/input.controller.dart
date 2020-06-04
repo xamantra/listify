@@ -17,15 +17,12 @@ class InputController extends MomentumController<InputModel> {
     );
   }
 
-  /// Do not allow empty list name or empty items.
   bool validInput() {
     var inputNotEmpty = model.listName.isNotEmpty && model.items.isNotEmpty;
     return inputNotEmpty;
   }
 
-  /// Check if list name already exists or list name and exact same list items already exist.
   bool exists() {
-    // access another controller.
     var exists = dependOn<ListController>().dataExists(
       listName: model.listName,
       items: model.items,
@@ -34,7 +31,6 @@ class InputController extends MomentumController<InputModel> {
     return exists;
   }
 
-  /// Submit the values inputted by the user and check for errors.
   void submit() {
     if (!validInput()) {
       triggerAction(
@@ -65,8 +61,6 @@ class InputController extends MomentumController<InputModel> {
     sendEvent(InputEvent(action: action, message: actionMessage));
   }
 
-  /// Update list name with the new user input.
-  /// Currently used in text field `onChanged` callback.
   void setListName(String value) {
     model.update(listName: value);
   }
@@ -75,7 +69,6 @@ class InputController extends MomentumController<InputModel> {
     model.update(itemName: value);
   }
 
-  /// Add new item in the items input with the name provided.
   void addItem() {
     if (model.itemName.isEmpty) {
       triggerAction(
@@ -112,8 +105,6 @@ class InputController extends MomentumController<InputModel> {
     model.update(items: items);
   }
 
-  /// Set the items input from external source
-  /// Currently used in copy list function.
   void setItems(List<ListItem> value) {
     model.update(items: value);
   }
@@ -136,7 +127,6 @@ class InputController extends MomentumController<InputModel> {
     );
   }
 
-  /// Reorder the items input in the model and rebuild the widgets.
   void reorder(int oldIndex, int newIndex) {
     var items = List<ListItem>.from(model.items);
     if (oldIndex < newIndex) {
@@ -147,15 +137,8 @@ class InputController extends MomentumController<InputModel> {
     model.update(items: items);
   }
 
-  /// Remove an item from the items input by index.
   void removeItem(int index) {
     var items = List<ListItem>.from(model.items);
     model.update(items: items..removeAt(index));
   }
 }
-
-/* This code appeared multiple times in this controller. */
-// var items = List<ListItem>.from(model.items)
-
-// we need to create new instance of list instead of modifying directly from
-// the current model state, list are not purely immutable.

@@ -32,15 +32,11 @@ void main() {
           ViewList(),
         ]),
       ],
-
-      /* Persistent state, save data function. */
       persistSave: (context, key, value) async {
         var sharedPref = await ClientDB.getByContext(context);
         var result = await sharedPref.setString(key, value);
         return result;
       },
-
-      /* Persistent state, get data function. */
       persistGet: (context, key) async {
         var sharedPref = await ClientDB.getByContext(context);
         var result = sharedPref.getString(key);
@@ -65,7 +61,7 @@ class MyApp extends StatelessWidget {
             visualDensity: VisualDensity.adaptivePlatformDensity,
           ),
           debugShowCheckedModeBanner: false,
-          home: Router.getActivePage(context), // persistent routing/navigation
+          home: Router.getActivePage(context),
         );
       },
     );
