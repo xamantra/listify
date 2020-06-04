@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:relative_scale/relative_scale.dart';
 
+import 'package:listify/src/data/color-theme.dart';
+
 import 'better-text.dart';
 
 class BoolSetting extends StatelessWidget {
@@ -8,13 +10,15 @@ class BoolSetting extends StatelessWidget {
   final String description;
   final bool isChecked;
   final void Function(bool) onChanged;
+  final ListifyColor theme;
 
   const BoolSetting({
     Key key,
     this.title,
     this.description,
-    this.onChanged,
     this.isChecked,
+    this.onChanged,
+    this.theme,
   }) : super(key: key);
 
   @override
@@ -37,11 +41,17 @@ class BoolSetting extends StatelessWidget {
                     child: ListTile(
                       title: BetterText(
                         title,
-                        style: TextStyle(fontSize: sy(11)),
+                        style: TextStyle(
+                          fontSize: sy(11),
+                          color: theme.listTileFontColor.primary,
+                        ),
                       ),
                       subtitle: BetterText(
                         description,
-                        style: TextStyle(fontSize: sy(10)),
+                        style: TextStyle(
+                          fontSize: sy(10),
+                          color: theme.listTileFontColor.secondary,
+                        ),
                         maxLines: 2,
                       ),
                     ),

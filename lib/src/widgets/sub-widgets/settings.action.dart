@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:listify/src/data/color-theme.dart';
 import 'package:relative_scale/relative_scale.dart';
 
 import 'better-text.dart';
@@ -7,12 +8,14 @@ class ActionSetting extends StatelessWidget {
   final String title;
   final String description;
   final void Function() action;
+  final ListifyColor theme;
 
   const ActionSetting({
     Key key,
     this.title,
     this.description,
     this.action,
+    this.theme,
   }) : super(key: key);
 
   @override
@@ -31,11 +34,17 @@ class ActionSetting extends StatelessWidget {
                     child: ListTile(
                       title: BetterText(
                         title,
-                        style: TextStyle(fontSize: sy(11)),
+                        style: TextStyle(
+                          fontSize: sy(11),
+                          color: theme.listTileFontColor.primary,
+                        ),
                       ),
                       subtitle: BetterText(
                         description,
-                        style: TextStyle(fontSize: sy(10)),
+                        style: TextStyle(
+                          fontSize: sy(10),
+                          color: theme.listTileFontColor.secondary,
+                        ),
                         maxLines: 2,
                       ),
                     ),
