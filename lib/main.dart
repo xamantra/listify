@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:listify/src/components/current-list/index.dart';
 import 'package:momentum/momentum.dart';
 
+import 'src/components/current-list/index.dart';
 import 'src/components/input/index.dart';
 import 'src/components/list/index.dart';
 import 'src/components/settings/index.dart';
+import 'src/components/theme/index.dart';
 import 'src/services/client_db.dart';
 import 'src/widgets/pages/add-list.dart';
 import 'src/widgets/pages/home.dart';
@@ -20,6 +21,7 @@ void main() {
         InputController()..config(maxTimeTravelSteps: 200),
         SettingsController(),
         CurrentListController(),
+        ThemeController(),
       ],
       services: [
         ClientDB(),
