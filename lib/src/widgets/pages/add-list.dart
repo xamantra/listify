@@ -200,9 +200,13 @@ class _AddNewListState extends MomentumState<AddNewList> with RelativeScale {
                   onPressed: () {
                     _inputController.submit();
                   },
+                  color: Theme.of(context).primaryColor,
                   child: BetterText(
                     'Save',
-                    style: TextStyle(fontSize: sy(11)),
+                    style: TextStyle(
+                      fontSize: sy(11),
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               ),

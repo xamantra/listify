@@ -76,9 +76,13 @@ class _AddNewItemState extends MomentumState<AddNewItem> with RelativeScale {
               onPressed: () {
                 _inputController.addItem();
               },
+              color: Theme.of(context).accentColor,
               child: BetterText(
                 'Add',
-                style: TextStyle(fontSize: sy(11)),
+                style: TextStyle(
+                  fontSize: sy(11),
+                  color: Colors.white,
+                ),
               ),
             ),
           ),
