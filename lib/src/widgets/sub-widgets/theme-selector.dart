@@ -17,7 +17,7 @@ class ThemeSelector extends StatelessWidget {
               controllers: [ThemeController],
               builder: (context, snapshot) {
                 var themeModel = snapshot<ThemeModel>();
-                var themes = themeModel.controller.themes();
+                var themes = themeModel.controller.themes;
                 var themeItems = <Widget>[];
                 for (var i = 0; i < themes.length; i++) {
                   var theme = themes[i];
