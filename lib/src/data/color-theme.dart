@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
 class ListifyColor extends Equatable {
-  final Color primary;
+  final MaterialColor primary;
   final Color accent;
   final Color appbarFont;
   final Color bodyBackground;
@@ -23,36 +23,6 @@ class ListifyColor extends Equatable {
     @required this.buttonPrimary,
     @required this.buttonSecondary,
   });
-
-  Map<String, dynamic> toJson() {
-    return {
-      'primary': primary?.value,
-      'accent': accent?.value,
-      'appbarFont': appbarFont?.value,
-      'bodyBackground': bodyBackground?.value,
-      'listTileCardBackground': listTileCardBackground?.value,
-      'listTileFontColor': listTileFontColor?.toJson(),
-      'listTileIconColor': listTileIconColor?.toJson(),
-      'buttonPrimary': buttonPrimary?.toJson(),
-      'buttonSecondary': buttonSecondary?.toJson(),
-    };
-  }
-
-  static ListifyColor fromJson(Map<String, dynamic> map) {
-    if (map == null) return null;
-
-    return ListifyColor(
-      primary: Color(map['primary']),
-      accent: Color(map['accent']),
-      appbarFont: Color(map['appbarFont']),
-      bodyBackground: Color(map['bodyBackground']),
-      listTileCardBackground: Color(map['listTileCardBackground']),
-      listTileFontColor: ListTileFontColor.fromJson(map['listTileFontColor']),
-      listTileIconColor: ListTileIconColor.fromJson(map['listTileIconColor']),
-      buttonPrimary: ButtonColor.fromJson(map['buttonPrimary']),
-      buttonSecondary: ButtonColor.fromJson(map['buttonSecondary']),
-    );
-  }
 
   @override
   List<Object> get props => [
@@ -77,22 +47,6 @@ class ListTileFontColor extends Equatable {
     @required this.secondary,
   });
 
-  Map<String, dynamic> toJson() {
-    return {
-      'primary': primary?.value,
-      'secondary': secondary?.value,
-    };
-  }
-
-  static ListTileFontColor fromJson(Map<String, dynamic> json) {
-    if (json == null) return null;
-
-    return ListTileFontColor(
-      primary: Color(json['primary']),
-      secondary: Color(json['secondary']),
-    );
-  }
-
   @override
   List<Object> get props => [
         primary,
@@ -113,26 +67,6 @@ class ListTileIconColor extends Equatable {
     @required this.danger,
   });
 
-  Map<String, dynamic> toJson() {
-    return {
-      'normal': normal?.value,
-      'primary': primary?.value,
-      'secondary': secondary?.value,
-      'danger': danger?.value,
-    };
-  }
-
-  static ListTileIconColor fromJson(Map<String, dynamic> json) {
-    if (json == null) return null;
-
-    return ListTileIconColor(
-      normal: Color(json['normal']),
-      primary: Color(json['primary']),
-      secondary: Color(json['secondary']),
-      danger: Color(json['danger']),
-    );
-  }
-
   @override
   List<Object> get props => [
         normal,
@@ -150,22 +84,6 @@ class ButtonColor extends Equatable {
     @required this.background,
     @required this.fontColor,
   });
-
-  Map<String, dynamic> toJson() {
-    return {
-      'background': background?.value,
-      'fontColor': fontColor?.value,
-    };
-  }
-
-  static ButtonColor fromJson(Map<String, dynamic> json) {
-    if (json == null) return null;
-
-    return ButtonColor(
-      background: Color(json['background']),
-      fontColor: Color(json['fontColor']),
-    );
-  }
 
   @override
   List<Object> get props => [

@@ -4,7 +4,7 @@ import 'color-theme.dart';
 
 ListifyColor defaultTheme() {
   return ListifyColor(
-    primary: Color(0xff3F51B5),
+    primary: Colors.indigo,
     accent: Color(0xffE91E63),
     appbarFont: Colors.white,
     bodyBackground: Color(0xffFAFAFA),
@@ -32,7 +32,7 @@ ListifyColor defaultTheme() {
 
 ListifyColor darkTheme() {
   return ListifyColor(
-    primary: Color(0xff3F51B5),
+    primary: Colors.indigo,
     accent: Color(0xffE91E63),
     appbarFont: Colors.white,
     bodyBackground: Color(0xffFAFAFA),
