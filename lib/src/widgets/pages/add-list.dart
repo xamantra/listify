@@ -24,7 +24,7 @@ class _AddNewListState extends MomentumState<AddNewList> with RelativeScale {
   InputController _inputController;
   ListController _listController;
   SettingsController _settingsController;
-  ListifyColor theme;
+  ListifyTheme theme;
   TextEditingController _textEditingController = TextEditingController();
 
   @override

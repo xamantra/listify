@@ -14,7 +14,7 @@ class ThemeModel extends MomentumModel<ThemeController> with EquatableMixin {
 
   @override
   void update({
-    List<ListifyColor> themes,
+    List<ListifyTheme> themes,
     int activeTheme,
   }) {
     ThemeModel(

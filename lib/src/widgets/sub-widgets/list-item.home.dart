@@ -14,7 +14,7 @@ import 'better-text.dart';
 class ListItemHome extends StatelessWidget {
   final int i;
   final ListData listData;
-  final ListifyColor theme;
+  final ListifyTheme theme;
 
   const ListItemHome({
     Key key,

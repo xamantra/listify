@@ -18,7 +18,7 @@ class _AddNewItemState extends MomentumState<AddNewItem> with RelativeScale {
   InputController _inputController;
   SettingsController _settingsController;
   TextEditingController _textEditingController = TextEditingController();
-  ListifyColor theme;
+  ListifyTheme theme;
 
   @override
   void didChangeDependencies() {

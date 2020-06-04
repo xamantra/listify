@@ -8,7 +8,7 @@ class ActionSetting extends StatelessWidget {
   final String title;
   final String description;
   final void Function() action;
-  final ListifyColor theme;
+  final ListifyTheme theme;
 
   const ActionSetting({
     Key key,

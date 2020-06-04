@@ -20,7 +20,7 @@ class ViewList extends StatefulWidget {
 class _ViewListState extends MomentumState<ViewList> with RelativeScale {
   CurrentListController currentListController;
   ListController listController;
-  ListifyColor theme;
+  ListifyTheme theme;
 
   @override
   void initMomentumState() {

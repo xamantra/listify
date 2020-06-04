@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'color-theme.dart';
 
-ListifyColor indigoPinkLight() {
-  return ListifyColor(
+ListifyTheme indigoPinkLight() {
+  return ListifyTheme(
     primary: Colors.indigo,
     accent: Colors.pink,
     appbarFont: Colors.white,
@@ -31,8 +31,8 @@ ListifyColor indigoPinkLight() {
   );
 }
 
-ListifyColor tealPurpleLight() {
-  return ListifyColor(
+ListifyTheme tealPurpleLight() {
+  return ListifyTheme(
     primary: Colors.teal,
     accent: Colors.purple,
     appbarFont: Colors.white,
@@ -60,8 +60,8 @@ ListifyColor tealPurpleLight() {
   );
 }
 
-ListifyColor indigoPinkDark() {
-  return ListifyColor(
+ListifyTheme indigoPinkDark() {
+  return ListifyTheme(
     primary: Colors.indigo,
     accent: Colors.pink,
     appbarFont: Colors.white,
@@ -89,8 +89,8 @@ ListifyColor indigoPinkDark() {
   );
 }
 
-ListifyColor tealPurpleDark() {
-  return ListifyColor(
+ListifyTheme tealPurpleDark() {
+  return ListifyTheme(
     primary: Colors.teal,
     accent: Colors.purple,
     appbarFont: Colors.white,

@@ -21,7 +21,7 @@ class _HomeState extends State<Home> with RelativeScale {
   InputController _inputController;
   ListController _listController;
   SettingsController _settingsController;
-  ListifyColor theme;
+  ListifyTheme theme;
 
   @override
   void didChangeDependencies() {

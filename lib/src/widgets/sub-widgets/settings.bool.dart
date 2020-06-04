@@ -10,7 +10,7 @@ class BoolSetting extends StatelessWidget {
   final String description;
   final bool isChecked;
   final void Function(bool) onChanged;
-  final ListifyColor theme;
+  final ListifyTheme theme;
 
   const BoolSetting({
     Key key,

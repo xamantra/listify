@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
-class ListifyColor extends Equatable {
+class ListifyTheme extends Equatable {
   final MaterialColor primary;
   final Color accent;
   final Color appbarFont;
@@ -13,7 +13,7 @@ class ListifyColor extends Equatable {
   final ButtonColor buttonPrimary;
   final ButtonColor buttonSecondary;
 
-  ListifyColor({
+  ListifyTheme({
     @required this.primary,
     @required this.accent,
     @required this.appbarFont,
