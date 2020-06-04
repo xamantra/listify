@@ -53,15 +53,21 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Listify - Momentum Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.indigo,
-        accentColor: Colors.pink,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      debugShowCheckedModeBanner: false,
-      home: Router.getActivePage(context), // persistent routing/navigation
+    return MomentumBuilder(
+      controllers: [ThemeController],
+      builder: (context, snapshot) {
+        var theme = snapshot<ThemeModel>().controller.selectedTheme();
+        return MaterialApp(
+          title: 'Listify - Momentum Demo',
+          theme: ThemeData(
+            primarySwatch: theme.primary,
+            accentColor: theme.accent,
+            visualDensity: VisualDensity.adaptivePlatformDensity,
+          ),
+          debugShowCheckedModeBanner: false,
+          home: Router.getActivePage(context), // persistent routing/navigation
+        );
+      },
     );
   }
 }

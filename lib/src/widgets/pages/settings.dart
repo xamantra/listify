@@ -2,6 +2,7 @@ import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:listify/src/widgets/sub-widgets/back-icon-button.dart';
 import 'package:listify/src/widgets/sub-widgets/settings.action.dart';
+import 'package:listify/src/widgets/sub-widgets/theme-selector.dart';
 import 'package:momentum/momentum.dart';
 import 'package:relative_scale/relative_scale.dart';
 
@@ -86,6 +87,16 @@ class _SettingsState extends MomentumState<Settings> {
                         description: 'Clear draft inputs inside "Add New List" page.',
                         action: () {
                           setting.controller.clearDraft();
+                        },
+                      ),
+                      ActionSetting(
+                        title: 'Select Theme',
+                        description: 'An app without a theme switcher isn\'t an app at all.',
+                        action: () {
+                          showDialog(
+                            context: context,
+                            builder: (context) => ThemeSelector(),
+                          );
                         },
                       ),
                     ],

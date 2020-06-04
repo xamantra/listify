@@ -35,10 +35,10 @@ ListifyColor darkTheme() {
     primary: Colors.indigo,
     accent: Color(0xffE91E63),
     appbarFont: Colors.white,
-    bodyBackground: Color(0xffFAFAFA),
-    listTileCardBackground: Colors.white,
+    bodyBackground: Color(0xff282C34),
+    listTileCardBackground: Color(0xff21252B),
     listTileFontColor: ListTileFontColor(
-      primary: Colors.black,
+      primary: Colors.white.withOpacity(0.80),
       secondary: Color(0xff737373),
     ),
     listTileIconColor: ListTileIconColor(

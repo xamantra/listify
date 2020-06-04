@@ -17,6 +17,10 @@ class ThemeController extends MomentumController<ThemeModel> {
     model.update(activeTheme: index);
   }
 
+  ListifyColor selectedTheme() {
+    return themes()[model.activeTheme];
+  }
+
   List<ListifyColor> themes() {
     return [
       defaultTheme(),
