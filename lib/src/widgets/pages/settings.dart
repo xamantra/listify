@@ -1,7 +1,6 @@
 import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:listify/src/components/theme/index.dart';
-import 'package:listify/src/data/color-theme.dart';
 import 'package:listify/src/widgets/sub-widgets/back-icon-button.dart';
 import 'package:listify/src/widgets/sub-widgets/settings.action.dart';
 import 'package:listify/src/widgets/sub-widgets/theme-selector.dart';
