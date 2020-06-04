@@ -23,8 +23,10 @@ class ThemeController extends MomentumController<ThemeModel> {
 
   List<ListifyColor> themes() {
     return [
-      defaultTheme(),
-      darkTheme(),
+      indigoPinkLight(),
+      tealPurpleLight(),
+      indigoPinkDark(),
+      tealPurpleDark(),
     ];
   }
 }

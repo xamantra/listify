@@ -2,39 +2,68 @@ import 'package:flutter/material.dart';
 
 import 'color-theme.dart';
 
-ListifyColor defaultTheme() {
+ListifyColor indigoPinkLight() {
   return ListifyColor(
     primary: Colors.indigo,
-    accent: Color(0xffE91E63),
+    accent: Colors.pink,
     appbarFont: Colors.white,
     textPrimary: Colors.black.withOpacity(0.80),
     bodyBackground: Color(0xffFAFAFA),
     listTileCardBackground: Colors.white,
     listTileFontColor: ListTileFontColor(
-      primary: Colors.black,
+      primary: Colors.black.withOpacity(0.7),
       secondary: Color(0xff737373),
     ),
     listTileIconColor: ListTileIconColor(
       normal: Color(0xff8C8C8C),
       primary: Colors.green,
-      secondary: Color(0xffE91E63),
+      secondary: Colors.pink,
       danger: Colors.red,
     ),
     buttonPrimary: ButtonColor(
-      background: Color(0xff3F51B5),
+      background: Colors.indigo,
       fontColor: Colors.white,
     ),
     buttonSecondary: ButtonColor(
-      background: Color(0xffE91E63),
+      background: Colors.pink,
       fontColor: Colors.white,
     ),
   );
 }
 
-ListifyColor darkTheme() {
+ListifyColor tealPurpleLight() {
+  return ListifyColor(
+    primary: Colors.teal,
+    accent: Colors.purple,
+    appbarFont: Colors.white,
+    textPrimary: Colors.black.withOpacity(0.80),
+    bodyBackground: Color(0xffFAFAFA),
+    listTileCardBackground: Colors.white,
+    listTileFontColor: ListTileFontColor(
+      primary: Colors.black.withOpacity(0.7),
+      secondary: Color(0xff737373),
+    ),
+    listTileIconColor: ListTileIconColor(
+      normal: Color(0xff8C8C8C),
+      primary: Colors.green,
+      secondary: Colors.purple,
+      danger: Colors.redAccent,
+    ),
+    buttonPrimary: ButtonColor(
+      background: Colors.teal,
+      fontColor: Colors.white,
+    ),
+    buttonSecondary: ButtonColor(
+      background: Colors.purple,
+      fontColor: Colors.white,
+    ),
+  );
+}
+
+ListifyColor indigoPinkDark() {
   return ListifyColor(
     primary: Colors.indigo,
-    accent: Color(0xffE91E63),
+    accent: Colors.pink,
     appbarFont: Colors.white,
     textPrimary: Colors.white.withOpacity(0.65),
     bodyBackground: Color(0xff282C34),
@@ -46,15 +75,44 @@ ListifyColor darkTheme() {
     listTileIconColor: ListTileIconColor(
       normal: Color(0xff8C8C8C),
       primary: Colors.green,
-      secondary: Color(0xffE91E63),
+      secondary: Colors.pink,
       danger: Colors.redAccent,
     ),
     buttonPrimary: ButtonColor(
-      background: Color(0xff3F51B5),
+      background: Colors.indigo,
       fontColor: Colors.white,
     ),
     buttonSecondary: ButtonColor(
-      background: Color(0xffE91E63),
+      background: Colors.pink,
+      fontColor: Colors.white,
+    ),
+  );
+}
+
+ListifyColor tealPurpleDark() {
+  return ListifyColor(
+    primary: Colors.teal,
+    accent: Colors.purple,
+    appbarFont: Colors.white,
+    textPrimary: Colors.white.withOpacity(0.65),
+    bodyBackground: Color(0xff282C34),
+    listTileCardBackground: Color(0xff21252B),
+    listTileFontColor: ListTileFontColor(
+      primary: Colors.white.withOpacity(0.80),
+      secondary: Color(0xff737373),
+    ),
+    listTileIconColor: ListTileIconColor(
+      normal: Color(0xff8C8C8C),
+      primary: Colors.green,
+      secondary: Colors.purple,
+      danger: Colors.redAccent,
+    ),
+    buttonPrimary: ButtonColor(
+      background: Colors.teal,
+      fontColor: Colors.white,
+    ),
+    buttonSecondary: ButtonColor(
+      background: Colors.purple,
       fontColor: Colors.white,
     ),
   );
