@@ -78,13 +78,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.1"
-  floating_search_bar:
-    dependency: "direct main"
-    description:
-      name: floating_search_bar
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.3.0"
   flushbar:
     dependency: "direct main"
     description:

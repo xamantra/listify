@@ -33,6 +33,8 @@ I decided to not write comments inside the code because I always find it very di
 
 There are still plenty of things that wasn't mentioned here especially one liner codes. But inside this app's code, you can just hover over the method or class names for momentum documentation.
 
+Some codes are not optimize like widgets that looks almost similar can be merge as one widget and use parameters to make them dynamic like the `ListTile`s for example. I really didn't have time for it :) Feel free to submit a pull request though.
+
 ## Gallery
 In this image the process were like this: Open app (home page) -> go to *add list* page -> close and terminate on multitask view -> reopen the app again ... And magic happens! All the inputs were retained and not just that but also including the page where you left off.
 
