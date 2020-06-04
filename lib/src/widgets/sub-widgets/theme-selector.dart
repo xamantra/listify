@@ -21,7 +21,7 @@ class ThemeSelector extends StatelessWidget {
                 var themeItems = <Widget>[];
                 for (var i = 0; i < themes.length; i++) {
                   var theme = themes[i];
-                  themeItems.add(
+                  themeItems.addAll([
                     Expanded(
                       child: GestureDetector(
                         onTap: () {
@@ -55,7 +55,8 @@ class ThemeSelector extends StatelessWidget {
                         ),
                       ),
                     ),
-                  );
+                    Divider(),
+                  ]);
                 }
                 return Container(
                   width: width,
@@ -65,7 +66,7 @@ class ThemeSelector extends StatelessWidget {
                     children: themeItems,
                   ),
                   decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(0.9),
+                    color: Colors.black.withOpacity(0.5),
                     borderRadius: BorderRadius.circular(5),
                   ),
                 );
