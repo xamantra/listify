@@ -12,13 +12,13 @@ import '../pages/view-list.dart';
 import 'better-text.dart';
 
 class ListItemHome extends StatelessWidget {
-  final int i;
+  final int index;
   final ListData listData;
   final ListifyTheme theme;
 
   const ListItemHome({
     Key key,
-    this.i,
+    this.index,
     this.listData,
     this.theme,
   }) : super(key: key);
@@ -32,7 +32,7 @@ class ListItemHome extends StatelessWidget {
       builder: (context, screenHeight, screenWidth, sy, sx) {
         IconData icon;
         Color color;
-        var checkState = _listController.getCheckState(i);
+        var checkState = _listController.getCheckState(index);
         if (checkState == true) {
           icon = Icons.check_circle;
           color = theme.listTileIconColor.primary;
@@ -51,7 +51,7 @@ class ListItemHome extends StatelessWidget {
           child: InkWell(
             onTap: () {
               _currentListController.reset(clearHistory: true);
-              _listController.view(i);
+              _listController.view(index);
               Router.goto(context, ViewList);
             },
             child: ListTile(
@@ -80,7 +80,7 @@ class ListItemHome extends StatelessWidget {
                     ),
                     onPressed: () {
                       _inputController.reset(clearHistory: true);
-                      _listController.createCopy(i);
+                      _listController.createCopy(index);
                       Router.goto(context, AddNewList);
                     },
                     tooltip: 'Create Copy',
