@@ -33,6 +33,13 @@ I decided to not write comments inside the code because I always find it very di
     - `Router.getActivePage(context)` - You'll also see this code inside `MyApp` class as the `home:` parameter value. `getActivePage` returns a widget which is the page where you left off (terminate the app). This is part of persistent navigation feature with momentum.
     - **NOTE:** `persistSave` and `persistGet` is used for saving and getting data so if both is not specified momentum will not persist any navigation or any state. And both of these functions require valid `toJson` and `fromJson` implementation on the model classes.
 
+### Components
+- `CurrentListController` & `CurrentListModel` - this is where the current list state is being stored. This is used in View List page.
+- `ListController` & `ListModel` - this is where the list data is validated for duplicates during adding of list, search list, display all list created in home page, etc.
+- `InputController` & `InputModel` - used in `Add New List` page and `Edit Existing List`. The inputs are handled and validated in this component. Undo/Redo feature is also handled here.
+- `SettingsController` & `SettingsModel` - used in settings page and also in some other pages to auto apply settings.
+- `ThemeController` & `ThemeModel` - this is where custom manual theming is handled. Because I'm not too familiar with flutter's theme object structure and props name I decided to do it manually. This is used in every page.
+
 There are still plenty of things that wasn't mentioned here especially one liner codes. But inside this app's code, you can just hover over the method or class names for momentum documentation.
 
 Some codes are not optimize like widgets that looks almost similar can be merge as one widget and use parameters to make them dynamic like the `ListTile`s for example. I really didn't have time for it :) Feel free to submit a pull request though.
