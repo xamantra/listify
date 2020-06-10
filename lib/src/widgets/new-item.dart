@@ -4,8 +4,6 @@ import 'package:relative_scale/relative_scale.dart';
 
 import '../components/input/index.dart';
 import '../components/settings/index.dart';
-import '../components/theme/index.dart';
-import '../models/index.dart';
 import 'index.dart';
 
 class AddNewItem extends StatefulWidget {
@@ -17,7 +15,6 @@ class _AddNewItemState extends MomentumState<AddNewItem> with RelativeScale {
   InputController _inputController;
   SettingsController _settingsController;
   TextEditingController _textEditingController = TextEditingController();
-  ListifyTheme theme;
 
   @override
   void didChangeDependencies() {
@@ -25,7 +22,6 @@ class _AddNewItemState extends MomentumState<AddNewItem> with RelativeScale {
     _inputController ??= Momentum.controller<InputController>(context);
     _settingsController ??= Momentum.controller<SettingsController>(context);
     _textEditingController.text = _inputController.model.itemName;
-    theme = Momentum.controller<ThemeController>(context).selectedTheme();
 
     _inputController.addListener(
       state: this,
@@ -59,6 +55,7 @@ class _AddNewItemState extends MomentumState<AddNewItem> with RelativeScale {
 
   @override
   Widget build(BuildContext context) {
+    var theme = CustomTheme.of(context);
     return Container(
       width: screenWidth,
       child: Row(
