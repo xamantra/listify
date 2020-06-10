@@ -1,18 +1,15 @@
 import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
+import 'package:listify/src/components/input/index.dart';
+import 'package:listify/src/components/list/index.dart';
+import 'package:listify/src/components/settings/index.dart';
 import 'package:listify/src/components/theme/index.dart';
 import 'package:listify/src/data/color-theme.dart';
-import 'package:listify/src/widgets/pages/home.dart';
-import 'package:listify/src/widgets/sub-widgets/back-icon-button.dart';
+import 'package:listify/src/widgets/index.dart';
 import 'package:momentum/momentum.dart';
 import 'package:relative_scale/relative_scale.dart';
 
-import '../../components/input/index.dart';
-import '../../components/list/index.dart';
-import '../../components/settings/index.dart';
-import '../sub-widgets/better-text.dart';
-import '../sub-widgets/new-item.dart';
-import '../sub-widgets/text_input.dart';
+import 'index.dart';
 import 'view-list.dart';
 
 class AddNewList extends StatefulWidget {

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:listify/src/components/current-list/index.dart';
+import 'package:listify/src/components/input/index.dart';
+import 'package:listify/src/components/list/index.dart';
 import 'package:listify/src/data/color-theme.dart';
+import 'package:listify/src/data/index.dart';
 import 'package:momentum/momentum.dart';
 import 'package:relative_scale/relative_scale.dart';
 
-import '../../components/current-list/current-list.controller.dart';
-import '../../components/input/index.dart';
-import '../../components/list/index.dart';
-import '../../data/list-data.dart';
 import '../pages/add-list.dart';
 import '../pages/view-list.dart';
 import 'better-text.dart';

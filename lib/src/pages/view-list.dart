@@ -4,12 +4,10 @@ import 'package:listify/src/components/current-list/index.dart';
 import 'package:listify/src/components/list/index.dart';
 import 'package:listify/src/components/theme/index.dart';
 import 'package:listify/src/data/color-theme.dart';
-import 'package:listify/src/widgets/sub-widgets/back-icon-button.dart';
-import 'package:listify/src/widgets/sub-widgets/confirm-list-delete.dart';
+import 'package:listify/src/widgets/index.dart';
 import 'package:momentum/momentum.dart';
 import 'package:relative_scale/relative_scale.dart';
 
-import '../sub-widgets/better-text.dart';
 import 'add-list.dart';
 
 class ViewList extends StatefulWidget {

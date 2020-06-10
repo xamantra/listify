@@ -152,9 +152,9 @@ packages:
   relative_scale:
     dependency: "direct main"
     description:
-      name: relative_scale
-      url: "https://pub.dartlang.org"
-    source: hosted
+      path: "C:\\Projects\\personal\\relative_scale"
+      relative: false
+    source: path
     version: "1.0.7"
   shared_preferences:
     dependency: "direct main"
