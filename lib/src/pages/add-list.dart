@@ -6,11 +6,8 @@ import 'package:relative_scale/relative_scale.dart';
 import '../components/input/index.dart';
 import '../components/list/index.dart';
 import '../components/settings/index.dart';
-import '../components/theme/index.dart';
-import '../models/index.dart';
 import '../widgets/index.dart';
 import 'index.dart';
-import 'view-list.dart';
 
 class AddNewList extends StatefulWidget {
   @override
@@ -21,7 +18,6 @@ class _AddNewListState extends MomentumState<AddNewList> with RelativeScale {
   InputController _inputController;
   ListController _listController;
   SettingsController _settingsController;
-  ListifyTheme theme;
   TextEditingController _textEditingController = TextEditingController();
 
   @override
@@ -30,7 +26,6 @@ class _AddNewListState extends MomentumState<AddNewList> with RelativeScale {
     _inputController ??= Momentum.controller<InputController>(context);
     _listController ??= Momentum.controller<ListController>(context);
     _settingsController ??= Momentum.controller<SettingsController>(context);
-    theme = Momentum.controller<ThemeController>(context).selectedTheme();
     _textEditingController.text = _inputController.model.listName;
     _inputController.addListener(
       state: this,
@@ -67,6 +62,7 @@ class _AddNewListState extends MomentumState<AddNewList> with RelativeScale {
 
   @override
   Widget build(BuildContext context) {
+    var theme = CustomTheme.of(context);
     return RouterPage(
       onWillPop: () async {
         Router.pop(context);

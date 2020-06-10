@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:relative_scale/relative_scale.dart';
 
-import '../models/index.dart';
-import 'better-text.dart';
+import 'index.dart';
 
 class ConfirmDialog extends StatelessWidget {
   final String title;
   final String message;
-  final ListifyTheme theme;
   final void Function() no;
   final void Function() yes;
 
@@ -17,11 +15,11 @@ class ConfirmDialog extends StatelessWidget {
     @required this.message,
     this.no,
     this.yes,
-    this.theme,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var theme = CustomTheme.of(context);
     return Dialog(
       backgroundColor: Colors.transparent,
       child: RelativeBuilder(

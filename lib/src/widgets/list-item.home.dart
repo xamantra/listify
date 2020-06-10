@@ -12,17 +12,16 @@ import 'index.dart';
 class ListItemHome extends StatelessWidget {
   final int index;
   final ListData listData;
-  final ListifyTheme theme;
 
   const ListItemHome({
     Key key,
     this.index,
     this.listData,
-    this.theme,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var theme = CustomTheme.of(context);
     var _listController = Momentum.controller<ListController>(context);
     var _currentListController = Momentum.controller<CurrentListController>(context);
     var _inputController = Momentum.controller<InputController>(context);

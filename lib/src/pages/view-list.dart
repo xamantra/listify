@@ -5,8 +5,6 @@ import 'package:relative_scale/relative_scale.dart';
 
 import '../components/current-list/index.dart';
 import '../components/list/index.dart';
-import '../components/theme/index.dart';
-import '../models/index.dart';
 import '../widgets/index.dart';
 import 'index.dart';
 
@@ -18,14 +16,12 @@ class ViewList extends StatefulWidget {
 class _ViewListState extends MomentumState<ViewList> with RelativeScale {
   CurrentListController currentListController;
   ListController listController;
-  ListifyTheme theme;
 
   @override
   void initMomentumState() {
     initRelativeScaler(context);
     currentListController ??= Momentum.controller<CurrentListController>(context);
     listController ??= Momentum.controller<ListController>(context);
-    theme = Momentum.controller<ThemeController>(context).selectedTheme();
     listController.listen<ListEvent>(
       state: this,
       invoke: (data) {
@@ -44,6 +40,7 @@ class _ViewListState extends MomentumState<ViewList> with RelativeScale {
 
   @override
   Widget build(BuildContext context) {
+    var theme = CustomTheme.of(context);
     var listName = currentListController.model.data.listName;
     return RouterPage(
       onWillPop: () async {

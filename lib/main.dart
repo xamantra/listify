@@ -8,6 +8,7 @@ import 'src/components/settings/index.dart';
 import 'src/components/theme/index.dart';
 import 'src/pages/index.dart';
 import 'src/services/client_db.dart';
+import 'src/widgets/custom-theme.dart';
 
 void main() {
   runApp(
@@ -50,15 +51,18 @@ class MyApp extends StatelessWidget {
       controllers: [ThemeController],
       builder: (context, snapshot) {
         var theme = snapshot<ThemeModel>().controller.selectedTheme();
-        return MaterialApp(
-          title: 'Listify - Momentum Demo',
-          theme: ThemeData(
-            primarySwatch: theme.primary,
-            accentColor: theme.accent,
-            visualDensity: VisualDensity.adaptivePlatformDensity,
+        return CustomTheme(
+          theme: theme,
+          child: MaterialApp(
+            title: 'Listify - Momentum Demo',
+            theme: ThemeData(
+              primarySwatch: theme.primary,
+              accentColor: theme.accent,
+              visualDensity: VisualDensity.adaptivePlatformDensity,
+            ),
+            debugShowCheckedModeBanner: false,
+            home: Router.getActivePage(context),
           ),
-          debugShowCheckedModeBanner: false,
-          home: Router.getActivePage(context),
         );
       },
     );

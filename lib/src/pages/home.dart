@@ -5,11 +5,8 @@ import 'package:relative_scale/relative_scale.dart';
 import '../components/input/index.dart';
 import '../components/list/index.dart';
 import '../components/settings/index.dart';
-import '../components/theme/index.dart';
-import '../models/index.dart';
 import '../widgets/index.dart';
-import 'add-list.dart';
-import 'settings.dart';
+import 'index.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -20,7 +17,6 @@ class _HomeState extends State<Home> with RelativeScale {
   InputController _inputController;
   ListController _listController;
   SettingsController _settingsController;
-  ListifyTheme theme;
 
   @override
   void didChangeDependencies() {
@@ -28,12 +24,12 @@ class _HomeState extends State<Home> with RelativeScale {
     _inputController ??= Momentum.controller<InputController>(context);
     _listController ??= Momentum.controller<ListController>(context);
     _settingsController ??= Momentum.controller<SettingsController>(context);
-    theme = Momentum.controller<ThemeController>(context).selectedTheme();
     super.didChangeDependencies();
   }
 
   @override
   Widget build(BuildContext context) {
+    var theme = CustomTheme.of(context);
     return RouterPage(
       child: Scaffold(
         appBar: AppBar(
@@ -130,11 +126,11 @@ class _HomeState extends State<Home> with RelativeScale {
               var items = <Widget>[];
               if (list.isSearching && list.searchQuery.trim().isNotEmpty) {
                 for (var i in list.controller.searchResults()) {
-                  items.add(ListItemHome(key: Key('$i'), index: i, listData: list.items[i], theme: theme));
+                  items.add(ListItemHome(key: Key('$i'), index: i, listData: list.items[i]));
                 }
               } else {
                 for (var i = 0; i < list.items.length; i++) {
-                  items.add(ListItemHome(key: Key('$i'), index: i, listData: list.items[i], theme: theme));
+                  items.add(ListItemHome(key: Key('$i'), index: i, listData: list.items[i]));
                 }
               }
               return Container(

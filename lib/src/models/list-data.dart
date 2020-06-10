@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-import 'list-item.dart';
+import 'index.dart';
 
 class ListData extends Equatable {
   final String listName;

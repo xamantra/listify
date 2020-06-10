@@ -1,25 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:relative_scale/relative_scale.dart';
 
-import '../models/index.dart';
 import 'index.dart';
 
 class ActionSetting extends StatelessWidget {
   final String title;
   final String description;
   final void Function() action;
-  final ListifyTheme theme;
 
   const ActionSetting({
     Key key,
     this.title,
     this.description,
     this.action,
-    this.theme,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var theme = CustomTheme.of(context);
     return RelativeBuilder(
       builder: (context, screenHeight, screenWidth, sy, sx) {
         return InkWell(

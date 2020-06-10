@@ -1,6 +1,7 @@
 export 'back-icon-button.dart';
 export 'better-text.dart';
 export 'confirm-list-delete.dart';
+export 'custom-theme.dart';
 export 'dialog.dart';
 export 'list-item.home.dart';
 export 'new-item.dart';

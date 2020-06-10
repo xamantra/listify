@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:relative_scale/relative_scale.dart';
 
-import '../models/index.dart';
 import 'index.dart';
 
 class BoolSetting extends StatelessWidget {
@@ -9,7 +8,6 @@ class BoolSetting extends StatelessWidget {
   final String description;
   final bool isChecked;
   final void Function(bool) onChanged;
-  final ListifyTheme theme;
 
   const BoolSetting({
     Key key,
@@ -17,11 +15,11 @@ class BoolSetting extends StatelessWidget {
     this.description,
     this.isChecked,
     this.onChanged,
-    this.theme,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var theme = CustomTheme.of(context);
     return RelativeBuilder(
       builder: (context, screenHeight, screenWidth, sy, sx) {
         return InkWell(
