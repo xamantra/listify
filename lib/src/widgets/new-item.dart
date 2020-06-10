@@ -5,7 +5,7 @@ import 'package:relative_scale/relative_scale.dart';
 import '../components/input/index.dart';
 import '../components/settings/index.dart';
 import '../components/theme/index.dart';
-import '../data/index.dart';
+import '../models/index.dart';
 import 'index.dart';
 
 class AddNewItem extends StatefulWidget {

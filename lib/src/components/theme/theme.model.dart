@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:momentum/momentum.dart';
 
-import '../../data/index.dart';
+import '../../models/index.dart';
 import 'index.dart';
 
 class ThemeModel extends MomentumModel<ThemeController> with EquatableMixin {

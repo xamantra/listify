@@ -7,7 +7,7 @@ import '../components/input/index.dart';
 import '../components/list/index.dart';
 import '../components/settings/index.dart';
 import '../components/theme/index.dart';
-import '../data/index.dart';
+import '../models/index.dart';
 import '../widgets/index.dart';
 import 'index.dart';
 import 'view-list.dart';

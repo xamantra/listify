@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:momentum/momentum.dart';
 
-import '../../data/list-data.dart';
+import '../../models/index.dart';
 import 'index.dart';
 
 enum ListAction {

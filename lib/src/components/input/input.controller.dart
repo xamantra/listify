@@ -1,7 +1,6 @@
 import 'package:momentum/momentum.dart';
 
-import '../../data/list-data.dart';
-import '../../data/list-item.dart';
+import '../../models/index.dart';
 import '../list/index.dart';
 import 'index.dart';
 

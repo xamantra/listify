@@ -5,7 +5,7 @@ import 'package:relative_scale/relative_scale.dart';
 import '../components/current-list/index.dart';
 import '../components/input/index.dart';
 import '../components/list/index.dart';
-import '../data/index.dart';
+import '../models/index.dart';
 import '../pages/index.dart';
 import 'index.dart';
 

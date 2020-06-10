@@ -1,6 +1,6 @@
 import 'package:momentum/momentum.dart';
 
-import '../../data/index.dart';
+import '../../models/index.dart';
 import 'index.dart';
 
 class ThemeController extends MomentumController<ThemeModel> {
