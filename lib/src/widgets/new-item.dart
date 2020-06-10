@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:listify/src/components/input/index.dart';
-import 'package:listify/src/components/settings/index.dart';
-import 'package:listify/src/components/theme/index.dart';
-import 'package:listify/src/data/color-theme.dart';
 import 'package:momentum/momentum.dart';
 import 'package:relative_scale/relative_scale.dart';
 
+import '../components/input/index.dart';
+import '../components/settings/index.dart';
+import '../components/theme/index.dart';
+import '../data/color-theme.dart';
 import 'better-text.dart';
 import 'text_input.dart';
 

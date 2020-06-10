@@ -1,10 +1,11 @@
 import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
-import 'package:listify/src/components/settings/index.dart';
-import 'package:listify/src/components/theme/index.dart';
-import 'package:listify/src/widgets/index.dart';
 import 'package:momentum/momentum.dart';
 import 'package:relative_scale/relative_scale.dart';
+
+import '../components/settings/index.dart';
+import '../components/theme/index.dart';
+import '../widgets/index.dart';
 
 class Settings extends StatefulWidget {
   @override

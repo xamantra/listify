@@ -1,13 +1,13 @@
 import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
-import 'package:listify/src/components/current-list/index.dart';
-import 'package:listify/src/components/list/index.dart';
-import 'package:listify/src/components/theme/index.dart';
-import 'package:listify/src/data/color-theme.dart';
-import 'package:listify/src/widgets/index.dart';
 import 'package:momentum/momentum.dart';
 import 'package:relative_scale/relative_scale.dart';
 
+import '../components/current-list/index.dart';
+import '../components/list/index.dart';
+import '../components/theme/index.dart';
+import '../data/color-theme.dart';
+import '../widgets/index.dart';
 import 'add-list.dart';
 
 class ViewList extends StatefulWidget {

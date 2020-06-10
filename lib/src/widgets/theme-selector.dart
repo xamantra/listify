@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:listify/src/components/theme/index.dart';
 import 'package:momentum/momentum.dart';
 import 'package:relative_scale/relative_scale.dart';
+
+import '../components/theme/index.dart';
 
 
 class ThemeSelector extends StatelessWidget {

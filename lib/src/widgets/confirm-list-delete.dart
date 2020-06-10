@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:listify/src/components/current-list/index.dart';
-import 'package:listify/src/components/list/index.dart';
-import 'package:listify/src/components/theme/index.dart';
 import 'package:momentum/momentum.dart';
 
+import '../components/current-list/index.dart';
+import '../components/list/index.dart';
+import '../components/theme/index.dart';
 import 'index.dart';
 
 class ConfirmListDelete extends StatelessWidget {

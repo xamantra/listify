@@ -1,11 +1,11 @@
 import 'package:flutter/foundation.dart';
-import 'package:listify/src/components/current-list/current-list.controller.dart';
-import 'package:listify/src/components/settings/index.dart';
 import 'package:momentum/momentum.dart';
 
 import '../../data/list-data.dart';
 import '../../data/list-item.dart';
+import '../current-list/current-list.controller.dart';
 import '../input/index.dart';
+import '../settings/index.dart';
 import 'index.dart';
 
 class ListController extends MomentumController<ListModel> {

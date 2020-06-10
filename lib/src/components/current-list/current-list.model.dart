@@ -1,8 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:momentum/momentum.dart';
 
-import 'package:listify/src/data/list-data.dart';
-
+import '../../data/list-data.dart';
 import 'index.dart';
 
 class CurrentListModel extends MomentumModel<CurrentListController> with EquatableMixin {
