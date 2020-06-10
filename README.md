@@ -3,9 +3,9 @@
 
 A flutter todo/task listing example app with advanced state management using `Momentum` library. Simple on the outside but powerful in the inside. This app has a very simple look and feel. Just todo app but the state management with momentum makes it very powerful. This turned out as a convenient app because of persistent state + persistent navigation (continue where you left off).
 
-- `Persistent State` - all state is persisted on the device. If you terminate the app and open it again, the states are retained.
+- `Persistent State` - all state is persisted on the device. If you terminate the app and open it again, the states are retained including user inputs.
 - `Persistent Navigation` - navigation between pages is persisted using momentum's powerful built-in router service. If you terminate the app and open it again, the page where you left off will be shown, and pressing the system back button navigates you to the correct previous page means navigation history is also persisted.
-- `Equatable` - skip updates if nothing actually changes.
+- `Equatable` - skip rebuilds if nothing actually changes. Theming is optimized with the help of equatable.
 - `Undo/Redo` - undo/redo all inputs.
 - `Create Copy` - create a copy of a list.
 - `Edit/Delete` - in view mode, you can edit or delete a list.
@@ -19,7 +19,7 @@ A flutter todo/task listing example app with advanced state management using `Mo
 I decided to not write comments inside the code because I always find it very distracting. Instead, in this readme, I listed most of the things you need to remember to get an idea of how this project works.
 <!--TODO: link to official momentum docs-->
 
-### Components
+## Components
 - `CurrentListController` & `CurrentListModel` - this is where the current list state is being stored. This is used in the `View List` page.
 - `ListController` & `ListModel` - this is where the list data is validated for duplicates during adding of list, search list, `Home` page will display all list created, etc.
 - `InputController` & `InputModel` - used in `Add New List` page and `Edit Existing List`. The inputs are handled and validated in this component. Undo/Redo feature is also handled here.
