@@ -5,9 +5,8 @@ import 'package:relative_scale/relative_scale.dart';
 import '../components/input/index.dart';
 import '../components/settings/index.dart';
 import '../components/theme/index.dart';
-import '../data/color-theme.dart';
-import 'better-text.dart';
-import 'text_input.dart';
+import '../data/index.dart';
+import 'index.dart';
 
 class AddNewItem extends StatefulWidget {
   @override

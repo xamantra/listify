@@ -6,9 +6,9 @@ import 'package:relative_scale/relative_scale.dart';
 import '../components/current-list/index.dart';
 import '../components/list/index.dart';
 import '../components/theme/index.dart';
-import '../data/color-theme.dart';
+import '../data/index.dart';
 import '../widgets/index.dart';
-import 'add-list.dart';
+import 'index.dart';
 
 class ViewList extends StatefulWidget {
   @override

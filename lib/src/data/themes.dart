@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'color-theme.dart';
+import 'index.dart';
 
 var indigoPinkLight = ListifyTheme(
   primary: Colors.indigo,

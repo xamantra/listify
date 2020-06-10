@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:relative_scale/relative_scale.dart';
 
-import '../data/color-theme.dart';
+import '../data/index.dart';
 import 'better-text.dart';
 
 class BoolSetting extends StatelessWidget {

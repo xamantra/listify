@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:relative_scale/relative_scale.dart';
 
-import '../data/color-theme.dart';
-import 'better-text.dart';
+import '../data/index.dart';
+import 'index.dart';
 
 class ActionSetting extends StatelessWidget {
   final String title;

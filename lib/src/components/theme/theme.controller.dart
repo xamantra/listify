@@ -1,7 +1,6 @@
 import 'package:momentum/momentum.dart';
 
-import '../../data/color-theme.dart';
-import '../../data/themes.dart';
+import '../../data/index.dart';
 import 'index.dart';
 
 class ThemeController extends MomentumController<ThemeModel> {
