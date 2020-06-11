@@ -11,36 +11,38 @@ import 'src/services/client_db.dart';
 import 'src/widgets/custom-theme.dart';
 
 void main() {
-  runApp(
-    Momentum(
-      child: MyApp(),
-      controllers: [
-        ListController(),
-        InputController()..config(maxTimeTravelSteps: 200),
-        SettingsController(),
-        CurrentListController(),
-        ThemeController(),
-      ],
-      services: [
-        ClientDB(),
-        Router([
-          Home(),
-          AddNewList(),
-          Settings(),
-          ViewList(),
-        ]),
-      ],
-      persistSave: (context, key, value) async {
-        var sharedPref = await ClientDB.getByContext(context);
-        var result = await sharedPref.setString(key, value);
-        return result;
-      },
-      persistGet: (context, key) async {
-        var sharedPref = await ClientDB.getByContext(context);
-        var result = sharedPref.getString(key);
-        return result;
-      },
-    ),
+  runApp(momentum());
+}
+
+Momentum momentum() {
+  return Momentum(
+    child: MyApp(),
+    controllers: [
+      ListController(),
+      InputController()..config(maxTimeTravelSteps: 200),
+      SettingsController(),
+      CurrentListController(),
+      ThemeController(),
+    ],
+    services: [
+      ClientDB(),
+      Router([
+        Home(),
+        AddNewList(),
+        Settings(),
+        ViewList(),
+      ]),
+    ],
+    persistSave: (context, key, value) async {
+      var sharedPref = await ClientDB.getByContext(context);
+      var result = await sharedPref.setString(key, value);
+      return result;
+    },
+    persistGet: (context, key) async {
+      var sharedPref = await ClientDB.getByContext(context);
+      var result = sharedPref.getString(key);
+      return result;
+    },
   );
 }
 

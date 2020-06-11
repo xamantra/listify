@@ -1,10 +1,14 @@
 import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
+import 'package:listify/src/components/list/index.dart';
 import 'package:momentum/momentum.dart';
 import 'package:relative_scale/relative_scale.dart';
 
+import '../../main.dart';
+import '../components/input/index.dart';
 import '../components/settings/index.dart';
 import '../widgets/index.dart';
+import 'index.dart';
 
 class Settings extends StatefulWidget {
   @override
@@ -94,6 +98,16 @@ class _SettingsState extends MomentumState<Settings> {
                             context: context,
                             builder: (context) => ThemeSelector(),
                           );
+                        },
+                      ),
+                      ActionSetting(
+                        title: 'Restart App',
+                        description: 'Clear input draft, reset navigation history and go to home page.',
+                        action: () async {
+                          await Router.resetWithContext<Home>(context);
+                          Momentum.controller<InputController>(context).reset(clearHistory: true);
+                          Momentum.controller<ListController>(context).clearSearch();
+                          Momentum.restart(context, momentum());
                         },
                       ),
                     ],

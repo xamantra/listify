@@ -37,6 +37,11 @@ class ListController extends MomentumController<ListModel> {
     return results;
   }
 
+  void clearSearch(){
+    model.update(isSearching: false);
+    model.update(searchQuery: '');
+  }
+
   bool dataExists({
     String listName,
     List<ListItem> items,
