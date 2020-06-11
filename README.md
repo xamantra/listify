@@ -5,6 +5,14 @@
 <a href="https://pub.dev/packages/shared_preferences" target="_blank"><img src="https://img.shields.io/badge/shared_preferences-^0.5.7+3-blue"></a>
 <a href="https://pub.dev/packages/auto_size_text" target="_blank"><img src="https://img.shields.io/badge/auto_size_text-^2.1.0-blue"></a>
 <a href="https://pub.dev/packages/flushbar" target="_blank"><img src="https://img.shields.io/badge/flushbar-^1.10.4-blue"></a>
+<a href="https://codemagic.io/apps/5ee250e7c2d47368630a87ea/5ee2546c10f7b765a8b3f636/latest_build" target="_blank"><img src="https://api.codemagic.io/apps/5ee250e7c2d47368630a87ea/5ee2546c10f7b765a8b3f636/status_badge.svg"></a>
+
+---
+
+- Download [debug apk](https://api.codemagic.io/artifacts/8cf54cac-8fc8-4264-a2f4-8271cd04ee3e/0b62a96c-2be2-4a19-ab71-ba4e709a7d76/app-debug.apk)
+- Download [release apk](https://api.codemagic.io/artifacts/a6cfd6af-75d5-450e-b505-6d0ebbf7326f/af95b4cb-6834-43b1-9e8f-fe64b12fc766/app-release.apk)
+
+---
 
 A flutter todo/task listing example app with advanced state management using `Momentum` library. Simple on the outside but powerful in the inside. This app has a very simple look and feel. Just todo app but the state management with momentum makes it very powerful. This turned out as a convenient app because of persistent state + persistent navigation (continue where you left off).
 
@@ -37,7 +45,14 @@ I decided to not write comments inside the code because I always find it very di
 - The `ListifyTheme` theme class is not normalized. It has a lot of duplicate properties (same colors) because I thought I'll be able to implement a much more complex theming for this app. I'm leaving it as it is for now.
 
 ## Gallery
-In this image the process was like this: Open the app (home page) -> go to *add list* page -> close and terminate on task view -> reopen the app again ... And magic happens! All the inputs were retained and not just that but also including the page where you left off.
+In this image the process was like this:
+- Open the app (Home Page).
+- Go to *Add New List* page.
+- Input some data.
+- Close and Terminate on task view.
+- Reopen the app again.
+
+And magic happens! All the inputs were retained and not just that but also including the page where you left off. Navigation history is also persisted which means pressing the system back button will navigate you to the correct previous page.
 
 ![persistent preview](./gallery/001.png)
 
