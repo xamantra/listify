@@ -1,4 +1,4 @@
-package com.example.listify
+package gq.xamdev.listify
 
 import io.flutter.embedding.android.FlutterActivity
 

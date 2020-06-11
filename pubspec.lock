@@ -124,10 +124,10 @@ packages:
   momentum:
     dependency: "direct main"
     description:
-      path: "C:\\Projects\\momentum\\momentum"
-      relative: false
-    source: path
-    version: "1.1.6"
+      name: momentum
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.1.7"
   path:
     dependency: transitive
     description:
@@ -152,9 +152,9 @@ packages:
   relative_scale:
     dependency: "direct main"
     description:
-      path: "C:\\Projects\\personal\\relative_scale"
-      relative: false
-    source: path
+      name: relative_scale
+      url: "https://pub.dartlang.org"
+    source: hosted
     version: "1.0.7"
   shared_preferences:
     dependency: "direct main"
