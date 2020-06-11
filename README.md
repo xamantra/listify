@@ -1,6 +1,10 @@
 # listify
 <a href="https://flutter.dev/docs/development/tools/sdk/releases" target="_blank"><img src="https://img.shields.io/badge/flutter-1.17.0-blue"></a>
 <a href="https://pub.dev/packages/momentum" target="_blank"><img src="https://img.shields.io/badge/momentum-1.1.7-blue"></a>
+<a href="https://pub.dev/packages/relative_scale" target="_blank"><img src="https://img.shields.io/badge/relative_scale-1.0.7-blue"></a>
+<a href="https://pub.dev/packages/shared_preferences" target="_blank"><img src="https://img.shields.io/badge/shared_preferences-^0.5.7+3-blue"></a>
+<a href="https://pub.dev/packages/auto_size_text" target="_blank"><img src="https://img.shields.io/badge/auto_size_text-^2.1.0-blue"></a>
+<a href="https://pub.dev/packages/flushbar" target="_blank"><img src="https://img.shields.io/badge/flushbar-^1.10.4-blue"></a>
 
 A flutter todo/task listing example app with advanced state management using `Momentum` library. Simple on the outside but powerful in the inside. This app has a very simple look and feel. Just todo app but the state management with momentum makes it very powerful. This turned out as a convenient app because of persistent state + persistent navigation (continue where you left off).
 
