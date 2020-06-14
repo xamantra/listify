@@ -37,7 +37,7 @@ class ListController extends MomentumController<ListModel> {
     return results;
   }
 
-  void clearSearch(){
+  void clearSearch() {
     model.update(isSearching: false);
     model.update(searchQuery: '');
   }
@@ -47,11 +47,11 @@ class ListController extends MomentumController<ListModel> {
     List<ListItem> items,
     bool editMode,
   }) {
-    var shouldCheckListName = false;
+    var shouldCheckListName = true;
     var current = dependOn<CurrentListController>().model;
     if (editMode) {
-      if (current.data.listName != listName) {
-        shouldCheckListName = true;
+      if (current.data.listName == listName) {
+        shouldCheckListName = false;
       }
     }
     var exists = model.items.any((e) {
