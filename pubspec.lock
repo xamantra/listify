@@ -124,10 +124,10 @@ packages:
   momentum:
     dependency: "direct main"
     description:
-      name: momentum
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.2.5"
+      path: "C:\\Projects\\momentum\\momentum"
+      relative: false
+    source: path
+    version: "1.2.3"
   path:
     dependency: transitive
     description:

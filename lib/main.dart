@@ -16,6 +16,8 @@ void main() {
 
 Momentum momentum() {
   return Momentum(
+    key: UniqueKey(),
+    restartCallback: main,
     child: MyApp(),
     controllers: [
       ListController(),
