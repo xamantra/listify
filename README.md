@@ -9,8 +9,7 @@
 
 ---
 
-- Download [debug apk](https://api.codemagic.io/artifacts/e061f630-619b-47e0-b247-96edcf37cdd5/263acbd4-05a4-486b-9170-9f02b8a72a7a/app-debug.apk)
-- Download [release apk](https://api.codemagic.io/artifacts/f142e77d-917e-4992-8001-d27743045701/7d27ba8b-5399-412d-929a-9ed787b10adf/app-release.apk)
+- Download [latest build](https://codemagic.io/apps/5ee250e7c2d47368630a87ea/5ee2546c10f7b765a8b3f636/latest_build)
 
 ---
 
