@@ -8,6 +8,12 @@ import '../components/list/index.dart';
 import '../widgets/index.dart';
 import 'index.dart';
 
+class EditListParam extends RouterParam {
+  final String listName;
+
+  EditListParam(this.listName);
+}
+
 class ViewList extends StatefulWidget {
   @override
   _ViewListState createState() => _ViewListState();
@@ -65,8 +71,8 @@ class _ViewListState extends MomentumState<ViewList> with RelativeScale {
                 color: theme.appbarFont,
               ),
               onPressed: () {
-                listController.editList(listName);
-                Router.goto(context, AddNewList);
+                // listController.editList(listName);
+                Router.goto(context, AddNewList, params: EditListParam(listName));
               },
               tooltip: 'Edit List',
             ),

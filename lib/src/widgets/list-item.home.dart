@@ -2,12 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:momentum/momentum.dart';
 import 'package:relative_scale/relative_scale.dart';
 
-import '../components/current-list/index.dart';
-import '../components/input/index.dart';
 import '../components/list/index.dart';
 import '../models/index.dart';
 import '../pages/index.dart';
 import 'index.dart';
+
+class ViewListParam extends RouterParam {
+  final int index;
+
+  ViewListParam(this.index);
+}
+
+class CopyListParam extends RouterParam {
+  final int index;
+
+  CopyListParam(this.index);
+}
 
 class ListItemHome extends StatelessWidget {
   final int index;
@@ -23,8 +33,6 @@ class ListItemHome extends StatelessWidget {
   Widget build(BuildContext context) {
     var theme = CustomTheme.of(context);
     var _listController = Momentum.controller<ListController>(context);
-    var _currentListController = Momentum.controller<CurrentListController>(context);
-    var _inputController = Momentum.controller<InputController>(context);
     return RelativeBuilder(
       builder: (context, screenHeight, screenWidth, sy, sx) {
         IconData icon;
@@ -47,9 +55,9 @@ class ListItemHome extends StatelessWidget {
           color: theme.listTileCardBackground,
           child: InkWell(
             onTap: () {
-              _currentListController.reset(clearHistory: true);
-              _listController.view(index);
-              Router.goto(context, ViewList);
+              // _currentListController.reset(clearHistory: true);
+              // _listController.view(index);
+              Router.goto(context, ViewList, params: ViewListParam(index));
             },
             child: ListTile(
               contentPadding: EdgeInsets.all(sy(4)).copyWith(left: sy(8)),
@@ -76,9 +84,9 @@ class ListItemHome extends StatelessWidget {
                       color: theme.listTileIconColor.normal,
                     ),
                     onPressed: () {
-                      _inputController.reset(clearHistory: true);
-                      _listController.createCopy(index);
-                      Router.goto(context, AddNewList);
+                      // _inputController.reset(clearHistory: true);
+                      // _listController.createCopy(index);
+                      Router.goto(context, AddNewList, params: CopyListParam(index));
                     },
                     tooltip: 'Create Copy',
                   ),
