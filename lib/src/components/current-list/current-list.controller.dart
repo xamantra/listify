@@ -1,11 +1,10 @@
-import 'package:listify/src/widgets/index.dart';
 import 'package:momentum/momentum.dart';
 
 import '../../models/index.dart';
 import '../list/index.dart';
 import 'index.dart';
 
-class CurrentListController extends MomentumController<CurrentListModel> with RouterMixin {
+class CurrentListController extends MomentumController<CurrentListModel> {
   ListController listController;
 
   @override
@@ -13,14 +12,6 @@ class CurrentListController extends MomentumController<CurrentListModel> with Ro
     return CurrentListModel(
       this,
     );
-  }
-
-  @override
-  void onRouteChanged(RouterParam param) {
-    if (param is ViewListParam) {
-      reset(clearHistory: true);
-      dependOn<ListController>().view(param.index);
-    }
   }
 
   @override

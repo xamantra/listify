@@ -1,11 +1,10 @@
-import 'package:listify/src/widgets/index.dart';
 import 'package:momentum/momentum.dart';
 
 import '../../models/index.dart';
 import '../list/index.dart';
 import 'index.dart';
 
-class InputController extends MomentumController<InputModel> with RouterMixin {
+class InputController extends MomentumController<InputModel> {
   @override
   InputModel init() {
     return InputModel(
@@ -15,15 +14,6 @@ class InputController extends MomentumController<InputModel> with RouterMixin {
       itemName: '',
       editingList: false,
     );
-  }
-
-  @override
-  void onRouteChanged(RouterParam param) {
-    if (param != null && param is CopyListParam) {
-      var param = getParam<CopyListParam>();
-      reset(clearHistory: true);
-      dependOn<ListController>().createCopy(param.index);
-    }
   }
 
   bool validInput() {

@@ -1,6 +1,4 @@
 import 'package:flutter/foundation.dart';
-import 'package:listify/src/pages/index.dart';
-import 'package:listify/src/widgets/index.dart';
 import 'package:momentum/momentum.dart';
 
 import '../../models/index.dart';
@@ -9,7 +7,7 @@ import '../input/index.dart';
 import '../settings/index.dart';
 import 'index.dart';
 
-class ListController extends MomentumController<ListModel> with RouterMixin {
+class ListController extends MomentumController<ListModel> {
   @override
   ListModel init() {
     return ListModel(
@@ -18,13 +16,6 @@ class ListController extends MomentumController<ListModel> with RouterMixin {
       isSearching: false,
       searchQuery: '',
     );
-  }
-
-  @override
-  void onRouteChanged(RouterParam param) {
-    if (param is EditListParam) {
-      editList(param.listName);
-    }
   }
 
   void toggleSearchMode() {

@@ -4,6 +4,7 @@ import 'package:momentum/momentum.dart';
 import 'src/components/current-list/index.dart';
 import 'src/components/input/index.dart';
 import 'src/components/list/index.dart';
+import 'src/components/route/index.dart';
 import 'src/components/settings/index.dart';
 import 'src/components/theme/index.dart';
 import 'src/pages/index.dart';
@@ -25,6 +26,7 @@ Momentum momentum() {
       SettingsController(),
       CurrentListController(),
       ThemeController(),
+      RouteController(),
     ],
     services: [
       ClientDB(),
