@@ -22,7 +22,7 @@ class InputController extends MomentumController<InputModel> {
   }
 
   bool exists() {
-    var exists = dependOn<ListController>().dataExists(
+    var exists = controller<ListController>().dataExists(
       listName: model.listName,
       items: model.items,
       editMode: model.editingList,
@@ -45,7 +45,7 @@ class InputController extends MomentumController<InputModel> {
       );
       return;
     }
-    var _listController = dependOn<ListController>();
+    var _listController = controller<ListController>();
     if (model.editingList) {
       _listController.updateList(model.editListName, model.listName, model.items);
       triggerAction(action: InputAction.ListDataEdited);

@@ -48,7 +48,7 @@ class ListController extends MomentumController<ListModel> {
     bool editMode,
   }) {
     var shouldCheckListName = true;
-    var current = dependOn<CurrentListController>().model;
+    var current = controller<CurrentListController>().model;
     if (editMode) {
       if (current.data.listName == listName) {
         shouldCheckListName = false;
@@ -124,8 +124,8 @@ class ListController extends MomentumController<ListModel> {
   }
 
   void createCopy(int index) {
-    var inputController = dependOn<InputController>();
-    var settings = dependOn<SettingsController>().model;
+    var inputController = controller<InputController>();
+    var settings = controller<SettingsController>().model;
     var copyListStates = settings.copyListStates;
     var copyListName = settings.copyListName;
     var toCopy = model.items[index];
@@ -147,7 +147,7 @@ class ListController extends MomentumController<ListModel> {
   void editList(String listName) {
     var toEdit = model.items.firstWhere((x) => x.listName == listName, orElse: () => null);
     if (toEdit != null) {
-      var inputController = dependOn<InputController>();
+      var inputController = controller<InputController>();
       inputController.editList(toEdit.listName, toEdit.items);
     }
   }
@@ -163,7 +163,7 @@ class ListController extends MomentumController<ListModel> {
       items.removeAt(index);
       items.insert(index, ListData(listName: newListName, items: newItems));
       model.update(items: items);
-      dependOn<CurrentListController>().viewData(model.items[index]);
+      controller<CurrentListController>().viewData(model.items[index]);
     }
   }
 
@@ -210,7 +210,7 @@ class ListController extends MomentumController<ListModel> {
 
   void viewData() {
     var data = model.items[model.viewingIndex];
-    dependOn<CurrentListController>().viewData(data);
+    controller<CurrentListController>().viewData(data);
   }
 
   void toggleItemState(int index) {

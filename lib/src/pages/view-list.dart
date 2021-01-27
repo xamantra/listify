@@ -36,7 +36,7 @@ class _ViewListState extends MomentumState<ViewList> with RelativeScale {
             showDialog(context: context, builder: (context) => ConfirmListDelete(message: data.message));
             break;
           case ListAction.ListDataDeleted:
-            Router.pop(context);
+            MomentumRouter.pop(context);
             break;
           default:
         }
@@ -50,7 +50,7 @@ class _ViewListState extends MomentumState<ViewList> with RelativeScale {
     var listName = currentListController.model.data.listName;
     return RouterPage(
       onWillPop: () async {
-        Router.pop(context);
+        MomentumRouter.pop(context);
         return false;
       },
       child: Scaffold(
@@ -72,7 +72,7 @@ class _ViewListState extends MomentumState<ViewList> with RelativeScale {
               ),
               onPressed: () {
                 // listController.editList(listName);
-                Router.goto(context, AddNewList, params: EditListParam(listName));
+                MomentumRouter.goto(context, AddNewList, params: EditListParam(listName));
               },
               tooltip: 'Edit List',
             ),

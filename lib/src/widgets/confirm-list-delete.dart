@@ -21,7 +21,7 @@ class ConfirmListDelete extends StatelessWidget {
       message: message,
       yes: () {
         list.controller.deleteList(currentList.data.listName);
-        Router.pop(context);
+        MomentumRouter.pop(context);
       },
     );
   }

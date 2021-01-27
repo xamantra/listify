@@ -108,7 +108,7 @@ class _HomeState extends State<Home> with RelativeScale {
                 color: theme.appbarFont,
               ),
               onPressed: () {
-                Router.goto(context, Settings);
+                MomentumRouter.goto(context, Settings);
               },
               tooltip: 'Settings',
             ),
@@ -149,7 +149,7 @@ class _HomeState extends State<Home> with RelativeScale {
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             _settingsController.executeDraftSetting();
-            Router.goto(context, AddNewList);
+            MomentumRouter.goto(context, AddNewList);
           },
           child: Icon(
             Icons.add,

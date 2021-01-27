@@ -57,7 +57,7 @@ class ListItemHome extends StatelessWidget {
             onTap: () {
               // _currentListController.reset(clearHistory: true);
               // _listController.view(index);
-              Router.goto(context, ViewList, params: ViewListParam(index));
+              MomentumRouter.goto(context, ViewList, params: ViewListParam(index));
             },
             child: ListTile(
               contentPadding: EdgeInsets.all(sy(4)).copyWith(left: sy(8)),
@@ -86,7 +86,7 @@ class ListItemHome extends StatelessWidget {
                     onPressed: () {
                       // _inputController.reset(clearHistory: true);
                       // _listController.createCopy(index);
-                      Router.goto(context, AddNewList, params: CopyListParam(index));
+                      MomentumRouter.goto(context, AddNewList, params: CopyListParam(index));
                     },
                     tooltip: 'Create Copy',
                   ),

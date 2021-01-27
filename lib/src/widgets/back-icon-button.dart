@@ -10,7 +10,7 @@ class BackIconButton extends StatelessWidget {
         return IconButton(
           icon: Icon(Icons.arrow_back, size: sy(18)),
           onPressed: () {
-            Router.pop(context);
+            MomentumRouter.pop(context);
           },
           tooltip: 'Back',
         );

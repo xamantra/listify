@@ -30,7 +30,7 @@ Momentum momentum() {
     ],
     services: [
       ClientDB(),
-      Router([
+      MomentumRouter([
         Home(),
         AddNewList(),
         Settings(),
@@ -67,7 +67,7 @@ class MyApp extends StatelessWidget {
               visualDensity: VisualDensity.adaptivePlatformDensity,
             ),
             debugShowCheckedModeBanner: false,
-            home: Router.getActivePage(context),
+            home: MomentumRouter.getActivePage(context),
           ),
         );
       },

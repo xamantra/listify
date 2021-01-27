@@ -16,7 +16,7 @@ class CurrentListController extends MomentumController<CurrentListModel> {
 
   @override
   void bootstrap() {
-    listController = dependOn<ListController>();
+    listController = controller<ListController>();
   }
 
   void viewData(ListData data) {

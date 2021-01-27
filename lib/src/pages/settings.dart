@@ -106,7 +106,7 @@ class _SettingsState extends MomentumState<Settings> {
                           title: 'Restart App',
                           description: 'Clear input draft, reset navigation history and go to home page.',
                           action: () async {
-                            await Router.resetWithContext<Home>(context);
+                            await MomentumRouter.resetWithContext<Home>(context);
                             Momentum.controller<InputController>(context).reset(clearHistory: true);
                             Momentum.controller<ListController>(context).clearSearch();
                             Momentum.restart(context, momentum());

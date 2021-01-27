@@ -48,11 +48,11 @@ class _AddNewListState extends MomentumState<AddNewList> with RelativeScale {
             showError(data.message);
             break;
           case InputAction.ListDataAdded:
-            Router.pop(context);
+            MomentumRouter.pop(context);
             break;
           case InputAction.ListDataEdited:
-            Router.resetWithContext<Home>(context);
-            Router.goto(context, ViewList);
+            MomentumRouter.resetWithContext<Home>(context);
+            MomentumRouter.goto(context, ViewList);
             break;
           default:
         }
@@ -65,7 +65,7 @@ class _AddNewListState extends MomentumState<AddNewList> with RelativeScale {
     var theme = CustomTheme.of(context);
     return RouterPage(
       onWillPop: () async {
-        Router.pop(context);
+        MomentumRouter.pop(context);
         return false;
       },
       child: Scaffold(
