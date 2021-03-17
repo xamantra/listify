@@ -30,14 +30,14 @@ class ActionSetting extends StatelessWidget {
                   title: Text(
                     title,
                     style: TextStyle(
-                      fontSize: 12,
+                      fontSize: 14,
                       color: theme.listTileFontColor.primary,
                     ),
                   ),
                   subtitle: Text(
                     description,
                     style: TextStyle(
-                      fontSize: 11,
+                      fontSize: 13,
                       color: theme.listTileFontColor.secondary,
                     ),
                     maxLines: 2,

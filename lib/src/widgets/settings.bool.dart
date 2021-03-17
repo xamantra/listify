@@ -36,14 +36,14 @@ class BoolSetting extends StatelessWidget {
                   title: Text(
                     title,
                     style: TextStyle(
-                      fontSize: 12,
+                      fontSize: 14,
                       color: theme.listTileFontColor.primary,
                     ),
                   ),
                   subtitle: Text(
                     description,
                     style: TextStyle(
-                      fontSize: 11,
+                      fontSize: 13,
                       color: theme.listTileFontColor.secondary,
                     ),
                     maxLines: 2,
@@ -56,7 +56,7 @@ class BoolSetting extends StatelessWidget {
               ),
             ],
           ),
-          Divider(height: 1, thickness: 1),
+          Divider(thickness: 1),
         ],
       ),
     );

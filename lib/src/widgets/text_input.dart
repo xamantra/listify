@@ -37,14 +37,14 @@ class _TextInputWidgetState extends State<TextInput> {
       decoration: InputDecoration(
         hintText: widget.hintText ?? '',
         hintStyle: TextStyle(
-          fontSize: 12,
+          fontSize: 14,
           color: widget.color.withOpacity(0.6),
         ),
         border: underline,
         enabledBorder: underline,
       ),
       style: TextStyle(
-        fontSize: 12,
+        fontSize: 14,
         color: widget.color,
       ),
     );

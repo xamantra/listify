@@ -35,7 +35,7 @@ class _SettingsState extends MomentumState<Settings> {
           leading: BackIconButton(),
           title: Text(
             'Settings',
-            style: TextStyle(fontSize: 14),
+            style: TextStyle(fontSize: 18),
           ),
         ),
         body: Container(

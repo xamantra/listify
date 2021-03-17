@@ -66,7 +66,7 @@ class ListItemHome extends StatelessWidget {
           title: Text(
             listData.listName,
             style: TextStyle(
-              fontSize: 12,
+              fontSize: 16,
               color: theme.listTileFontColor.primary,
             ),
             maxLines: 2,

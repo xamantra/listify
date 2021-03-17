@@ -82,7 +82,7 @@ class _AddNewListState extends MomentumState<AddNewList> {
               return Text(
                 input.editingList ? 'Edit Existing List' : 'Add New List',
                 style: TextStyle(
-                  fontSize: 14,
+                  fontSize: 18,
                   color: theme.appbarFont,
                 ),
               );
@@ -184,7 +184,7 @@ class _AddNewListState extends MomentumState<AddNewList> {
                                     title: Text(
                                       input.items[i].name,
                                       style: TextStyle(
-                                        fontSize: 12,
+                                        fontSize: 14,
                                         color: theme.listTileFontColor.primary,
                                       ),
                                       maxLines: 2,
@@ -237,7 +237,7 @@ class _AddNewListState extends MomentumState<AddNewList> {
                   child: Text(
                     'Save',
                     style: TextStyle(
-                      fontSize: 12,
+                      fontSize: 14,
                       color: Colors.white,
                     ),
                   ),

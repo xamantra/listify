@@ -82,7 +82,7 @@ class _AddNewItemState extends MomentumState<AddNewItem> {
               child: Text(
                 'Add',
                 style: TextStyle(
-                  fontSize: 12,
+                  fontSize: 14,
                   color: Colors.white,
                 ),
               ),

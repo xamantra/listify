@@ -44,7 +44,7 @@ class _HomeState extends State<Home> {
                     _listController.search(value);
                   },
                   style: TextStyle(
-                    fontSize: 13,
+                    fontSize: 18,
                     color: theme.appbarFont,
                   ),
                   decoration: InputDecoration(
@@ -77,7 +77,7 @@ class _HomeState extends State<Home> {
               return Text(
                 'Listify',
                 style: TextStyle(
-                  fontSize: 14,
+                  fontSize: 18,
                   color: theme.appbarFont,
                 ),
               );

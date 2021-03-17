@@ -58,7 +58,7 @@ class _ViewListState extends MomentumState<ViewList> {
           title: Text(
             listName,
             style: TextStyle(
-              fontSize: 14,
+              fontSize: 18,
               color: theme.appbarFont,
             ),
           ),
@@ -141,7 +141,7 @@ class _ViewListState extends MomentumState<ViewList> {
                                     title: Text(
                                       list.data.items[i].name,
                                       style: TextStyle(
-                                        fontSize: 12,
+                                        fontSize: 16,
                                         color: theme.listTileFontColor.primary,
                                       ),
                                       maxLines: 2,
