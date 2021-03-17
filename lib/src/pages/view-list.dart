@@ -1,10 +1,9 @@
-import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:momentum/momentum.dart';
-import 'package:relative_scale/relative_scale.dart';
 
 import '../components/current-list/index.dart';
 import '../components/list/index.dart';
+import '../utils/index.dart';
 import '../widgets/index.dart';
 import 'index.dart';
 
@@ -19,13 +18,12 @@ class ViewList extends StatefulWidget {
   _ViewListState createState() => _ViewListState();
 }
 
-class _ViewListState extends MomentumState<ViewList> with RelativeScale {
+class _ViewListState extends MomentumState<ViewList> {
   CurrentListController currentListController;
   ListController listController;
 
   @override
   void initMomentumState() {
-    initRelativeScaler(context);
     currentListController ??= Momentum.controller<CurrentListController>(context);
     listController ??= Momentum.controller<ListController>(context);
     listController.listen<ListEvent>(
@@ -47,6 +45,7 @@ class _ViewListState extends MomentumState<ViewList> with RelativeScale {
   @override
   Widget build(BuildContext context) {
     var theme = CustomTheme.of(context);
+    var screen = screenSize(context);
     var listName = currentListController.model.data.listName;
     return RouterPage(
       onWillPop: () async {
@@ -56,10 +55,10 @@ class _ViewListState extends MomentumState<ViewList> with RelativeScale {
       child: Scaffold(
         appBar: AppBar(
           leading: BackIconButton(),
-          title: BetterText(
+          title: Text(
             listName,
             style: TextStyle(
-              fontSize: sy(13),
+              fontSize: 14,
               color: theme.appbarFont,
             ),
           ),
@@ -67,7 +66,7 @@ class _ViewListState extends MomentumState<ViewList> with RelativeScale {
             IconButton(
               icon: Icon(
                 Icons.edit,
-                size: sy(18),
+                size: 20,
                 color: theme.appbarFont,
               ),
               onPressed: () {
@@ -79,7 +78,7 @@ class _ViewListState extends MomentumState<ViewList> with RelativeScale {
             IconButton(
               icon: Icon(
                 Icons.delete,
-                size: sy(18),
+                size: 20,
                 color: theme.appbarFont,
               ),
               onPressed: () {
@@ -90,9 +89,9 @@ class _ViewListState extends MomentumState<ViewList> with RelativeScale {
           ],
         ),
         body: Container(
-          height: screenHeight,
-          width: screenWidth,
-          padding: EdgeInsets.all(sy(12)),
+          height: screen.height,
+          width: screen.width,
+          padding: EdgeInsets.all(13),
           color: theme.bodyBackground,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -128,21 +127,21 @@ class _ViewListState extends MomentumState<ViewList> with RelativeScale {
                               Card(
                                 key: Key('$i'),
                                 color: theme.listTileCardBackground,
-                                margin: EdgeInsets.only(top: sy(8)),
+                                margin: EdgeInsets.only(top: 8),
                                 child: InkWell(
                                   onTap: () {
                                     currentListController.toggleItemState(i);
                                   },
                                   child: ListTile(
-                                    contentPadding: EdgeInsets.all(sy(4)).copyWith(left: sy(8)),
+                                    contentPadding: EdgeInsets.all(4).copyWith(left: 8),
                                     leading: Icon(
                                       icon,
                                       color: color,
                                     ),
-                                    title: BetterText(
+                                    title: Text(
                                       list.data.items[i].name,
                                       style: TextStyle(
-                                        fontSize: sy(11),
+                                        fontSize: 12,
                                         color: theme.listTileFontColor.primary,
                                       ),
                                       maxLines: 2,
@@ -153,7 +152,7 @@ class _ViewListState extends MomentumState<ViewList> with RelativeScale {
                             );
                           }
                           return Container(
-                            constraints: BoxConstraints(maxHeight: screenHeight),
+                            constraints: BoxConstraints(maxHeight: screen.height),
                             child: ReorderableListView(
                               children: items,
                               onReorder: (oldIndex, newIndex) {
@@ -173,24 +172,5 @@ class _ViewListState extends MomentumState<ViewList> with RelativeScale {
         ),
       ),
     );
-  }
-
-  void showError(String message) {
-    Flushbar(
-      messageText: BetterText(
-        message,
-        style: TextStyle(
-          fontSize: sy(11),
-          color: Colors.white,
-        ),
-        maxLines: 2,
-      ),
-      isDismissible: true,
-      backgroundColor: Colors.red,
-      duration: Duration(seconds: 5),
-      onTap: (flushbar) {
-        flushbar.dismiss();
-      },
-    )..show(context);
   }
 }

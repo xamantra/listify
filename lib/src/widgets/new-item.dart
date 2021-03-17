@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:momentum/momentum.dart';
-import 'package:relative_scale/relative_scale.dart';
 
 import '../components/input/index.dart';
 import '../components/settings/index.dart';
+import '../utils/index.dart';
 import 'index.dart';
 
 class AddNewItem extends StatefulWidget {
@@ -11,14 +11,13 @@ class AddNewItem extends StatefulWidget {
   _AddNewItemState createState() => _AddNewItemState();
 }
 
-class _AddNewItemState extends MomentumState<AddNewItem> with RelativeScale {
+class _AddNewItemState extends MomentumState<AddNewItem> {
   InputController _inputController;
   SettingsController _settingsController;
   TextEditingController _textEditingController = TextEditingController();
 
   @override
   void didChangeDependencies() {
-    initRelativeScaler(context);
     _inputController ??= Momentum.controller<InputController>(context);
     _settingsController ??= Momentum.controller<SettingsController>(context);
     _textEditingController.text = _inputController.model.itemName;
@@ -56,8 +55,9 @@ class _AddNewItemState extends MomentumState<AddNewItem> with RelativeScale {
   @override
   Widget build(BuildContext context) {
     var theme = CustomTheme.of(context);
+    var screen = screenSize(context);
     return Container(
-      width: screenWidth,
+      width: screen.width,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -73,16 +73,16 @@ class _AddNewItemState extends MomentumState<AddNewItem> with RelativeScale {
             ),
           ),
           Container(
-            width: sy(64),
+            width: 64,
             child: RaisedButton(
               onPressed: () {
                 _inputController.addItem();
               },
               color: theme.buttonSecondary.background,
-              child: BetterText(
+              child: Text(
                 'Add',
                 style: TextStyle(
-                  fontSize: sy(11),
+                  fontSize: 12,
                   color: Colors.white,
                 ),
               ),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:relative_scale/relative_scale.dart';
 
 class TextInput extends StatefulWidget {
   final String value;
@@ -21,10 +20,9 @@ class TextInput extends StatefulWidget {
   _TextInputWidgetState createState() => _TextInputWidgetState();
 }
 
-class _TextInputWidgetState extends State<TextInput> with RelativeScale {
+class _TextInputWidgetState extends State<TextInput> {
   @override
   void didChangeDependencies() {
-    initRelativeScaler(context);
     super.didChangeDependencies();
   }
 
@@ -39,14 +37,14 @@ class _TextInputWidgetState extends State<TextInput> with RelativeScale {
       decoration: InputDecoration(
         hintText: widget.hintText ?? '',
         hintStyle: TextStyle(
-          fontSize: sy(11),
+          fontSize: 12,
           color: widget.color.withOpacity(0.6),
         ),
         border: underline,
         enabledBorder: underline,
       ),
       style: TextStyle(
-        fontSize: sy(11),
+        fontSize: 12,
         color: widget.color,
       ),
     );

@@ -1,9 +1,9 @@
-import 'package:listify/src/components/input/index.dart';
-import 'package:listify/src/pages/index.dart';
 import 'package:momentum/momentum.dart';
 
+import '../../pages/index.dart';
 import '../../widgets/index.dart';
 import '../current-list/index.dart';
+import '../input/index.dart';
 import '../list/index.dart';
 import 'index.dart';
 

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:momentum/momentum.dart';
-import 'package:relative_scale/relative_scale.dart';
 
 import '../components/theme/index.dart';
+import '../utils/index.dart';
 
 class ThemeSelector extends StatelessWidget {
   @override
@@ -11,8 +11,9 @@ class ThemeSelector extends StatelessWidget {
       backgroundColor: Colors.transparent,
       child: Material(
         color: Colors.transparent,
-        child: RelativeBuilder(
-          builder: (context, height, width, sy, sx) {
+        child: Builder(
+          builder: (context) {
+            var screen = screenSize(context);
             var themeModel = Momentum.controller<ThemeController>(context).model;
             var themes = themeModel.controller.themes;
             var themeItems = <Widget>[];
@@ -29,22 +30,22 @@ class ThemeSelector extends StatelessWidget {
                       children: [
                         Expanded(
                           child: Container(
-                            height: height,
-                            width: sy(32),
+                            height: screen.height,
+                            width: 32,
                             color: theme.primary,
                           ),
                         ),
                         Expanded(
                           child: Container(
-                            height: height,
-                            width: sy(32),
+                            height: screen.height,
+                            width: 32,
                             color: theme.accent,
                           ),
                         ),
                         Expanded(
                           child: Container(
-                            height: height,
-                            width: sy(32),
+                            height: screen.height,
+                            width: 32,
                             color: theme.bodyBackground,
                           ),
                         ),
@@ -56,9 +57,9 @@ class ThemeSelector extends StatelessWidget {
               ]);
             }
             return Container(
-              width: width,
-              height: sy(300),
-              padding: EdgeInsets.all(sy(8)),
+              width: screen.width,
+              height: 300,
+              padding: EdgeInsets.all(8),
               child: Column(
                 children: themeItems,
               ),

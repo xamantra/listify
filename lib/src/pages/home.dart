@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:momentum/momentum.dart';
-import 'package:relative_scale/relative_scale.dart';
 
 import '../components/input/index.dart';
 import '../components/list/index.dart';
 import '../components/settings/index.dart';
+import '../utils/index.dart';
 import '../widgets/index.dart';
 import 'index.dart';
 
@@ -13,14 +13,13 @@ class Home extends StatefulWidget {
   _HomeState createState() => _HomeState();
 }
 
-class _HomeState extends State<Home> with RelativeScale {
+class _HomeState extends State<Home> {
   InputController _inputController;
   ListController _listController;
   SettingsController _settingsController;
 
   @override
   void didChangeDependencies() {
-    initRelativeScaler(context);
     _inputController ??= Momentum.controller<InputController>(context);
     _listController ??= Momentum.controller<ListController>(context);
     _settingsController ??= Momentum.controller<SettingsController>(context);
@@ -30,6 +29,7 @@ class _HomeState extends State<Home> with RelativeScale {
   @override
   Widget build(BuildContext context) {
     var theme = CustomTheme.of(context);
+    var screen = screenSize(context);
     return RouterPage(
       child: Scaffold(
         appBar: AppBar(
@@ -44,13 +44,13 @@ class _HomeState extends State<Home> with RelativeScale {
                     _listController.search(value);
                   },
                   style: TextStyle(
-                    fontSize: sy(12),
+                    fontSize: 13,
                     color: theme.appbarFont,
                   ),
                   decoration: InputDecoration(
                     hintText: 'Search ...',
                     hintStyle: TextStyle(
-                      fontSize: sy(12),
+                      fontSize: 13,
                       color: theme.appbarFont.withOpacity(0.6),
                     ),
                     border: UnderlineInputBorder(
@@ -74,10 +74,10 @@ class _HomeState extends State<Home> with RelativeScale {
                   ),
                 );
               }
-              return BetterText(
+              return Text(
                 'Listify',
                 style: TextStyle(
-                  fontSize: sy(13),
+                  fontSize: 14,
                   color: theme.appbarFont,
                 ),
               );
@@ -91,7 +91,7 @@ class _HomeState extends State<Home> with RelativeScale {
                   var isSearching = snapshot<ListModel>().isSearching;
                   return Icon(
                     isSearching ? Icons.close : Icons.search,
-                    size: sy(18),
+                    size: 20,
                     color: theme.appbarFont,
                   );
                 },
@@ -104,7 +104,7 @@ class _HomeState extends State<Home> with RelativeScale {
             IconButton(
               icon: Icon(
                 Icons.settings,
-                size: sy(18),
+                size: 20,
                 color: theme.appbarFont,
               ),
               onPressed: () {
@@ -115,9 +115,9 @@ class _HomeState extends State<Home> with RelativeScale {
           ],
         ),
         body: Container(
-          height: screenHeight,
-          width: screenWidth,
-          padding: EdgeInsets.all(sy(12)),
+          height: screen.height,
+          width: screen.width,
+          padding: EdgeInsets.all(13),
           color: theme.bodyBackground,
           child: MomentumBuilder(
             controllers: [ListController],
@@ -134,7 +134,7 @@ class _HomeState extends State<Home> with RelativeScale {
                 }
               }
               return Container(
-                constraints: BoxConstraints(maxHeight: screenHeight),
+                constraints: BoxConstraints(maxHeight: screen.height),
                 child: ReorderableListView(
                   children: items,
                   onReorder: (oldIndex, newIndex) {
@@ -153,7 +153,7 @@ class _HomeState extends State<Home> with RelativeScale {
           },
           child: Icon(
             Icons.add,
-            size: sy(18),
+            size: 20,
             color: theme.appbarFont,
           ),
         ),

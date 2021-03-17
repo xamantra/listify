@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:relative_scale/relative_scale.dart';
 
 import 'index.dart';
 
@@ -20,50 +19,46 @@ class BoolSetting extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var theme = CustomTheme.of(context);
-    return RelativeBuilder(
-      builder: (context, screenHeight, screenWidth, sy, sx) {
-        return InkWell(
-          onTap: () {
-            if (onChanged != null) {
-              onChanged(!isChecked);
-            }
-          },
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+    return InkWell(
+      onTap: () {
+        if (onChanged != null) {
+          onChanged(!isChecked);
+        }
+      },
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Expanded(
-                    child: ListTile(
-                      title: BetterText(
-                        title,
-                        style: TextStyle(
-                          fontSize: sy(11),
-                          color: theme.listTileFontColor.primary,
-                        ),
-                      ),
-                      subtitle: BetterText(
-                        description,
-                        style: TextStyle(
-                          fontSize: sy(10),
-                          color: theme.listTileFontColor.secondary,
-                        ),
-                        maxLines: 2,
-                      ),
+              Expanded(
+                child: ListTile(
+                  title: Text(
+                    title,
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: theme.listTileFontColor.primary,
                     ),
                   ),
-                  Checkbox(
-                    value: isChecked ?? false,
-                    onChanged: onChanged ?? (_) {},
+                  subtitle: Text(
+                    description,
+                    style: TextStyle(
+                      fontSize: 11,
+                      color: theme.listTileFontColor.secondary,
+                    ),
+                    maxLines: 2,
                   ),
-                ],
+                ),
               ),
-              Divider(height: 1, thickness: 1),
+              Checkbox(
+                value: isChecked ?? false,
+                onChanged: onChanged ?? (_) {},
+              ),
             ],
           ),
-        );
-      },
+          Divider(height: 1, thickness: 1),
+        ],
+      ),
     );
   }
 }

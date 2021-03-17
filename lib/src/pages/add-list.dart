@@ -1,11 +1,10 @@
-import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:momentum/momentum.dart';
-import 'package:relative_scale/relative_scale.dart';
 
 import '../components/input/index.dart';
 import '../components/list/index.dart';
 import '../components/settings/index.dart';
+import '../utils/index.dart';
 import '../widgets/index.dart';
 import 'index.dart';
 
@@ -14,7 +13,7 @@ class AddNewList extends StatefulWidget {
   _AddNewListState createState() => _AddNewListState();
 }
 
-class _AddNewListState extends MomentumState<AddNewList> with RelativeScale {
+class _AddNewListState extends MomentumState<AddNewList> {
   InputController _inputController;
   ListController _listController;
   SettingsController _settingsController;
@@ -22,7 +21,6 @@ class _AddNewListState extends MomentumState<AddNewList> with RelativeScale {
 
   @override
   void initMomentumState() {
-    initRelativeScaler(context);
     _inputController ??= Momentum.controller<InputController>(context);
     _listController ??= Momentum.controller<ListController>(context);
     _settingsController ??= Momentum.controller<SettingsController>(context);
@@ -45,7 +43,7 @@ class _AddNewListState extends MomentumState<AddNewList> with RelativeScale {
       invoke: (data) {
         switch (data.action) {
           case InputAction.ErrorOccured:
-            showError(data.message);
+            showErrorMessage(data.message);
             break;
           case InputAction.ListDataAdded:
             MomentumRouter.pop(context);
@@ -63,6 +61,7 @@ class _AddNewListState extends MomentumState<AddNewList> with RelativeScale {
   @override
   Widget build(BuildContext context) {
     var theme = CustomTheme.of(context);
+    var screen = screenSize(context);
     return RouterPage(
       onWillPop: () async {
         MomentumRouter.pop(context);
@@ -80,10 +79,10 @@ class _AddNewListState extends MomentumState<AddNewList> with RelativeScale {
             },
             builder: (context, snapshot) {
               var input = snapshot<InputModel>();
-              return BetterText(
+              return Text(
                 input.editingList ? 'Edit Existing List' : 'Add New List',
                 style: TextStyle(
-                  fontSize: sy(13),
+                  fontSize: 14,
                   color: theme.appbarFont,
                 ),
               );
@@ -93,7 +92,7 @@ class _AddNewListState extends MomentumState<AddNewList> with RelativeScale {
             IconButton(
               icon: Icon(
                 Icons.undo,
-                size: sy(18),
+                size: 20,
                 color: theme.appbarFont,
               ),
               onPressed: () {
@@ -104,7 +103,7 @@ class _AddNewListState extends MomentumState<AddNewList> with RelativeScale {
             IconButton(
               icon: Icon(
                 Icons.redo,
-                size: sy(18),
+                size: 20,
                 color: theme.appbarFont,
               ),
               onPressed: () {
@@ -115,7 +114,7 @@ class _AddNewListState extends MomentumState<AddNewList> with RelativeScale {
             IconButton(
               icon: Icon(
                 Icons.cancel,
-                size: sy(18),
+                size: 20,
                 color: theme.appbarFont,
               ),
               onPressed: () {
@@ -126,10 +125,10 @@ class _AddNewListState extends MomentumState<AddNewList> with RelativeScale {
           ],
         ),
         body: Container(
-          height: screenHeight,
-          width: screenWidth,
+          height: double.infinity,
+          width: double.infinity,
           color: theme.bodyBackground,
-          padding: EdgeInsets.all(sy(24)),
+          padding: EdgeInsets.all(24),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -171,21 +170,21 @@ class _AddNewListState extends MomentumState<AddNewList> with RelativeScale {
                               Card(
                                 key: Key('$i'),
                                 color: theme.listTileCardBackground,
-                                margin: EdgeInsets.only(top: sy(8)),
+                                margin: EdgeInsets.only(top: 8),
                                 child: InkWell(
                                   onTap: () {
                                     _inputController.toggleItemState(i);
                                   },
                                   child: ListTile(
-                                    contentPadding: EdgeInsets.all(sy(4)).copyWith(left: sy(8)),
+                                    contentPadding: EdgeInsets.all(4).copyWith(left: 8),
                                     leading: Icon(
                                       icon,
                                       color: color,
                                     ),
-                                    title: BetterText(
+                                    title: Text(
                                       input.items[i].name,
                                       style: TextStyle(
-                                        fontSize: sy(11),
+                                        fontSize: 12,
                                         color: theme.listTileFontColor.primary,
                                       ),
                                       maxLines: 2,
@@ -196,7 +195,7 @@ class _AddNewListState extends MomentumState<AddNewList> with RelativeScale {
                                         IconButton(
                                           icon: Icon(
                                             Icons.close,
-                                            size: sy(18),
+                                            size: 20,
                                             color: theme.listTileIconColor.danger,
                                           ),
                                           onPressed: () {
@@ -212,7 +211,7 @@ class _AddNewListState extends MomentumState<AddNewList> with RelativeScale {
                             );
                           }
                           return Container(
-                            constraints: BoxConstraints(maxHeight: screenHeight),
+                            constraints: BoxConstraints(maxHeight: screen.height),
                             child: ReorderableListView(
                               children: items,
                               onReorder: (oldIndex, newIndex) {
@@ -229,16 +228,16 @@ class _AddNewListState extends MomentumState<AddNewList> with RelativeScale {
                 ),
               ),
               Container(
-                width: screenWidth,
+                width: screen.width,
                 child: RaisedButton(
                   onPressed: () {
                     _inputController.submit();
                   },
                   color: theme.buttonPrimary.background,
-                  child: BetterText(
+                  child: Text(
                     'Save',
                     style: TextStyle(
-                      fontSize: sy(11),
+                      fontSize: 12,
                       color: Colors.white,
                     ),
                   ),
@@ -249,24 +248,5 @@ class _AddNewListState extends MomentumState<AddNewList> with RelativeScale {
         ),
       ),
     );
-  }
-
-  void showError(String message) {
-    Flushbar(
-      messageText: BetterText(
-        message,
-        style: TextStyle(
-          fontSize: sy(11),
-          color: Colors.white,
-        ),
-        maxLines: 2,
-      ),
-      isDismissible: true,
-      backgroundColor: Colors.red,
-      duration: Duration(seconds: 5),
-      onTap: (flushbar) {
-        flushbar.dismiss();
-      },
-    )..show(context);
   }
 }
