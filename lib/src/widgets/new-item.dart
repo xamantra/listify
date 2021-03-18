@@ -63,7 +63,7 @@ class _AddNewItemState extends MomentumState<AddNewItem> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           Expanded(
-            child: TextInput(
+            child: CustomTextInput(
               controller: _textEditingController,
               hintText: 'Item Name',
               color: theme.textPrimary,

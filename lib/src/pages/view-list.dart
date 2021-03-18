@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:momentum/momentum.dart';
 
 import '../components/current-list/index.dart';
@@ -52,119 +53,123 @@ class _ViewListState extends MomentumState<ViewList> {
         MomentumRouter.pop(context);
         return false;
       },
-      child: Scaffold(
-        appBar: AppBar(
-          leading: BackIconButton(),
-          title: Text(
-            listName,
-            style: TextStyle(
-              color: theme.appbarFont,
+      child: AnnotatedRegion<SystemUiOverlayStyle>(
+        value: SystemUiOverlayStyle.light,
+        child: Scaffold(
+          appBar: AppBar(
+            brightness: Brightness.dark,
+            leading: BackIconButton(),
+            title: Text(
+              listName,
+              style: TextStyle(
+                color: theme.appbarFont,
+              ),
             ),
+            actions: [
+              IconButton(
+                icon: Icon(
+                  Icons.edit,
+                  color: theme.appbarFont,
+                ),
+                onPressed: () {
+                  // listController.editList(listName);
+                  MomentumRouter.goto(context, AddNewList, params: EditListParam(listName));
+                },
+                tooltip: 'Edit List',
+              ),
+              IconButton(
+                icon: Icon(
+                  Icons.delete,
+                  color: theme.appbarFont,
+                ),
+                onPressed: () {
+                  listController!.confirmDelete(listName);
+                },
+                tooltip: 'Delete List',
+              ),
+            ],
           ),
-          actions: [
-            IconButton(
-              icon: Icon(
-                Icons.edit,
-                color: theme.appbarFont,
-              ),
-              onPressed: () {
-                // listController.editList(listName);
-                MomentumRouter.goto(context, AddNewList, params: EditListParam(listName));
-              },
-              tooltip: 'Edit List',
-            ),
-            IconButton(
-              icon: Icon(
-                Icons.delete,
-                color: theme.appbarFont,
-              ),
-              onPressed: () {
-                listController!.confirmDelete(listName);
-              },
-              tooltip: 'Delete List',
-            ),
-          ],
-        ),
-        body: Container(
-          height: screen.height,
-          width: screen.width,
-          padding: EdgeInsets.all(13),
-          color: theme.bodyBackground,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Flexible(
-                child: Column(
-                  children: <Widget>[
-                    Expanded(
-                      child: MomentumBuilder(
-                        controllers: [CurrentListController],
-                        builder: (context, snapshot) {
-                          var list = snapshot<CurrentListModel>();
-                          var items = <Widget>[];
-                          for (var i = 0; i < list.data!.items!.length; i++) {
-                            IconData? icon;
-                            Color? color;
-                            var checkState = list.data!.items![i].listState;
-                            if (checkState == true) {
-                              icon = Icons.check_circle;
-                              color = theme.listTileIconColor.primary;
-                            }
-                            if (checkState == false) {
-                              icon = Icons.crop_square;
-                              color = theme.listTileIconColor.normal;
-                            }
-                            if (checkState == null) {
-                              icon = Icons.remove_circle;
-                              color = theme.primary;
-                            }
+          body: Container(
+            height: screen.height,
+            width: screen.width,
+            padding: EdgeInsets.all(13),
+            color: theme.bodyBackground,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Flexible(
+                  child: Column(
+                    children: <Widget>[
+                      Expanded(
+                        child: MomentumBuilder(
+                          controllers: [CurrentListController],
+                          builder: (context, snapshot) {
+                            var list = snapshot<CurrentListModel>();
+                            var items = <Widget>[];
+                            for (var i = 0; i < list.data!.items!.length; i++) {
+                              IconData? icon;
+                              Color? color;
+                              var checkState = list.data!.items![i].listState;
+                              if (checkState == true) {
+                                icon = Icons.check_circle;
+                                color = theme.listTileIconColor.primary;
+                              }
+                              if (checkState == false) {
+                                icon = Icons.crop_square;
+                                color = theme.listTileIconColor.normal;
+                              }
+                              if (checkState == null) {
+                                icon = Icons.remove_circle;
+                                color = theme.primary;
+                              }
 
-                            items.add(
-                              Card(
-                                key: Key('$i'),
-                                color: theme.listTileCardBackground,
-                                margin: EdgeInsets.only(top: 8),
-                                child: InkWell(
-                                  onTap: () {
-                                    currentListController!.toggleItemState(i);
-                                  },
-                                  child: ListTile(
-                                    contentPadding: EdgeInsets.all(4).copyWith(left: 8),
-                                    leading: Icon(
-                                      icon,
-                                      color: color,
-                                    ),
-                                    title: Text(
-                                      list.data!.items![i].name!,
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                        color: theme.listTileFontColor.primary,
+                              items.add(
+                                Card(
+                                  key: Key('$i'),
+                                  color: theme.listTileCardBackground,
+                                  margin: EdgeInsets.only(top: 8),
+                                  child: InkWell(
+                                    onTap: () {
+                                      currentListController!.toggleItemState(i);
+                                    },
+                                    child: ListTile(
+                                      contentPadding: EdgeInsets.all(4).copyWith(left: 8),
+                                      leading: Icon(
+                                        icon,
+                                        color: color,
                                       ),
-                                      maxLines: 2,
+                                      title: Text(
+                                        list.data!.items![i].name!,
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          color: theme.listTileFontColor.primary,
+                                        ),
+                                        maxLines: 2,
+                                      ),
                                     ),
                                   ),
                                 ),
+                              );
+                            }
+                            return Container(
+                              constraints: BoxConstraints(maxHeight: screen.height),
+                              child: ReorderableListView(
+                                children: items,
+                                onReorder: (oldIndex, newIndex) {
+                                  print([oldIndex, newIndex]);
+                                  currentListController!.reorderListItems(oldIndex, newIndex);
+                                },
                               ),
                             );
-                          }
-                          return Container(
-                            constraints: BoxConstraints(maxHeight: screen.height),
-                            child: ReorderableListView(
-                              children: items,
-                              onReorder: (oldIndex, newIndex) {
-                                print([oldIndex, newIndex]);
-                                currentListController!.reorderListItems(oldIndex, newIndex);
-                              },
-                            ),
-                          );
-                        },
+                          },
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

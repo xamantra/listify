@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class TextInput extends StatefulWidget {
+class CustomTextInput extends StatefulWidget {
   final String? value;
   final TextEditingController? controller;
   final String? hintText;
   final void Function(String)? onChanged;
   final Color? color;
 
-  const TextInput({
+  const CustomTextInput({
     Key? key,
     this.value,
     this.controller,
@@ -20,7 +20,7 @@ class TextInput extends StatefulWidget {
   _TextInputWidgetState createState() => _TextInputWidgetState();
 }
 
-class _TextInputWidgetState extends State<TextInput> {
+class _TextInputWidgetState extends State<CustomTextInput> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:momentum/momentum.dart';
 
 import '../components/input/index.dart';
@@ -67,179 +68,183 @@ class _AddNewListState extends MomentumState<AddNewList> {
         MomentumRouter.pop(context);
         return false;
       },
-      child: Scaffold(
-        appBar: AppBar(
-          leading: BackIconButton(),
-          title: MomentumBuilder(
-            controllers: [InputController],
-            dontRebuildIf: (controller, __) {
-              var editingListPrev = controller<InputController>().prevModel?.editingList;
-              var editingList = controller<InputController>().model.editingList;
-              return editingListPrev != editingList;
-            },
-            builder: (context, snapshot) {
-              var input = snapshot<InputModel>();
-              return Text(
-                input.editingList! ? 'Edit Existing List' : 'Add New List',
-                style: TextStyle(
+      child: AnnotatedRegion<SystemUiOverlayStyle>(
+        value: SystemUiOverlayStyle.light,
+        child: Scaffold(
+          appBar: AppBar(
+            brightness: Brightness.dark,
+            leading: BackIconButton(),
+            title: MomentumBuilder(
+              controllers: [InputController],
+              dontRebuildIf: (controller, __) {
+                var editingListPrev = controller<InputController>().prevModel?.editingList;
+                var editingList = controller<InputController>().model.editingList;
+                return editingListPrev != editingList;
+              },
+              builder: (context, snapshot) {
+                var input = snapshot<InputModel>();
+                return Text(
+                  input.editingList! ? 'Edit Existing List' : 'Add New List',
+                  style: TextStyle(
+                    color: theme.appbarFont,
+                  ),
+                );
+              },
+            ),
+            actions: [
+              IconButton(
+                icon: Icon(
+                  Icons.undo,
                   color: theme.appbarFont,
                 ),
-              );
-            },
-          ),
-          actions: [
-            IconButton(
-              icon: Icon(
-                Icons.undo,
-                color: theme.appbarFont,
-              ),
-              onPressed: () {
-                _inputController!.backward();
-              },
-              tooltip: 'Undo',
-            ),
-            IconButton(
-              icon: Icon(
-                Icons.redo,
-                color: theme.appbarFont,
-              ),
-              onPressed: () {
-                _inputController!.forward();
-              },
-              tooltip: 'Redo',
-            ),
-            IconButton(
-              icon: Icon(
-                Icons.cancel,
-                color: theme.appbarFont,
-              ),
-              onPressed: () {
-                _inputController!.reset(clearHistory: true);
-              },
-              tooltip: 'Clear',
-            ),
-          ],
-        ),
-        body: Container(
-          height: double.infinity,
-          width: double.infinity,
-          color: theme.bodyBackground,
-          padding: EdgeInsets.all(24),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              TextInput(
-                controller: _textEditingController,
-                hintText: 'List Name',
-                color: theme.textPrimary,
-                onChanged: (value) {
-                  _inputController!.setListName(value);
+                onPressed: () {
+                  _inputController!.backward();
                 },
+                tooltip: 'Undo',
               ),
-              Flexible(
-                child: Column(
-                  children: <Widget>[
-                    Expanded(
-                      child: MomentumBuilder(
-                        controllers: [InputController],
-                        builder: (context, snapshot) {
-                          var input = snapshot<InputModel>();
-                          var items = <Widget>[];
-                          for (var i = 0; i < input.items!.length; i++) {
-                            IconData? icon;
-                            Color? color;
-                            var checkState = input.items![i].listState;
-                            if (checkState == true) {
-                              icon = Icons.check_circle;
-                              color = theme.listTileIconColor.primary;
-                            }
-                            if (checkState == false) {
-                              icon = Icons.crop_square;
-                              color = theme.listTileIconColor.normal;
-                            }
-                            if (checkState == null) {
-                              icon = Icons.remove_circle;
-                              color = theme.primary;
-                            }
-                            items.add(
-                              Card(
-                                key: Key('$i'),
-                                color: theme.listTileCardBackground,
-                                margin: EdgeInsets.only(top: 8),
-                                child: InkWell(
-                                  onTap: () {
-                                    _inputController!.toggleItemState(i);
-                                  },
-                                  child: ListTile(
-                                    contentPadding: EdgeInsets.all(4).copyWith(left: 8),
-                                    leading: Icon(
-                                      icon,
-                                      color: color,
-                                    ),
-                                    title: Text(
-                                      input.items![i].name!,
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        color: theme.listTileFontColor.primary,
+              IconButton(
+                icon: Icon(
+                  Icons.redo,
+                  color: theme.appbarFont,
+                ),
+                onPressed: () {
+                  _inputController!.forward();
+                },
+                tooltip: 'Redo',
+              ),
+              IconButton(
+                icon: Icon(
+                  Icons.cancel,
+                  color: theme.appbarFont,
+                ),
+                onPressed: () {
+                  _inputController!.reset(clearHistory: true);
+                },
+                tooltip: 'Clear',
+              ),
+            ],
+          ),
+          body: Container(
+            height: double.infinity,
+            width: double.infinity,
+            color: theme.bodyBackground,
+            padding: EdgeInsets.all(24),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                CustomTextInput(
+                  controller: _textEditingController,
+                  hintText: 'List Name',
+                  color: theme.textPrimary,
+                  onChanged: (value) {
+                    _inputController!.setListName(value);
+                  },
+                ),
+                Flexible(
+                  child: Column(
+                    children: <Widget>[
+                      Expanded(
+                        child: MomentumBuilder(
+                          controllers: [InputController],
+                          builder: (context, snapshot) {
+                            var input = snapshot<InputModel>();
+                            var items = <Widget>[];
+                            for (var i = 0; i < input.items!.length; i++) {
+                              IconData? icon;
+                              Color? color;
+                              var checkState = input.items![i].listState;
+                              if (checkState == true) {
+                                icon = Icons.check_circle;
+                                color = theme.listTileIconColor.primary;
+                              }
+                              if (checkState == false) {
+                                icon = Icons.crop_square;
+                                color = theme.listTileIconColor.normal;
+                              }
+                              if (checkState == null) {
+                                icon = Icons.remove_circle;
+                                color = theme.primary;
+                              }
+                              items.add(
+                                Card(
+                                  key: Key('$i'),
+                                  color: theme.listTileCardBackground,
+                                  margin: EdgeInsets.only(top: 8),
+                                  child: InkWell(
+                                    onTap: () {
+                                      _inputController!.toggleItemState(i);
+                                    },
+                                    child: ListTile(
+                                      contentPadding: EdgeInsets.all(4).copyWith(left: 8),
+                                      leading: Icon(
+                                        icon,
+                                        color: color,
                                       ),
-                                      maxLines: 2,
-                                    ),
-                                    trailing: Row(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: <Widget>[
-                                        IconButton(
-                                          icon: Icon(
-                                            Icons.close,
-                                            size: 20,
-                                            color: theme.listTileIconColor.danger,
-                                          ),
-                                          onPressed: () {
-                                            _inputController!.removeItem(i);
-                                          },
-                                          tooltip: 'Remove Item',
+                                      title: Text(
+                                        input.items![i].name!,
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          color: theme.listTileFontColor.primary,
                                         ),
-                                      ],
+                                        maxLines: 2,
+                                      ),
+                                      trailing: Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: <Widget>[
+                                          IconButton(
+                                            icon: Icon(
+                                              Icons.close,
+                                              size: 20,
+                                              color: theme.listTileIconColor.danger,
+                                            ),
+                                            onPressed: () {
+                                              _inputController!.removeItem(i);
+                                            },
+                                            tooltip: 'Remove Item',
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),
+                              );
+                            }
+                            return Container(
+                              constraints: BoxConstraints(maxHeight: screen.height),
+                              child: ReorderableListView(
+                                children: items,
+                                onReorder: (oldIndex, newIndex) {
+                                  print([oldIndex, newIndex]);
+                                  _inputController!.reorder(oldIndex, newIndex);
+                                },
                               ),
                             );
-                          }
-                          return Container(
-                            constraints: BoxConstraints(maxHeight: screen.height),
-                            child: ReorderableListView(
-                              children: items,
-                              onReorder: (oldIndex, newIndex) {
-                                print([oldIndex, newIndex]);
-                                _inputController!.reorder(oldIndex, newIndex);
-                              },
-                            ),
-                          );
-                        },
+                          },
+                        ),
                       ),
-                    ),
-                    AddNewItem(),
-                  ],
+                      AddNewItem(),
+                    ],
+                  ),
                 ),
-              ),
-              Container(
-                width: screen.width,
-                child: RaisedButton(
-                  onPressed: () {
-                    _inputController!.submit();
-                  },
-                  color: theme.buttonPrimary.background,
-                  child: Text(
-                    'Save',
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.white,
+                Container(
+                  width: screen.width,
+                  child: RaisedButton(
+                    onPressed: () {
+                      _inputController!.submit();
+                    },
+                    color: theme.buttonPrimary.background,
+                    child: Text(
+                      'Save',
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
