@@ -14,16 +14,16 @@ class ListifyTheme extends Equatable {
   final ButtonColor buttonSecondary;
 
   ListifyTheme({
-    @required this.primary,
-    @required this.accent,
-    @required this.appbarFont,
-    @required this.textPrimary,
-    @required this.bodyBackground,
-    @required this.listTileCardBackground,
-    @required this.listTileFontColor,
-    @required this.listTileIconColor,
-    @required this.buttonPrimary,
-    @required this.buttonSecondary,
+    required this.primary,
+    required this.accent,
+    required this.appbarFont,
+    required this.textPrimary,
+    required this.bodyBackground,
+    required this.listTileCardBackground,
+    required this.listTileFontColor,
+    required this.listTileIconColor,
+    required this.buttonPrimary,
+    required this.buttonSecondary,
   });
 
   @override
@@ -46,8 +46,8 @@ class ListTileFontColor extends Equatable {
   final Color secondary;
 
   ListTileFontColor({
-    @required this.primary,
-    @required this.secondary,
+    required this.primary,
+    required this.secondary,
   });
 
   @override
@@ -64,10 +64,10 @@ class ListTileIconColor extends Equatable {
   final Color danger;
 
   ListTileIconColor({
-    @required this.normal,
-    @required this.primary,
-    @required this.secondary,
-    @required this.danger,
+    required this.normal,
+    required this.primary,
+    required this.secondary,
+    required this.danger,
   });
 
   @override
@@ -84,8 +84,8 @@ class ButtonColor extends Equatable {
   final Color fontColor;
 
   ButtonColor({
-    @required this.background,
-    @required this.fontColor,
+    required this.background,
+    required this.fontColor,
   });
 
   @override

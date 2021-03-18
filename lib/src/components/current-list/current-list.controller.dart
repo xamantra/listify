@@ -5,7 +5,7 @@ import '../list/index.dart';
 import 'index.dart';
 
 class CurrentListController extends MomentumController<CurrentListModel> {
-  ListController listController;
+  late ListController listController;
 
   @override
   CurrentListModel init() {

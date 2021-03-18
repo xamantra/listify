@@ -12,18 +12,18 @@ class SettingsModel extends MomentumModel<SettingsController> with EquatableMixi
     this.copyListStates,
   }) : super(controller);
 
-  final bool draftInputs;
-  final bool clearOnAdd;
-  final bool copyListName;
-  final bool copyListStates;
+  final bool? draftInputs;
+  final bool? clearOnAdd;
+  final bool? copyListName;
+  final bool? copyListStates;
 
   @override
   void update({
-    String actionMessage,
-    bool draftInputs,
-    bool clearOnAdd,
-    bool copyListName,
-    bool copyListStates,
+    String? actionMessage,
+    bool? draftInputs,
+    bool? clearOnAdd,
+    bool? copyListName,
+    bool? copyListStates,
   }) {
     SettingsModel(
       controller,
@@ -43,7 +43,7 @@ class SettingsModel extends MomentumModel<SettingsController> with EquatableMixi
     };
   }
 
-  SettingsModel fromJson(Map<String, dynamic> map) {
+  SettingsModel? fromJson(Map<String, dynamic>? map) {
     if (map == null) return null;
 
     return SettingsModel(
@@ -56,7 +56,7 @@ class SettingsModel extends MomentumModel<SettingsController> with EquatableMixi
   }
 
   @override
-  List<Object> get props => [
+  List<Object?> get props => [
         draftInputs,
         clearOnAdd,
         copyListName,

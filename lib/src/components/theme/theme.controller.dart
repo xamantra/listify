@@ -17,7 +17,7 @@ class ThemeController extends MomentumController<ThemeModel> {
   }
 
   ListifyTheme selectedTheme() {
-    return themes[model.activeTheme];
+    return themes[model.activeTheme!];
   }
 
   List<ListifyTheme> get themes {

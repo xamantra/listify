@@ -3,14 +3,14 @@ import 'package:momentum/momentum.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ClientDB extends MomentumService {
-  SharedPreferences _sharedPreferences;
+  SharedPreferences? _sharedPreferences;
 
-  Future<SharedPreferences> getByInstance() async {
+  Future<SharedPreferences?> getByInstance() async {
     _sharedPreferences ??= await SharedPreferences.getInstance();
     return _sharedPreferences;
   }
 
-  static Future<SharedPreferences> getByContext(BuildContext context) async {
+  static Future<SharedPreferences?> getByContext(BuildContext context) async {
     var service = Momentum.service<ClientDB>(context);
     service._sharedPreferences ??= await SharedPreferences.getInstance();
     return service._sharedPreferences;

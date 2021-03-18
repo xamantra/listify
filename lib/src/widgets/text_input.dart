@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
 class TextInput extends StatefulWidget {
-  final String value;
-  final TextEditingController controller;
-  final String hintText;
-  final void Function(String) onChanged;
-  final Color color;
+  final String? value;
+  final TextEditingController? controller;
+  final String? hintText;
+  final void Function(String)? onChanged;
+  final Color? color;
 
   const TextInput({
-    Key key,
+    Key? key,
     this.value,
     this.controller,
     this.hintText,
@@ -28,9 +28,9 @@ class _TextInputWidgetState extends State<TextInput> {
 
   @override
   Widget build(BuildContext context) {
-    var underline = UnderlineInputBorder(borderSide: BorderSide(color: widget.color));
+    var underline = UnderlineInputBorder(borderSide: BorderSide(color: widget.color!));
     return TextFormField(
-      key: Key(widget.value),
+      key: Key(widget.value ?? ''),
       initialValue: widget.controller != null ? null : widget.value,
       controller: widget.controller,
       onChanged: widget.onChanged ?? (value) {},
@@ -38,7 +38,7 @@ class _TextInputWidgetState extends State<TextInput> {
         hintText: widget.hintText ?? '',
         hintStyle: TextStyle(
           fontSize: 14,
-          color: widget.color.withOpacity(0.6),
+          color: widget.color!.withOpacity(0.6),
         ),
         border: underline,
         enabledBorder: underline,

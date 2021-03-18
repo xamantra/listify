@@ -7,23 +7,23 @@ import '../pages/index.dart';
 import 'index.dart';
 
 class ViewListParam extends RouterParam {
-  final int index;
+  final int? index;
 
   ViewListParam(this.index);
 }
 
 class CopyListParam extends RouterParam {
-  final int index;
+  final int? index;
 
   CopyListParam(this.index);
 }
 
 class ListItemHome extends StatelessWidget {
-  final int index;
-  final ListData listData;
+  final int? index;
+  final ListData? listData;
 
   const ListItemHome({
-    Key key,
+    Key? key,
     this.index,
     this.listData,
   }) : super(key: key);
@@ -32,9 +32,9 @@ class ListItemHome extends StatelessWidget {
   Widget build(BuildContext context) {
     var theme = CustomTheme.of(context);
     var _listController = Momentum.controller<ListController>(context);
-    IconData icon;
-    Color color;
-    var checkState = _listController.getCheckState(index);
+    IconData? icon;
+    Color? color;
+    var checkState = _listController.getCheckState(index!);
     if (checkState == true) {
       icon = Icons.check_circle;
       color = theme.listTileIconColor.primary;
@@ -61,10 +61,9 @@ class ListItemHome extends StatelessWidget {
           leading: Icon(
             icon,
             color: color,
-            size: 18,
           ),
           title: Text(
-            listData.listName,
+            listData!.listName!,
             style: TextStyle(
               fontSize: 16,
               color: theme.listTileFontColor.primary,
@@ -77,7 +76,6 @@ class ListItemHome extends StatelessWidget {
               IconButton(
                 icon: Icon(
                   Icons.content_copy,
-                  size: 20,
                   color: theme.listTileIconColor.normal,
                 ),
                 onPressed: () {

@@ -14,7 +14,7 @@ class ThemeSelector extends StatelessWidget {
         child: Builder(
           builder: (context) {
             var screen = screenSize(context);
-            var themeModel = Momentum.controller<ThemeController>(context).model;
+            ThemeModel themeModel = Momentum.controller<ThemeController>(context).model;
             var themes = themeModel.controller.themes;
             var themeItems = <Widget>[];
             for (var i = 0; i < themes.length; i++) {

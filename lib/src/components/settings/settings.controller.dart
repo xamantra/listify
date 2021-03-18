@@ -16,31 +16,31 @@ class SettingsController extends MomentumController<SettingsModel> {
   }
 
   void setDraftInputs(bool value) {
-    model.update(draftInputs: value ?? false);
+    model.update(draftInputs: value);
     executeDraftSetting();
   }
 
   void setClearOnAdd(bool value) {
-    model.update(clearOnAdd: value ?? false);
+    model.update(clearOnAdd: value);
     executeClearOnAddSetting();
   }
 
   void setCopyListName(bool value) {
-    model.update(copyListName: value ?? false);
+    model.update(copyListName: value);
   }
 
   void setCopyListStates(bool value) {
-    model.update(copyListStates: value ?? false);
+    model.update(copyListStates: value);
   }
 
   void executeDraftSetting() {
-    if (!model.draftInputs) {
+    if (!model.draftInputs!) {
       controller<InputController>().reset(clearHistory: true);
     }
   }
 
   void executeClearOnAddSetting() {
-    if (model.clearOnAdd) {
+    if (model.clearOnAdd!) {
       controller<InputController>().setItemName('');
     }
   }

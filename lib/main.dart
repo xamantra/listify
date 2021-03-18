@@ -38,13 +38,13 @@ Momentum momentum() {
       ]),
     ],
     persistSave: (context, key, value) async {
-      var sharedPref = await ClientDB.getByContext(context);
-      var result = await sharedPref.setString(key, value);
+      var sharedPref = await (ClientDB.getByContext(context!));
+      var result = await sharedPref!.setString(key, value!);
       return result;
     },
     persistGet: (context, key) async {
-      var sharedPref = await ClientDB.getByContext(context);
-      var result = sharedPref.getString(key);
+      var sharedPref = await (ClientDB.getByContext(context!));
+      var result = sharedPref!.getString(key);
       return result;
     },
   );

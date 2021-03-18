@@ -3,8 +3,8 @@ import 'package:equatable/equatable.dart';
 import 'index.dart';
 
 class ListData extends Equatable {
-  final String listName;
-  final List<ListItem> items;
+  final String? listName;
+  final List<ListItem>? items;
 
   ListData({
     this.listName,
@@ -13,11 +13,11 @@ class ListData extends Equatable {
   Map<String, dynamic> toJson() {
     return {
       'listName': listName,
-      'items': items?.map((x) => x?.toJson())?.toList(),
+      'items': items?.map((x) => x.toJson()).toList(),
     };
   }
 
-  static ListData fromJson(Map<String, dynamic> json) {
+  static ListData? fromJson(Map<String, dynamic>? json) {
     if (json == null) return null;
 
     return ListData(
@@ -27,5 +27,5 @@ class ListData extends Equatable {
   }
 
   @override
-  List<Object> get props => [listName, items];
+  List<Object?> get props => [listName, items];
 }

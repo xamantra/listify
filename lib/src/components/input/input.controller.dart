@@ -17,7 +17,7 @@ class InputController extends MomentumController<InputModel> {
   }
 
   bool validInput() {
-    var inputNotEmpty = model.listName.isNotEmpty && model.items.isNotEmpty;
+    var inputNotEmpty = model.listName!.isNotEmpty && model.items!.isNotEmpty;
     return inputNotEmpty;
   }
 
@@ -25,7 +25,7 @@ class InputController extends MomentumController<InputModel> {
     var exists = controller<ListController>().dataExists(
       listName: model.listName,
       items: model.items,
-      editMode: model.editingList,
+      editMode: model.editingList!,
     );
     return exists;
   }
@@ -46,7 +46,7 @@ class InputController extends MomentumController<InputModel> {
       return;
     }
     var _listController = controller<ListController>();
-    if (model.editingList) {
+    if (model.editingList!) {
       _listController.updateList(model.editListName, model.listName, model.items);
       triggerAction(action: InputAction.ListDataEdited);
     } else {
@@ -56,7 +56,7 @@ class InputController extends MomentumController<InputModel> {
     reset(clearHistory: true);
   }
 
-  void triggerAction({InputAction action, String actionMessage}) {
+  void triggerAction({InputAction? action, String? actionMessage}) {
     sendEvent(InputEvent(action: action, message: actionMessage));
   }
 
@@ -69,14 +69,14 @@ class InputController extends MomentumController<InputModel> {
   }
 
   void addItem() {
-    if (model.itemName.isEmpty) {
+    if (model.itemName!.isEmpty) {
       triggerAction(
         actionMessage: "Item name is required!",
         action: InputAction.ErrorOccured,
       );
       return;
     }
-    var items = List<ListItem>.from(model.items);
+    var items = List<ListItem>.from(model.items!);
     var itemExists = items.any((x) => x.name == model.itemName);
     if (itemExists) {
       triggerAction(
@@ -91,7 +91,7 @@ class InputController extends MomentumController<InputModel> {
   }
 
   void toggleItemState(int index) {
-    var items = List<ListItem>.from(model.items);
+    var items = List<ListItem>.from(model.items!);
     var item = items[index];
     var state = item.listState;
     var updatedItem = ListItem(
@@ -108,7 +108,7 @@ class InputController extends MomentumController<InputModel> {
     model.update(items: value);
   }
 
-  void copyFrom(String listName, List<ListItem> items) {
+  void copyFrom(String? listName, List<ListItem> items) {
     model.update(
       listName: listName,
       items: items,
@@ -117,7 +117,7 @@ class InputController extends MomentumController<InputModel> {
     );
   }
 
-  void editList(String listName, List<ListItem> items) {
+  void editList(String? listName, List<ListItem>? items) {
     model.update(
       listName: listName,
       items: items,
@@ -127,7 +127,7 @@ class InputController extends MomentumController<InputModel> {
   }
 
   void reorder(int oldIndex, int newIndex) {
-    var items = List<ListItem>.from(model.items);
+    var items = List<ListItem>.from(model.items!);
     if (oldIndex < newIndex) {
       newIndex -= 1;
     }
@@ -137,7 +137,7 @@ class InputController extends MomentumController<InputModel> {
   }
 
   void removeItem(int index) {
-    var items = List<ListItem>.from(model.items);
+    var items = List<ListItem>.from(model.items!);
     model.update(items: items..removeAt(index));
   }
 }

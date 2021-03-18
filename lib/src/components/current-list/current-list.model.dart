@@ -10,11 +10,11 @@ class CurrentListModel extends MomentumModel<CurrentListController> with Equatab
     this.data,
   }) : super(controller);
 
-  final ListData data;
+  final ListData? data;
 
   @override
   void update({
-    ListData data,
+    ListData? data,
   }) {
     CurrentListModel(
       controller,
@@ -28,7 +28,7 @@ class CurrentListModel extends MomentumModel<CurrentListController> with Equatab
     };
   }
 
-  CurrentListModel fromJson(Map<String, dynamic> json) {
+  CurrentListModel? fromJson(Map<String, dynamic>? json) {
     if (json == null) return null;
 
     return CurrentListModel(
@@ -38,5 +38,5 @@ class CurrentListModel extends MomentumModel<CurrentListController> with Equatab
   }
 
   @override
-  List<Object> get props => [data];
+  List<Object?> get props => [data];
 }

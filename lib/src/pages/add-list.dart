@@ -14,9 +14,9 @@ class AddNewList extends StatefulWidget {
 }
 
 class _AddNewListState extends MomentumState<AddNewList> {
-  InputController _inputController;
-  ListController _listController;
-  SettingsController _settingsController;
+  InputController? _inputController;
+  ListController? _listController;
+  SettingsController? _settingsController;
   TextEditingController _textEditingController = TextEditingController();
 
   @override
@@ -24,26 +24,26 @@ class _AddNewListState extends MomentumState<AddNewList> {
     _inputController ??= Momentum.controller<InputController>(context);
     _listController ??= Momentum.controller<ListController>(context);
     _settingsController ??= Momentum.controller<SettingsController>(context);
-    _textEditingController.text = _inputController.model.listName;
-    _inputController.addListener(
+    _textEditingController.text = _inputController!.model.listName!;
+    _inputController!.addListener(
       state: this,
       invoke: (model, isTimeTravel) {
         if (isTimeTravel) {
-          _textEditingController.text = model.listName;
+          _textEditingController.text = model.listName!;
           // for this selection code, refer to this link: https://stackoverflow.com/a/58307018
           _textEditingController.selection = TextSelection.fromPosition(
             TextPosition(offset: _textEditingController.text.length),
           );
         }
-        if (model.listName.isEmpty) _textEditingController.clear();
+        if (model.listName!.isEmpty) _textEditingController.clear();
       },
     );
-    _inputController.listen<InputEvent>(
+    _inputController!.listen<InputEvent>(
       state: this,
       invoke: (data) {
         switch (data.action) {
           case InputAction.ErrorOccured:
-            showErrorMessage(data.message);
+            showErrorMessage(data.message!);
             break;
           case InputAction.ListDataAdded:
             MomentumRouter.pop(context);
@@ -80,9 +80,8 @@ class _AddNewListState extends MomentumState<AddNewList> {
             builder: (context, snapshot) {
               var input = snapshot<InputModel>();
               return Text(
-                input.editingList ? 'Edit Existing List' : 'Add New List',
+                input.editingList! ? 'Edit Existing List' : 'Add New List',
                 style: TextStyle(
-                  fontSize: 18,
                   color: theme.appbarFont,
                 ),
               );
@@ -92,33 +91,30 @@ class _AddNewListState extends MomentumState<AddNewList> {
             IconButton(
               icon: Icon(
                 Icons.undo,
-                size: 20,
                 color: theme.appbarFont,
               ),
               onPressed: () {
-                _inputController.backward();
+                _inputController!.backward();
               },
               tooltip: 'Undo',
             ),
             IconButton(
               icon: Icon(
                 Icons.redo,
-                size: 20,
                 color: theme.appbarFont,
               ),
               onPressed: () {
-                _inputController.forward();
+                _inputController!.forward();
               },
               tooltip: 'Redo',
             ),
             IconButton(
               icon: Icon(
                 Icons.cancel,
-                size: 20,
                 color: theme.appbarFont,
               ),
               onPressed: () {
-                _inputController.reset(clearHistory: true);
+                _inputController!.reset(clearHistory: true);
               },
               tooltip: 'Clear',
             ),
@@ -138,7 +134,7 @@ class _AddNewListState extends MomentumState<AddNewList> {
                 hintText: 'List Name',
                 color: theme.textPrimary,
                 onChanged: (value) {
-                  _inputController.setListName(value);
+                  _inputController!.setListName(value);
                 },
               ),
               Flexible(
@@ -150,10 +146,10 @@ class _AddNewListState extends MomentumState<AddNewList> {
                         builder: (context, snapshot) {
                           var input = snapshot<InputModel>();
                           var items = <Widget>[];
-                          for (var i = 0; i < input.items.length; i++) {
-                            IconData icon;
-                            Color color;
-                            var checkState = input.items[i].listState;
+                          for (var i = 0; i < input.items!.length; i++) {
+                            IconData? icon;
+                            Color? color;
+                            var checkState = input.items![i].listState;
                             if (checkState == true) {
                               icon = Icons.check_circle;
                               color = theme.listTileIconColor.primary;
@@ -173,7 +169,7 @@ class _AddNewListState extends MomentumState<AddNewList> {
                                 margin: EdgeInsets.only(top: 8),
                                 child: InkWell(
                                   onTap: () {
-                                    _inputController.toggleItemState(i);
+                                    _inputController!.toggleItemState(i);
                                   },
                                   child: ListTile(
                                     contentPadding: EdgeInsets.all(4).copyWith(left: 8),
@@ -182,7 +178,7 @@ class _AddNewListState extends MomentumState<AddNewList> {
                                       color: color,
                                     ),
                                     title: Text(
-                                      input.items[i].name,
+                                      input.items![i].name!,
                                       style: TextStyle(
                                         fontSize: 14,
                                         color: theme.listTileFontColor.primary,
@@ -199,7 +195,7 @@ class _AddNewListState extends MomentumState<AddNewList> {
                                             color: theme.listTileIconColor.danger,
                                           ),
                                           onPressed: () {
-                                            _inputController.removeItem(i);
+                                            _inputController!.removeItem(i);
                                           },
                                           tooltip: 'Remove Item',
                                         ),
@@ -216,7 +212,7 @@ class _AddNewListState extends MomentumState<AddNewList> {
                               children: items,
                               onReorder: (oldIndex, newIndex) {
                                 print([oldIndex, newIndex]);
-                                _inputController.reorder(oldIndex, newIndex);
+                                _inputController!.reorder(oldIndex, newIndex);
                               },
                             ),
                           );
@@ -231,7 +227,7 @@ class _AddNewListState extends MomentumState<AddNewList> {
                 width: screen.width,
                 child: RaisedButton(
                   onPressed: () {
-                    _inputController.submit();
+                    _inputController!.submit();
                   },
                   color: theme.buttonPrimary.background,
                   child: Text(

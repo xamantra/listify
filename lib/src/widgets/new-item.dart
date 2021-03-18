@@ -12,21 +12,21 @@ class AddNewItem extends StatefulWidget {
 }
 
 class _AddNewItemState extends MomentumState<AddNewItem> {
-  InputController _inputController;
-  SettingsController _settingsController;
+  InputController? _inputController;
+  SettingsController? _settingsController;
   TextEditingController _textEditingController = TextEditingController();
 
   @override
   void didChangeDependencies() {
     _inputController ??= Momentum.controller<InputController>(context);
     _settingsController ??= Momentum.controller<SettingsController>(context);
-    _textEditingController.text = _inputController.model.itemName;
+    _textEditingController.text = _inputController!.model.itemName!;
 
-    _inputController.addListener(
+    _inputController!.addListener(
       state: this,
       invoke: (model, isTimeTravel) {
         if (isTimeTravel) {
-          _textEditingController.text = model.itemName;
+          _textEditingController.text = model.itemName!;
           // for this selection code, refer to this link: https://stackoverflow.com/a/58307018
           _textEditingController.selection = TextSelection.fromPosition(
             TextPosition(offset: _textEditingController.text.length),
@@ -34,16 +34,16 @@ class _AddNewItemState extends MomentumState<AddNewItem> {
         }
       },
     );
-    _inputController.listen<InputEvent>(
+    _inputController!.listen<InputEvent>(
       state: this,
       invoke: (data) {
-        var clear = _settingsController.model.clearOnAdd;
+        var clear = _settingsController!.model.clearOnAdd;
         switch (data.action) {
           case InputAction.ListDataAdded:
-            if (clear) _textEditingController.clear();
+            if (clear!) _textEditingController.clear();
             break;
           case InputAction.ListItemAdded:
-            if (clear) _textEditingController.clear();
+            if (clear!) _textEditingController.clear();
             break;
           default:
         }
@@ -68,7 +68,7 @@ class _AddNewItemState extends MomentumState<AddNewItem> {
               hintText: 'Item Name',
               color: theme.textPrimary,
               onChanged: (value) {
-                _inputController.setItemName(value);
+                _inputController!.setItemName(value);
               },
             ),
           ),
@@ -76,7 +76,7 @@ class _AddNewItemState extends MomentumState<AddNewItem> {
             width: 64,
             child: RaisedButton(
               onPressed: () {
-                _inputController.addItem();
+                _inputController!.addItem();
               },
               color: theme.buttonSecondary.background,
               child: Text(

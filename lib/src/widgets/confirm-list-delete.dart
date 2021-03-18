@@ -6,21 +6,21 @@ import '../components/list/index.dart';
 import 'index.dart';
 
 class ConfirmListDelete extends StatelessWidget {
-  final String message;
+  final String? message;
 
   const ConfirmListDelete({
-    Key key,
-    @required this.message,
+    Key? key,
+    required this.message,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    var list = Momentum.controller<ListController>(context).model;
-    var currentList = Momentum.controller<CurrentListController>(context).model;
+    ListModel list = Momentum.controller<ListController>(context).model;
+    CurrentListModel currentList = Momentum.controller<CurrentListController>(context).model;
     return ConfirmDialog(
       title: 'Delete List',
       message: message,
       yes: () {
-        list.controller.deleteList(currentList.data.listName);
+        list.controller.deleteList(currentList.data!.listName);
         MomentumRouter.pop(context);
       },
     );

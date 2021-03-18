@@ -1,4 +1,4 @@
-import 'package:flutter/foundation.dart';
+import 'package:collection/collection.dart' show IterableExtension;
 import 'package:momentum/momentum.dart';
 
 import '../../models/index.dart';
@@ -19,7 +19,7 @@ class ListController extends MomentumController<ListModel> {
   }
 
   void toggleSearchMode() {
-    model.update(isSearching: !model.isSearching);
+    model.update(isSearching: !model.isSearching!);
   }
 
   void search(String query) {
@@ -28,9 +28,9 @@ class ListController extends MomentumController<ListModel> {
 
   List<int> searchResults() {
     var results = <int>[];
-    var q = model.searchQuery.trim().toLowerCase();
-    for (var i = 0; i < model.items.length; i++) {
-      if (model.items[i].listName.toLowerCase().contains(q)) {
+    var q = model.searchQuery!.trim().toLowerCase();
+    for (var i = 0; i < model.items!.length; i++) {
+      if (model.items![i].listName!.toLowerCase().contains(q)) {
         results.add(i);
       }
     }
@@ -43,22 +43,22 @@ class ListController extends MomentumController<ListModel> {
   }
 
   bool dataExists({
-    String listName,
-    List<ListItem> items,
-    bool editMode,
+    String? listName,
+    List<ListItem>? items,
+    required bool editMode,
   }) {
     var shouldCheckListName = true;
-    var current = controller<CurrentListController>().model;
+    CurrentListModel current = controller<CurrentListController>().model;
     if (editMode) {
-      if (current.data.listName == listName) {
+      if (current.data!.listName == listName) {
         shouldCheckListName = false;
       }
     }
-    var exists = model.items.any((e) {
-      var itemsEqual = e.items.length == items.length;
+    var exists = model.items!.any((e) {
+      var itemsEqual = e.items!.length == items!.length;
       if (itemsEqual) {
         for (var i = 0; i < items.length; i++) {
-          if (items[i].name != e.items[i].name) {
+          if (items[i].name != e.items![i].name) {
             itemsEqual = false;
             break;
           }
@@ -71,13 +71,13 @@ class ListController extends MomentumController<ListModel> {
   }
 
   void addList(ListData item) {
-    var lists = List<ListData>.from(model.items);
+    var lists = List<ListData>.from(model.items!);
     lists.add(item);
     model.update(items: lists);
   }
 
   void reorder(int oldIndex, int newIndex) {
-    var lists = List<ListData>.from(model.items);
+    var lists = List<ListData>.from(model.items!);
     if (oldIndex < newIndex) {
       newIndex -= 1;
     }
@@ -87,49 +87,49 @@ class ListController extends MomentumController<ListModel> {
   }
 
   void reorderListItems(int oldIndex, int newIndex) {
-    var dataItems = List<ListData>.from(model.items);
-    var items = List<ListItem>.from(dataItems[model.viewingIndex].items);
+    var dataItems = List<ListData>.from(model.items!);
+    var items = List<ListItem>.from(dataItems[model.viewingIndex!].items!);
     if (oldIndex < newIndex) {
       newIndex -= 1;
     }
     var item = items.removeAt(oldIndex);
     items.insert(newIndex, item);
     var data = ListData(
-      listName: dataItems[model.viewingIndex].listName,
+      listName: dataItems[model.viewingIndex!].listName,
       items: items,
     );
     dataItems
-      ..removeAt(model.viewingIndex)
-      ..insert(model.viewingIndex, data);
+      ..removeAt(model.viewingIndex!)
+      ..insert(model.viewingIndex!, data);
     model.update(items: dataItems);
   }
 
   void removeItem(int index) {
-    var items = List<ListData>.from(model.items);
+    var items = List<ListData>.from(model.items!);
     model.update(items: items..removeAt(index));
   }
 
   void removeListItem(int index) {
-    var dataItems = List<ListData>.from(model.items);
-    var items = List<ListItem>.from(dataItems[model.viewingIndex].items);
+    var dataItems = List<ListData>.from(model.items!);
+    var items = List<ListItem>.from(dataItems[model.viewingIndex!].items!);
     items.removeAt(index);
     var data = ListData(
-      listName: dataItems[model.viewingIndex].listName,
+      listName: dataItems[model.viewingIndex!].listName,
       items: items,
     );
     dataItems
-      ..removeAt(model.viewingIndex)
-      ..insert(model.viewingIndex, data);
+      ..removeAt(model.viewingIndex!)
+      ..insert(model.viewingIndex!, data);
     model.update(items: dataItems);
   }
 
   void createCopy(int index) {
     var inputController = controller<InputController>();
-    var settings = controller<SettingsController>().model;
-    var copyListStates = settings.copyListStates;
-    var copyListName = settings.copyListName;
-    var toCopy = model.items[index];
-    var items = List<ListItem>.from(toCopy.items);
+    SettingsModel settings = controller<SettingsController>().model;
+    var copyListStates = settings.copyListStates!;
+    var copyListName = settings.copyListName!;
+    var toCopy = model.items![index];
+    var items = List<ListItem>.from(toCopy.items!);
     if (!copyListStates) {
       for (var i = 0; i < items.length; i++) {
         items[i] = ListItem(
@@ -145,7 +145,7 @@ class ListController extends MomentumController<ListModel> {
   }
 
   void editList(String listName) {
-    var toEdit = model.items.firstWhere((x) => x.listName == listName, orElse: () => null);
+    var toEdit = model.items!.firstWhereOrNull((x) => x.listName == listName);
     if (toEdit != null) {
       var inputController = controller<InputController>();
       inputController.editList(toEdit.listName, toEdit.items);
@@ -153,40 +153,40 @@ class ListController extends MomentumController<ListModel> {
   }
 
   void updateList(
-    String listName,
-    String newListName,
-    List<ListItem> newItems,
+    String? listName,
+    String? newListName,
+    List<ListItem>? newItems,
   ) {
-    var items = List<ListData>.from(model.items);
+    var items = List<ListData>.from(model.items!);
     var index = items.indexWhere((x) => x.listName == listName);
     if (index != -1) {
       items.removeAt(index);
       items.insert(index, ListData(listName: newListName, items: newItems));
       model.update(items: items);
-      controller<CurrentListController>().viewData(model.items[index]);
+      controller<CurrentListController>().viewData(model.items![index]);
     }
   }
 
   void trigger({
-    @required ListAction action,
-    String actionMessage,
+    required ListAction action,
+    String? actionMessage,
   }) {
     sendEvent(ListEvent(action: action, message: actionMessage ?? ''));
   }
 
   void confirmDelete(String listName) {
-    var items = List<ListData>.from(model.items);
-    var toDelete = items.firstWhere((x) => x.listName == listName);
+    var items = List<ListData>.from(model.items!);
+    var toDelete = items.firstWhereOrNull((x) => x.listName == listName);
     if (toDelete != null) {
       trigger(
         action: ListAction.ListConfirmDelete,
-        actionMessage: 'Are you sure you want to delete the list "${toDelete.listName}" and its ${toDelete.items.length} items? There\'s no going back.',
+        actionMessage: 'Are you sure you want to delete the list "${toDelete.listName}" and its ${toDelete.items!.length} items? There\'s no going back.',
       );
     }
   }
 
-  void deleteList(String listName) {
-    var items = List<ListData>.from(model.items);
+  void deleteList(String? listName) {
+    var items = List<ListData>.from(model.items!);
     var index = items.indexWhere((x) => x.listName == listName);
     if (index != -1) {
       items.removeAt(index);
@@ -194,44 +194,48 @@ class ListController extends MomentumController<ListModel> {
     }
   }
 
-  bool getCheckState(int index) {
-    var hasChecked = model.items[index].items.any((x) => x.listState == true);
-    var hasUnchecked = model.items[index].items.any((x) => x.listState == false);
-    var hasPartial = model.items[index].items.any((x) => x.listState == null);
+  bool? getCheckState(int index) {
+    var hasChecked = model.items![index].items!.any((x) => x.listState == true);
+    var hasUnchecked = model.items![index].items!.any((x) => x.listState == false);
+    var hasPartial = model.items![index].items!.any((x) => x.listState == null);
     if (hasChecked && hasUnchecked) return null;
     if (hasPartial) return null;
     return hasChecked && !hasUnchecked && !hasPartial;
   }
 
-  void view(int index) {
+  void view(int? index) {
     model.update(viewingIndex: index);
     viewData();
   }
 
   void viewData() {
-    var data = model.items[model.viewingIndex];
+    var data = model.items![model.viewingIndex!];
     controller<CurrentListController>().viewData(data);
   }
 
   void toggleItemState(int index) {
-    var dataItems = List<ListData>.from(model.items);
-    var items = List<ListItem>.from(dataItems[model.viewingIndex].items);
+    var dataItems = List<ListData>.from(model.items!);
+    var items = List<ListItem>.from(dataItems[model.viewingIndex!].items!);
     var item = items[index];
     var state = item.listState;
     var updatedItem = ListItem(
       name: item.name,
-      listState: state == false ? true : state == true ? null : false,
+      listState: state == false
+          ? true
+          : state == true
+              ? null
+              : false,
     );
     items
       ..removeAt(index)
       ..insert(index, updatedItem);
     var data = ListData(
-      listName: dataItems[model.viewingIndex].listName,
+      listName: dataItems[model.viewingIndex!].listName,
       items: items,
     );
     dataItems
-      ..removeAt(model.viewingIndex)
-      ..insert(model.viewingIndex, data);
+      ..removeAt(model.viewingIndex!)
+      ..insert(model.viewingIndex!, data);
     model.update(items: dataItems);
   }
 }

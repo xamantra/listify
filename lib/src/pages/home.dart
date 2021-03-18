@@ -14,9 +14,9 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  InputController _inputController;
-  ListController _listController;
-  SettingsController _settingsController;
+  InputController? _inputController;
+  ListController? _listController;
+  SettingsController? _settingsController;
 
   @override
   void didChangeDependencies() {
@@ -37,20 +37,18 @@ class _HomeState extends State<Home> {
             controllers: [ListController],
             builder: (context, snapshot) {
               var list = snapshot<ListModel>();
-              if (list.isSearching) {
+              if (list.isSearching!) {
                 return TextFormField(
                   initialValue: list.searchQuery,
                   onChanged: (value) {
-                    _listController.search(value);
+                    _listController!.search(value);
                   },
                   style: TextStyle(
-                    fontSize: 18,
                     color: theme.appbarFont,
                   ),
                   decoration: InputDecoration(
                     hintText: 'Search ...',
                     hintStyle: TextStyle(
-                      fontSize: 13,
                       color: theme.appbarFont.withOpacity(0.6),
                     ),
                     border: UnderlineInputBorder(
@@ -77,7 +75,6 @@ class _HomeState extends State<Home> {
               return Text(
                 'Listify',
                 style: TextStyle(
-                  fontSize: 18,
                   color: theme.appbarFont,
                 ),
               );
@@ -88,23 +85,21 @@ class _HomeState extends State<Home> {
               icon: MomentumBuilder(
                 controllers: [ListController],
                 builder: (context, snapshot) {
-                  var isSearching = snapshot<ListModel>().isSearching;
+                  var isSearching = snapshot<ListModel>().isSearching!;
                   return Icon(
                     isSearching ? Icons.close : Icons.search,
-                    size: 20,
                     color: theme.appbarFont,
                   );
                 },
               ),
               onPressed: () {
-                _listController.toggleSearchMode();
+                _listController!.toggleSearchMode();
               },
               tooltip: 'Search',
             ),
             IconButton(
               icon: Icon(
                 Icons.settings,
-                size: 20,
                 color: theme.appbarFont,
               ),
               onPressed: () {
@@ -124,13 +119,13 @@ class _HomeState extends State<Home> {
             builder: (context, snapshot) {
               var list = snapshot<ListModel>();
               var items = <Widget>[];
-              if (list.isSearching && list.searchQuery.trim().isNotEmpty) {
+              if (list.isSearching! && list.searchQuery!.trim().isNotEmpty) {
                 for (var i in list.controller.searchResults()) {
-                  items.add(ListItemHome(key: Key('$i'), index: i, listData: list.items[i]));
+                  items.add(ListItemHome(key: Key('$i'), index: i, listData: list.items![i]));
                 }
               } else {
-                for (var i = 0; i < list.items.length; i++) {
-                  items.add(ListItemHome(key: Key('$i'), index: i, listData: list.items[i]));
+                for (var i = 0; i < list.items!.length; i++) {
+                  items.add(ListItemHome(key: Key('$i'), index: i, listData: list.items![i]));
                 }
               }
               return Container(
@@ -139,7 +134,7 @@ class _HomeState extends State<Home> {
                   children: items,
                   onReorder: (oldIndex, newIndex) {
                     print([oldIndex, newIndex]);
-                    _listController.reorder(oldIndex, newIndex);
+                    _listController!.reorder(oldIndex, newIndex);
                   },
                 ),
               );
@@ -148,7 +143,7 @@ class _HomeState extends State<Home> {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            _settingsController.executeDraftSetting();
+            _settingsController!.executeDraftSetting();
             MomentumRouter.goto(context, AddNewList);
           },
           child: Icon(

@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'index.dart';
 
 class ActionSetting extends StatelessWidget {
-  final String title;
-  final String description;
-  final void Function() action;
+  final String? title;
+  final String? description;
+  final void Function()? action;
 
   const ActionSetting({
-    Key key,
+    Key? key,
     this.title,
     this.description,
     this.action,
@@ -28,14 +28,14 @@ class ActionSetting extends StatelessWidget {
               Expanded(
                 child: ListTile(
                   title: Text(
-                    title,
+                    title!,
                     style: TextStyle(
                       fontSize: 14,
                       color: theme.listTileFontColor.primary,
                     ),
                   ),
                   subtitle: Text(
-                    description,
+                    description!,
                     style: TextStyle(
                       fontSize: 13,
                       color: theme.listTileFontColor.secondary,

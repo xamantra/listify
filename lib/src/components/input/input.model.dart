@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
 import 'package:momentum/momentum.dart';
 
 import '../../models/index.dart';
@@ -14,11 +13,11 @@ enum InputAction {
 }
 
 class InputEvent {
-  final InputAction action;
-  final String message;
+  final InputAction? action;
+  final String? message;
 
   InputEvent({
-    @required this.action,
+    required this.action,
     this.message,
   });
 }
@@ -33,20 +32,20 @@ class InputModel extends MomentumModel<InputController> with EquatableMixin {
     this.editListName,
   }) : super(controller);
 
-  final String listName;
-  final List<ListItem> items;
-  final String itemName;
-  final bool editingList;
-  final String editListName;
+  final String? listName;
+  final List<ListItem>? items;
+  final String? itemName;
+  final bool? editingList;
+  final String? editListName;
 
   @override
   void update({
-    String listName,
-    List<ListItem> items,
-    String actionMessage,
-    String itemName,
-    bool editingList,
-    String editListName,
+    String? listName,
+    List<ListItem>? items,
+    String? actionMessage,
+    String? itemName,
+    bool? editingList,
+    String? editListName,
   }) {
     InputModel(
       controller,
@@ -61,14 +60,14 @@ class InputModel extends MomentumModel<InputController> with EquatableMixin {
   Map<String, dynamic> toJson() {
     return {
       'listName': listName,
-      'items': items?.map((x) => x?.toJson())?.toList(),
+      'items': items?.map((x) => x.toJson()).toList(),
       'itemName': itemName,
       'editingList': editingList,
       'editListName': editListName,
     };
   }
 
-  InputModel fromJson(Map<String, dynamic> json) {
+  InputModel? fromJson(Map<String, dynamic>? json) {
     if (json == null) return null;
 
     return InputModel(
@@ -82,7 +81,7 @@ class InputModel extends MomentumModel<InputController> with EquatableMixin {
   }
 
   @override
-  List<Object> get props => [
+  List<Object?> get props => [
         listName,
         items,
         itemName,

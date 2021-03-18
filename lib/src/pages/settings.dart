@@ -33,10 +33,7 @@ class _SettingsState extends MomentumState<Settings> {
       child: Scaffold(
         appBar: AppBar(
           leading: BackIconButton(),
-          title: Text(
-            'Settings',
-            style: TextStyle(fontSize: 18),
-          ),
+          title: Text('Settings'),
         ),
         body: Container(
           height: screen.height,
@@ -56,7 +53,7 @@ class _SettingsState extends MomentumState<Settings> {
                       description: 'When pressing "+" button inside home page, the previous inputs will be shown on Add List Page including edit session.',
                       isChecked: setting.draftInputs,
                       onChanged: (state) {
-                        setting.controller.setDraftInputs(state);
+                        setting.controller.setDraftInputs(state!);
                       },
                     ),
                     BoolSetting(
@@ -64,7 +61,7 @@ class _SettingsState extends MomentumState<Settings> {
                       description: 'After adding new item on the list, the item name textbox will be cleared.',
                       isChecked: setting.clearOnAdd,
                       onChanged: (state) {
-                        setting.controller.setClearOnAdd(state);
+                        setting.controller.setClearOnAdd(state!);
                       },
                     ),
                     BoolSetting(
@@ -72,7 +69,7 @@ class _SettingsState extends MomentumState<Settings> {
                       description: 'When copying a list data, the list\'s name will also be copied.',
                       isChecked: setting.copyListName,
                       onChanged: (state) {
-                        setting.controller.setCopyListName(state);
+                        setting.controller.setCopyListName(state!);
                       },
                     ),
                     BoolSetting(
@@ -80,7 +77,7 @@ class _SettingsState extends MomentumState<Settings> {
                       description: 'When copying a list data, the checkbox states will also be copied.',
                       isChecked: setting.copyListStates,
                       onChanged: (state) {
-                        setting.controller.setCopyListStates(state);
+                        setting.controller.setCopyListStates(state!);
                       },
                     ),
                     ActionSetting(

@@ -4,15 +4,15 @@ import '../utils/index.dart';
 import 'index.dart';
 
 class ConfirmDialog extends StatelessWidget {
-  final String title;
-  final String message;
-  final void Function() no;
-  final void Function() yes;
+  final String? title;
+  final String? message;
+  final void Function()? no;
+  final void Function()? yes;
 
   const ConfirmDialog({
-    Key key,
+    Key? key,
     this.title,
-    @required this.message,
+    required this.message,
     this.no,
     this.yes,
   }) : super(key: key);

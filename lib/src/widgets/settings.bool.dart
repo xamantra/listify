@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'index.dart';
 
 class BoolSetting extends StatelessWidget {
-  final String title;
-  final String description;
-  final bool isChecked;
-  final void Function(bool) onChanged;
+  final String? title;
+  final String? description;
+  final bool? isChecked;
+  final void Function(bool?)? onChanged;
 
   const BoolSetting({
-    Key key,
+    Key? key,
     this.title,
     this.description,
     this.isChecked,
@@ -22,7 +22,7 @@ class BoolSetting extends StatelessWidget {
     return InkWell(
       onTap: () {
         if (onChanged != null) {
-          onChanged(!isChecked);
+          onChanged!(!isChecked!);
         }
       },
       child: Column(
@@ -34,14 +34,14 @@ class BoolSetting extends StatelessWidget {
               Expanded(
                 child: ListTile(
                   title: Text(
-                    title,
+                    title!,
                     style: TextStyle(
                       fontSize: 14,
                       color: theme.listTileFontColor.primary,
                     ),
                   ),
                   subtitle: Text(
-                    description,
+                    description!,
                     style: TextStyle(
                       fontSize: 13,
                       color: theme.listTileFontColor.secondary,

@@ -10,12 +10,12 @@ class ThemeModel extends MomentumModel<ThemeController> with EquatableMixin {
     this.activeTheme,
   }) : super(controller);
 
-  final int activeTheme;
+  final int? activeTheme;
 
   @override
   void update({
-    List<ListifyTheme> themes,
-    int activeTheme,
+    List<ListifyTheme>? themes,
+    int? activeTheme,
   }) {
     ThemeModel(
       controller,
@@ -29,7 +29,7 @@ class ThemeModel extends MomentumModel<ThemeController> with EquatableMixin {
     };
   }
 
-  ThemeModel fromJson(Map<String, dynamic> json) {
+  ThemeModel? fromJson(Map<String, dynamic>? json) {
     if (json == null) return null;
 
     return ThemeModel(
@@ -39,7 +39,7 @@ class ThemeModel extends MomentumModel<ThemeController> with EquatableMixin {
   }
 
   @override
-  List<Object> get props => [
+  List<Object?> get props => [
         activeTheme,
       ];
 }

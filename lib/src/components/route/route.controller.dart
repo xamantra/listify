@@ -16,16 +16,16 @@ class RouteController extends MomentumController<RouteModel> with RouterMixin {
   }
 
   @override
-  void onRouteChanged(RouterParam param) {
+  void onRouteChanged(RouterParam? param) {
     if (param is ViewListParam) {
       controller<CurrentListController>().reset(clearHistory: true);
       controller<ListController>().view(param.index);
     }
 
     if (param is CopyListParam) {
-      var data = getParam<CopyListParam>();
+      var data = getParam<CopyListParam>()!;
       controller<InputController>().reset(clearHistory: true);
-      controller<ListController>().createCopy(data.index);
+      controller<ListController>().createCopy(data.index!);
     }
 
     if (param is EditListParam) {

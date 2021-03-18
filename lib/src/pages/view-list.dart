@@ -19,14 +19,14 @@ class ViewList extends StatefulWidget {
 }
 
 class _ViewListState extends MomentumState<ViewList> {
-  CurrentListController currentListController;
-  ListController listController;
+  CurrentListController? currentListController;
+  ListController? listController;
 
   @override
   void initMomentumState() {
     currentListController ??= Momentum.controller<CurrentListController>(context);
     listController ??= Momentum.controller<ListController>(context);
-    listController.listen<ListEvent>(
+    listController!.listen<ListEvent>(
       state: this,
       invoke: (data) {
         switch (data.action) {
@@ -46,7 +46,7 @@ class _ViewListState extends MomentumState<ViewList> {
   Widget build(BuildContext context) {
     var theme = CustomTheme.of(context);
     var screen = screenSize(context);
-    var listName = currentListController.model.data.listName;
+    var listName = currentListController!.model.data!.listName!;
     return RouterPage(
       onWillPop: () async {
         MomentumRouter.pop(context);
@@ -58,7 +58,6 @@ class _ViewListState extends MomentumState<ViewList> {
           title: Text(
             listName,
             style: TextStyle(
-              fontSize: 18,
               color: theme.appbarFont,
             ),
           ),
@@ -66,7 +65,6 @@ class _ViewListState extends MomentumState<ViewList> {
             IconButton(
               icon: Icon(
                 Icons.edit,
-                size: 20,
                 color: theme.appbarFont,
               ),
               onPressed: () {
@@ -78,11 +76,10 @@ class _ViewListState extends MomentumState<ViewList> {
             IconButton(
               icon: Icon(
                 Icons.delete,
-                size: 20,
                 color: theme.appbarFont,
               ),
               onPressed: () {
-                listController.confirmDelete(listName);
+                listController!.confirmDelete(listName);
               },
               tooltip: 'Delete List',
             ),
@@ -106,10 +103,10 @@ class _ViewListState extends MomentumState<ViewList> {
                         builder: (context, snapshot) {
                           var list = snapshot<CurrentListModel>();
                           var items = <Widget>[];
-                          for (var i = 0; i < list.data.items.length; i++) {
-                            IconData icon;
-                            Color color;
-                            var checkState = list.data.items[i].listState;
+                          for (var i = 0; i < list.data!.items!.length; i++) {
+                            IconData? icon;
+                            Color? color;
+                            var checkState = list.data!.items![i].listState;
                             if (checkState == true) {
                               icon = Icons.check_circle;
                               color = theme.listTileIconColor.primary;
@@ -130,7 +127,7 @@ class _ViewListState extends MomentumState<ViewList> {
                                 margin: EdgeInsets.only(top: 8),
                                 child: InkWell(
                                   onTap: () {
-                                    currentListController.toggleItemState(i);
+                                    currentListController!.toggleItemState(i);
                                   },
                                   child: ListTile(
                                     contentPadding: EdgeInsets.all(4).copyWith(left: 8),
@@ -139,7 +136,7 @@ class _ViewListState extends MomentumState<ViewList> {
                                       color: color,
                                     ),
                                     title: Text(
-                                      list.data.items[i].name,
+                                      list.data!.items![i].name!,
                                       style: TextStyle(
                                         fontSize: 16,
                                         color: theme.listTileFontColor.primary,
@@ -157,7 +154,7 @@ class _ViewListState extends MomentumState<ViewList> {
                               children: items,
                               onReorder: (oldIndex, newIndex) {
                                 print([oldIndex, newIndex]);
-                                currentListController.reorderListItems(oldIndex, newIndex);
+                                currentListController!.reorderListItems(oldIndex, newIndex);
                               },
                             ),
                           );

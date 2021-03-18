@@ -1,13 +1,12 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
 
 class ListItem extends Equatable {
-  final String name;
-  final bool listState;
+  final String? name;
+  final bool? listState;
 
   ListItem({
-    @required this.name,
-    @required this.listState,
+    required this.name,
+    required this.listState,
   });
 
   Map<String, dynamic> toJson() {
@@ -17,7 +16,7 @@ class ListItem extends Equatable {
     };
   }
 
-  static ListItem fromJson(Map<String, dynamic> json) {
+  static ListItem? fromJson(Map<String, dynamic>? json) {
     if (json == null) return null;
 
     return ListItem(
@@ -27,5 +26,5 @@ class ListItem extends Equatable {
   }
 
   @override
-  List<Object> get props => [name, listState];
+  List<Object?> get props => [name, listState];
 }

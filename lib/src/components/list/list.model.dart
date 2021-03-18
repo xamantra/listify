@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
 import 'package:momentum/momentum.dart';
 
 import '../../models/index.dart';
@@ -13,10 +12,10 @@ enum ListAction {
 
 class ListEvent {
   final ListAction action;
-  final String message;
+  final String? message;
 
   ListEvent({
-    @required this.action,
+    required this.action,
     this.message,
   });
 }
@@ -30,17 +29,17 @@ class ListModel extends MomentumModel<ListController> with EquatableMixin {
     this.searchQuery,
   }) : super(controller);
 
-  final List<ListData> items;
-  final int viewingIndex;
-  final bool isSearching;
-  final String searchQuery;
+  final List<ListData>? items;
+  final int? viewingIndex;
+  final bool? isSearching;
+  final String? searchQuery;
 
   @override
   void update({
-    List<ListData> items,
-    int viewingIndex,
-    bool isSearching,
-    String searchQuery,
+    List<ListData>? items,
+    int? viewingIndex,
+    bool? isSearching,
+    String? searchQuery,
   }) {
     ListModel(
       controller,
@@ -53,14 +52,14 @@ class ListModel extends MomentumModel<ListController> with EquatableMixin {
 
   Map<String, dynamic> toJson() {
     return {
-      'items': items?.map((x) => x?.toJson())?.toList(),
+      'items': items?.map((x) => x.toJson()).toList(),
       'viewingIndex': viewingIndex,
       'isSearching': isSearching,
       'searchQuery': searchQuery,
     };
   }
 
-  ListModel fromJson(Map<String, dynamic> json) {
+  ListModel? fromJson(Map<String, dynamic>? json) {
     if (json == null) return null;
 
     return ListModel(
@@ -73,7 +72,7 @@ class ListModel extends MomentumModel<ListController> with EquatableMixin {
   }
 
   @override
-  List<Object> get props => [
+  List<Object?> get props => [
         items,
         viewingIndex,
         isSearching,
