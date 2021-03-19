@@ -26,6 +26,7 @@ class _AddNewListState extends MomentumState<AddNewList> {
     _listController ??= Momentum.controller<ListController>(context);
     _settingsController ??= Momentum.controller<SettingsController>(context);
     _textEditingController.text = _inputController!.model.listName!;
+    _inputController!.clearStateHistory(); // reset the undo/redo state every time this page is opened.
     _inputController!.addListener(
       state: this,
       invoke: (model, isTimeTravel) {

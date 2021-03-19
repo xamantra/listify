@@ -160,8 +160,8 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: "5ed04cba9e859ba3802ed02a7dc24b1f84c4de27"
-      resolved-ref: "5ed04cba9e859ba3802ed02a7dc24b1f84c4de27"
+      ref: eec71ae36af21f60ce0c291b59986d46244a0a3a
+      resolved-ref: eec71ae36af21f60ce0c291b59986d46244a0a3a
       url: "https://github.com/xamantra/momentum.git"
     source: git
     version: "2.0.0"
